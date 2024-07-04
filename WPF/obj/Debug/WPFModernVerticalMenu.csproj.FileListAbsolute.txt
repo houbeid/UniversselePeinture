@@ -1,0 +1,94 @@
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\bin\Debug\WPFModernVerticalMenu.exe.config
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\bin\Debug\WPFModernVerticalMenu.exe
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\bin\Debug\WPFModernVerticalMenu.pdb
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.csprojAssemblyReference.cache
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Controls\MenuItem.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Controls\UserPopup.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\MainWindow.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\App.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu_MarkupCompile.cache
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu_MarkupCompile.lref
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\App.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Assets\Icons.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Controls\MenuItem.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Controls\UserPopup.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\MainWindow.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Themes\DarkTheme.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.g.resources
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.Properties.Resources.resources
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.csproj.GenerateResource.cache
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.csproj.CoreCompileInputs.cache
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.exe
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\WPFModernVerticalMenu.pdb
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Styles\MainStyle.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Home.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Home.baml
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Dashboard.g.cs
+C:\Users\JEYDERHT\Desktop\UI Controls\WPFModernVerticalMenu\obj\Debug\Pages\Dashboard.baml
+C:\Users\pc\Menu\bin\Debug\WPFModernVerticalMenu.exe.config
+C:\Users\pc\Menu\bin\Debug\WPFModernVerticalMenu.exe
+C:\Users\pc\Menu\bin\Debug\WPFModernVerticalMenu.pdb
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.csproj.AssemblyReference.cache
+C:\Users\pc\Menu\obj\Debug\Controls\MenuItem.g.cs
+C:\Users\pc\Menu\obj\Debug\Controls\UserPopup.g.cs
+C:\Users\pc\Menu\obj\Debug\MainWindow.g.cs
+C:\Users\pc\Menu\obj\Debug\Pages\Dashboard.g.cs
+C:\Users\pc\Menu\obj\Debug\App.g.cs
+C:\Users\pc\Menu\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu_MarkupCompile.cache
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu_MarkupCompile.lref
+C:\Users\pc\Menu\obj\Debug\App.baml
+C:\Users\pc\Menu\obj\Debug\Assets\Icons.baml
+C:\Users\pc\Menu\obj\Debug\Controls\MenuItem.baml
+C:\Users\pc\Menu\obj\Debug\Controls\UserPopup.baml
+C:\Users\pc\Menu\obj\Debug\MainWindow.baml
+C:\Users\pc\Menu\obj\Debug\Pages\Dashboard.baml
+C:\Users\pc\Menu\obj\Debug\Styles\MainStyle.baml
+C:\Users\pc\Menu\obj\Debug\Themes\DarkTheme.baml
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.g.resources
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.Properties.Resources.resources
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.csproj.GenerateResource.cache
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.csproj.CoreCompileInputs.cache
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.exe
+C:\Users\pc\Menu\obj\Debug\WPFModernVerticalMenu.pdb
+C:\Users\pc\Menu\obj\Debug\Pages\RegisterClient.g.cs
+C:\Users\pc\Menu\obj\Debug\Pages\RegisterClient.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Controls\MenuItem.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Controls\UserPopup.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\DashboardWindow.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\MainWindow.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Pages\Dashboard.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Pages\RegisterClient.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\App.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu_MarkupCompile.cache
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu_MarkupCompile.lref
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\WPFModernVerticalMenu.exe.config
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\WPFModernVerticalMenu.exe
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\WPFModernVerticalMenu.pdb
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\MaterialDesignColors.dll
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\MaterialDesignColors.pdb
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\App.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Assets\Icons.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Controls\MenuItem.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Controls\UserPopup.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\DashboardWindow.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\MainWindow.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Pages\Dashboard.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Pages\RegisterClient.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Styles\MainStyle.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\Themes\DarkTheme.baml
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.g.resources
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.Properties.Resources.resources
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.csproj.GenerateResource.cache
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.csproj.CoreCompileInputs.cache
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.csproj.CopyComplete
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.exe
+C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\WPFModernVerticalMenu.pdb
