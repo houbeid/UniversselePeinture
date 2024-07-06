@@ -34,7 +34,7 @@
                               Width="85" Height="75"
                               HorizontalAlignment="Left">
                             <Border.Background>
-                                <ImageBrush ImageSource="D:\UniversselleLogo.png" Stretch="Uniform"/>
+                                <ImageBrush ImageSource="/Resources/UniversselleLogo.png" Stretch="Uniform"/>
                             </Border.Background>
                         </Border>
                         

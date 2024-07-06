@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\obj\Debug\
+C:\Users\pc\source\repos\UniversselPeinture\WPF\obj\Debug\
 WPFModernVerticalMenu
 none
 false
 DEBUG;TRACE
-C:\Users\pc\source\repos\ProjetUniverssellePeinture\Menu\App.xaml
+C:\Users\pc\source\repos\UniversselPeinture\WPF\App.xaml
 9-610834093
 
 11-142830009
-16-474556570
+16-1380396036
 Assets\Icons.xaml;Controls\MenuItem.xaml;Controls\UserPopup.xaml;DashboardWindow.xaml;MainWindow.xaml;Pages\Dashboard.xaml;Pages\RegisterClient.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
 
-True
+False
 

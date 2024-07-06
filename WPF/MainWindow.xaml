@@ -28,7 +28,7 @@
                         <Button x:Name="btn_exit" ToolTip="Close Application" Content="Exit Application" Click="exitApp"/>
                     </StackPanel>
                 </materialDesign:PopupBox>
-                <Image Margin="0 60 0 5" Source="D:\UniversselleLogo.png" Height="100"/>
+                <Image Margin="0 60 0 5" Source="/Resources/UniversselleLogo.png" Height="100"/>
                 <TextBlock Margin="0 25 0 5" HorizontalAlignment="Center" FontSize="28"
                            FontWeight="Bold" Text="Universelle Peinture"/>
                 <TextBlock  FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center"
