@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace UniverssellePeintureApi.Model
 {
-    public class ApiDbContext : DbContext
+    public class ApiDbContext : IdentityDbContext<User>
     {
 
         public ApiDbContext(DbContextOptions options) : base(options) { }
@@ -14,6 +15,7 @@ namespace UniverssellePeintureApi.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Commerce>()
                 .HasMany(c => c.Clients)
                 .WithOne(c => c.Commerce)

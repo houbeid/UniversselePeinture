@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pc\\source\\repos\\ProjetUniverssellePeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj": {}
+    "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pc\\source\\repos\\ProjetUniverssellePeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj": {
+    "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pc\\source\\repos\\ProjetUniverssellePeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
+        "projectUniqueName": "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
         "projectName": "UniverssellePeintureApi",
-        "projectPath": "C:\\Users\\pc\\source\\repos\\ProjetUniverssellePeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
+        "projectPath": "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
         "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pc\\source\\repos\\ProjetUniverssellePeinture\\UniverssellePeintureApi\\obj\\",
+        "outputPath": "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.31, )"
