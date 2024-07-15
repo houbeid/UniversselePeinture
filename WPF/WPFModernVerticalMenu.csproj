@@ -103,7 +103,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\Dashboard.xaml">
+    <Page Include="Pages\RegistreComercial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -121,8 +121,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\Dashboard.xaml.cs">
-      <DependentUpon>Dashboard.xaml</DependentUpon>
+    <Compile Include="Pages\RegistreComercial.xaml.cs">
+      <DependentUpon>RegistreComercial.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>

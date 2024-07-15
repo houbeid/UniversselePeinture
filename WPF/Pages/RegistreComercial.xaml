@@ -1,0 +1,60 @@
+﻿<Page x:Class="WPFModernVerticalMenu.Pages.RegistreComercial"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Inscription Comercial">
+
+
+    <Page.Resources>
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Name="border" BorderBrush="Gray" BorderThickness="0,0,0,3" Background="{TemplateBinding Background}">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#124481"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="0,0,0,5"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Title Section -->
+        <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Margin="0,0,0,20">
+            <TextBlock Text="Inscription Du Commerçant" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
+            <!--<TextBlock Text="rgjnerog solgrnerog solgrtneor woetignero sogiwneor eogrinero eorgin soejg" FontSize="12" Foreground="#6A6A6A"/>-->
+        </StackPanel>
+
+        <!-- Form Section -->
+        <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Margin="0,0,0,20">
+            <TextBlock Text="Nom et Prenom" Margin="10,5,0,5"/>
+            <TextBox Name="FirstNavigationTabTextBox" Style="{StaticResource CustomTextBoxStyle}" Margin="10,5,0,20"/>
+            <TextBlock Text="Numero de telephone" Margin="10,5,0,5"/>
+            <TextBox Name="SecondNavigationTabTextBox" Style="{StaticResource CustomTextBoxStyle}" Margin="10,5,0,20"/>
+        </StackPanel>
+
+        <!-- Button Section -->
+        <Button Content="Enregistrer" HorizontalAlignment="Center" VerticalAlignment="Top" Width="310" Height="50" Background="#124481" Foreground="White" FontSize="16" Margin="199,37,251,0" Grid.Row="3"/>
+    </Grid>
+</Page>

@@ -18,9 +18,9 @@ namespace WPFModernVerticalMenu.Pages
     /// <summary>
     /// Lógica de interacción para Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : Page
+    public partial class RegistreComercial : Page
     {
-        public Dashboard()
+        public RegistreComercial()
         {
             InitializeComponent();
         }

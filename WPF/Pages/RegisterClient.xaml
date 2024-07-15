@@ -8,47 +8,64 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Inscription du Client">
 
+    <Page.Resources>
+        <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Name="border" BorderBrush="Gray" BorderThickness="0,0,0,3" Background="{TemplateBinding Background}">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#124481"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="0,0,0,5"/>
+        </Style>
+    </Page.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Code *" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Name="CodeTextBox" Margin="20"  Padding="10"/>
+            <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="5,0,0,20">
+                <TextBlock Text="Inscription Du Client" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
+                <TextBlock Text="Veuillez écrire les informations correctes pour l'inscription du client. Notez que les champs avec des étoiles sont obligatoires à remplir." FontSize="12" Foreground="#6A6A6A"/>
+            </StackPanel>
+            <!-- Left Navigation Panel -->
+            <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
+                <TextBlock Text="Code*" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="CodeTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <TextBlock Text="Name_Society" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="Name_SocietyTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <TextBlock Text="Respnsible_Name *" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="Respnsible_NameTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <TextBlock Text="CoordonnéesGPS" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="CoordonnéesGPSTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+            </StackPanel>
 
-            <Label Grid.Row="1" Grid.Column="0" Content=" Name_Society" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Name="Name_SocietyTextBox" Margin="20"  Padding="10"/>
-
-            <Label Grid.Row="2" Grid.Column="0" Content="Respnsible_Name *" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="Respnsible_NameTextBox" Margin="20"  Padding="10"/>
-
-            <Label Grid.Row="3" Grid.Column="0" Content="CoordonnéesGPS " VerticalAlignment="Center"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Name="CoordonnéesGPSTextBox" Margin="20"  Padding="10"/>
-
-            <Label Grid.Row="4" Grid.Column="0" Content="Zone *" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="ZoneTextBox" Margin="20"  Padding="10"/>
-
-            <Label Grid.Row="5" Grid.Column="0" Content="Recommandation " VerticalAlignment="Center"/>
-            <TextBox Grid.Row="5" Grid.Column="1" Name="RecommandationTextBox" Margin="20"  Padding="10"/>
-
-            <Label Grid.Row="6" Grid.Column="0" Content="CommercantId *" VerticalAlignment="Center"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Name="CommercantIdTextBox" Margin="20"  Padding="10"/>
-
-            <Button Grid.Row="7" Grid.Column="1" Background="#810DA2" Content="Enregistrer" Click="Enregistrer_Click" Padding="20" Margin="20" HorizontalAlignment="Right" Foreground="White"/>
-
+            <!-- Right Form Panel -->
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
+                <Label Content="Zone *" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="ZoneTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
+                <Label Content="Recommandation" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Name="RecommandationTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <Label Content="CommercantId" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Name="CommercantIdTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <Button Content="Enregistrer" Click="Enregistrer_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,20" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="56"/>
+            </StackPanel>
         </Grid>
     </ScrollViewer>
 </Page>
-
