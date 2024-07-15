@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:WPFModernVerticalMenu"
         xmlns:ctls="clr-namespace:WPFModernVerticalMenu.Controls"
         mc:Ignorable="d"
@@ -16,6 +17,22 @@
         AllowsTransparency="True"
         ResizeMode="NoResize"
         FontFamily="Poppins">
+
+    <Window.Resources>
+        <Style x:Key="NoBorderButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Border Background="{DynamicResource PrimaryBackgroundColor}"
             CornerRadius="8">
@@ -102,17 +119,18 @@
                 <!-- End: Button Close | Restore | Minimize -->
 
                 <!-- Start: Notification and Logout Buttons -->
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,560">
-                    <Button x:Name="btnNotification"  Width="36" Height="30" Style="{StaticResource IconButtonsStyle}" Click="btnNotification_Click">
-                        <!--<Image Source="pack://application:,,,/Resources/bell.png" Width="20" Height="20"/>-->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,560">
+                    <Button x:Name="btnNotification" Style="{StaticResource NoBorderButtonStyle}" Width="55" Height="30" Background="Transparent" Click="btnNotification_Click">
+                        <Image Source="/Resources/Bell.png"  Width="20" Height="20" />
                     </Button>
-                    <Button x:Name="btnLogout" Style="{StaticResource IconButtonsStyle}" Click="btnLogout_Click" Background="#124481" Foreground="White" Padding="5,0" Margin="10,0,0,0" Width="120" Height="30">
+                    <Button x:Name="btnLogout" Click="btnLogout_Click" Background="#124481" Foreground="White" Padding="5,0" Margin="10,0,0,0" Width="130" Height="35">
                         <StackPanel Orientation="Horizontal">
-                            <!--<Image Source="pack://application:,,,/Resources/logout.png" Width="20" Height="20" Margin="0,0,5,0"/>-->
+                            <fa:ImageAwesome Icon="SignOut" Width="20" Height="20" Margin="0,0,5,0" Foreground="White"/>
                             <TextBlock Text="Déconnexion" VerticalAlignment="Center" Foreground="White"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
+
                 <!-- End: Notification and Logout Buttons -->
 
                 <!-- Start: Frame Content -->
@@ -126,4 +144,5 @@
         </Grid>
     </Border>
 </Window>
+
 

@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\UniverssellePeintureApi",
+    "\\UniverssellePeintureApi\\DTO",
     "\\WPF",
     "\\WPF\\Pages"
   ],
-  "SelectedNode": "\\WPF\\DashboardWindow.xaml.cs",
+  "SelectedNode": "\\WPF\\Pages\\RegisterClient.xaml",
   "PreviewInSolutionExplorer": false
 }
