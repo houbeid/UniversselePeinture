@@ -37,7 +37,7 @@ namespace WPFModernVerticalMenu
             //if (Tg_Btn.IsChecked == false)
             //{
             Popup.PlacementTarget = btnHome;
-            Popup.Placement = PlacementMode.Right;
+            //Popup.Placement = PlacementMode.Right;
             Popup.IsOpen = true;
             Header.PopupText.Text = "Home";
             // }
@@ -100,89 +100,89 @@ namespace WPFModernVerticalMenu
             Popup.IsOpen = false;
         }
 
-        private void btnOrderList_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (Tg_Btn.IsChecked == false)
-            //{
-            Popup.PlacementTarget = btnOrderList;
-            Popup.Placement = PlacementMode.Right;
-            Popup.IsOpen = true;
-            Header.PopupText.Text = "Order List";
-            // }
-        }
+        //private void btnOrderList_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //if (Tg_Btn.IsChecked == false)
+        //    //{
+        //    Popup.PlacementTarget = btnOrderList;
+        //    Popup.Placement = PlacementMode.Right;
+        //    Popup.IsOpen = true;
+        //    Header.PopupText.Text = "Order List";
+        //    // }
+        //}
 
-        private void btnOrderList_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
+        //private void btnOrderList_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    Popup.Visibility = Visibility.Collapsed;
+        //    Popup.IsOpen = false;
+        //}
 
-        private void btnBilling_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (Tg_Btn.IsChecked == false)
-            //{
-            Popup.PlacementTarget = btnBilling;
-            Popup.Placement = PlacementMode.Right;
-            Popup.IsOpen = true;
-            Header.PopupText.Text = "Billing";
-            //}
-        }
+        //private void btnBilling_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //if (Tg_Btn.IsChecked == false)
+        //    //{
+        //    Popup.PlacementTarget = btnBilling;
+        //    Popup.Placement = PlacementMode.Right;
+        //    Popup.IsOpen = true;
+        //    Header.PopupText.Text = "Billing";
+        //    //}
+        //}
 
-        private void btnBilling_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
+        //private void btnBilling_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    Popup.Visibility = Visibility.Collapsed;
+        //    Popup.IsOpen = false;
+        //}
 
-        private void btnPointOfSale_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (Tg_Btn.IsChecked == false)
-            //{
-            Popup.PlacementTarget = btnPointOfSale;
-            Popup.Placement = PlacementMode.Right;
-            Popup.IsOpen = true;
-            Header.PopupText.Text = "Poin Of Sale";
-            //}
-        }
+        //private void btnPointOfSale_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //if (Tg_Btn.IsChecked == false)
+        //    //{
+        //    Popup.PlacementTarget = btnPointOfSale;
+        //    Popup.Placement = PlacementMode.Right;
+        //    Popup.IsOpen = true;
+        //    Header.PopupText.Text = "Poin Of Sale";
+        //    //}
+        //}
 
-        private void btnPointOfSale_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
+        //private void btnPointOfSale_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    Popup.Visibility = Visibility.Collapsed;
+        //    Popup.IsOpen = false;
+        //}
 
-        private void btnSecurity_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (Tg_Btn.IsChecked == false)
-            //{
-            Popup.PlacementTarget = btnSecurity;
-            Popup.Placement = PlacementMode.Right;
-            Popup.IsOpen = true;
-            Header.PopupText.Text = "Security";
-            //}
-        }
+        //private void btnSecurity_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //if (Tg_Btn.IsChecked == false)
+        //    //{
+        //    Popup.PlacementTarget = btnSecurity;
+        //    Popup.Placement = PlacementMode.Right;
+        //    Popup.IsOpen = true;
+        //    Header.PopupText.Text = "Security";
+        //    //}
+        //}
 
-        private void btnSecurity_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
-        private void btnSetting_MouseEnter(object sender, MouseEventArgs e)
-        {
-            //if (Tg_Btn.IsChecked == false)
-            //{
-            Popup.PlacementTarget = btnSetting;
-            Popup.Placement = PlacementMode.Right;
-            Popup.IsOpen = true;
-            Header.PopupText.Text = "Setting";
-            // }
-        }
+        //private void btnSecurity_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    Popup.Visibility = Visibility.Collapsed;
+        //    Popup.IsOpen = false;
+        //}
+        //private void btnSetting_MouseEnter(object sender, MouseEventArgs e)
+        //{
+        //    //if (Tg_Btn.IsChecked == false)
+        //    //{
+        //    Popup.PlacementTarget = btnSetting;
+        //    Popup.Placement = PlacementMode.Right;
+        //    Popup.IsOpen = true;
+        //    Header.PopupText.Text = "Setting";
+        //    // }
+        //}
 
-        private void btnSetting_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Popup.Visibility = Visibility.Collapsed;
-            Popup.IsOpen = false;
-        }
+        //private void btnSetting_MouseLeave(object sender, MouseEventArgs e)
+        //{
+        //    Popup.Visibility = Visibility.Collapsed;
+        //    Popup.IsOpen = false;
+        //}
         // End: MenuLeft PopupButton //
 
         // Start: Button Close | Restore | Minimize 
@@ -208,16 +208,32 @@ namespace WPFModernVerticalMenu
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/RegisterClient.xaml", UriKind.RelativeOrAbsolute));
+            Button b = sender as Button;
+            b.Foreground = new SolidColorBrush(Colors.Yellow);
         }
 
         private void btnDashboard_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new System.Uri("Pages/Dashboard.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/RegistreComercial.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void fContainer_Navigated(object sender, NavigationEventArgs e)
         {
 
+        }
+
+        private void MenuItem_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void btnNotification_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle notification button click
+        }
+
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle logout button click
         }
     }
 }

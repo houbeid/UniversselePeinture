@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:WPFModernVerticalMenu.Themes">
 
     <!-- Background Colors -->
-    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#810DA2"/>
-    <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#810DA2"/>
+    <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="White"/>
+    <SolidColorBrush x:Key="SecundaryBackgroundColor" Color="#124481"/>
 
     <!-- Primary Colors -->
     <SolidColorBrush x:Key="PrimaryBlueColor" Color="#FFFFFF"/>
@@ -16,7 +16,7 @@
     <SolidColorBrush x:Key="TextFourthColor" Color="#FFFFFF"/>
 
     <!-- Icon Colors -->
-    <SolidColorBrush x:Key="PrimaryIconColor" Color="#FFFFFF"/>
+    <!--<SolidColorBrush x:Key="PrimaryIconColor" Color="#FFFFFF"/>-->
     <SolidColorBrush x:Key="SecundaryIconColor" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="TertiarIconyColor" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="FourthIconColor" Color="#FFFFFF"/>
