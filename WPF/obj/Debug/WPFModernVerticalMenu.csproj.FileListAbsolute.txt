@@ -169,3 +169,5 @@ C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\WPFModernVe
 C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\WPFModernVerticalMenu.csproj.CopyComplete
 C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\RegistreComercial.g.cs
 C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\RegistreComercial.baml
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\bin\Debug\FontAwesome.WPF.dll
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\bin\Debug\FontAwesome.WPF.xml
