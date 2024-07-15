@@ -1,4 +1,6 @@
-﻿namespace UniverssellePeintureApi.DTO
+﻿using UniverssellePeintureApi.Model;
+
+namespace UniverssellePeintureApi.DTO
 {
     public class AddClientDto
     {
@@ -15,5 +17,28 @@
         public DateTime? Delivery_Date { get; set; }
         public string? Description { get; set; }
         public int CommercantId { get; set; }
+    }
+    public class AddStockdto
+    {
+        public int Quantite { get; set; }
+
+
+        // Navigation property pour le produit
+        public int ClientId { get; set; }
+
+        public Client Client { get; set; }
+        // Clé étrangère pour le produit
+        public int ProduitId { get; set; }
+
+        // Navigation property pour le produit
+        public Produit Produit { get; set; }
+    }
+    public class AddProduitdto
+    {
+        public string Nom { get; set; }
+        public string Description { get; set; }
+        public decimal? PrixVente { get; set; }
+
+        public decimal? valeur_actuel { get; set; }
     }
 }

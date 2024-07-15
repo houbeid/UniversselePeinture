@@ -8,9 +8,7 @@
         // Clé étrangère pour le client
         public int ClientId { get; set; }
 
-        // Navigation property pour le client
         public Client Client { get; set; }
-
         // Clé étrangère pour le produit
         public int ProduitId { get; set; }
 

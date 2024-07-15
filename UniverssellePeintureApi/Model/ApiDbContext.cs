@@ -34,6 +34,14 @@ namespace UniverssellePeintureApi.Model
             modelBuilder.Entity<Client>()
                 .HasIndex(c => c.Code)
                 .IsUnique();
+            modelBuilder.Entity<Commerce>()
+                .HasMany(c => c.PortFeuilleClients)
+                .WithOne(c => c.Commerce)
+                .HasForeignKey(c => c.CommercantId);
+
+            modelBuilder.Entity<PortFeuilleClient>()
+                .HasIndex(c => c.Code)
+                .IsUnique();
         }
     }
 }

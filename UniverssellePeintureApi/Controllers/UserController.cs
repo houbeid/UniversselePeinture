@@ -15,9 +15,10 @@ namespace UniverssellePeintureApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public UserController(UserManager<User> userManager, IConfiguration _configuration) {
+        public UserController(UserManager<User> userManager, IConfiguration configuration) {
 
             _userManager = userManager;
+            _configuration = configuration;
         }
 
         private readonly UserManager<User> _userManager;
@@ -63,34 +64,78 @@ namespace UniverssellePeintureApi.Controllers
                 User? user = await _userManager.FindByNameAsync(model.userName);
                 if (user != null)
                 { 
-                    var token = GenerateJwtToken(user);
-                    return Ok(new { Token = token });
+                    if (await _userManager.CheckPasswordAsync(user, model.password)) 
+                    {
+                        var claims = new List<Claim>();
+                        //new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+                        claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+                        claims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                        //new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                        claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+                        var roles = await _userManager.GetRolesAsync(user);
+                        foreach (var role in roles)
+                        {
+                            claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+                        }
+
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
+                        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                        var token = new JwtSecurityToken(
+                            issuer: _configuration["JWT:Issuer"],
+                            audience: _configuration["JWT:Audience"],
+                            claims: claims,
+                            expires: DateTime.Now.AddMinutes(30),
+                            signingCredentials: creds);
+                        var _token = new
+                        {
+                            token = new JwtSecurityTokenHandler().WriteToken(token),
+                            expiratin = token.ValidTo,
+                        };
+                        return Ok(_token);
+                    }
+                    else
+                    {
+                        return Unauthorized();
+                    }
                 }
-                return Unauthorized();
+                else
+                {
+                    return BadRequest();
+                }
             }
             return BadRequest(ModelState);
+
         }
 
-        private string GenerateJwtToken(User user)
-        {
-            var claims = new[]
-            {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+        //private string GenerateJwtToken(User user)
+        //{
+        //    var claims = new List<Claim>();
+        //    //new Claim(JwtRegisteredClaimNames.Sub, user.Id),
+        //     claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+        //    claims.Add(new Claim(ClaimTypes.MobilePhone, user.PhoneNumber));
+        //    claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+        //    //new Claim(JwtRegisteredClaimNames.Email, user.Email),
+        //    claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()))
+        //        var roles await _userManager.GetRolesAsync(user);
+        //    foreach(var role in roles)
+        //    {
+        //        claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+        //    }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        //    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+        //    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
+        //    var token = new JwtSecurityToken(
+        //        issuer: _configuration["Jwt:Issuer"],
+        //        audience: _configuration["Jwt:Audience"],
+        //        claims: claims,
+        //        expires: DateTime.Now.AddMinutes(30),
+        //        signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+
+        //    return new JwtSecurityTokenHandler().WriteToken(token);
+        //}
     }
 }

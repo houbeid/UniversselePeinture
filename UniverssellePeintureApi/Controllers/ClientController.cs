@@ -55,6 +55,48 @@ namespace UniverssellePeintureApi.Controllers
             return CreatedAtAction(nameof(GetClientById), new { id = client.Id }, client);
         }
 
+        [HttpPost("{update}")]
+        public async Task<bool> UpdateClientAsync(ClientUpdateRequest updateRequest)
+        {
+            var client = await _context.Clients
+            .Where(c => c.Code == updateRequest.Code)
+                .FirstOrDefaultAsync();
+
+            if (client == null)
+            {
+                return false; // Client not found
+            }
+            if (updateRequest.Name_Society != null && updateRequest.Name_Society != client.Name_Society)
+            {
+                client.Name_Society = updateRequest.Name_Society;
+            }
+            if (updateRequest.Phone_Number != null && updateRequest.Phone_Number != client.Phone_Number)
+                client.Phone_Number = updateRequest.Phone_Number;
+            if (updateRequest.Respnsible_Name != null && updateRequest.Respnsible_Name != client.Respnsible_Name)
+                client.Respnsible_Name = updateRequest.Respnsible_Name;
+            if (updateRequest.Gérant != null && updateRequest.Gérant != client.Gérant)
+                client.Gérant = updateRequest.Gérant;
+            if (updateRequest.Solvabilité != null && updateRequest.Solvabilité != client.Solvabilité)
+                client.Solvabilité = updateRequest.Solvabilité;
+            if (updateRequest.CoordonnéesGPS != null && updateRequest.CoordonnéesGPS != client.CoordonnéesGPS)
+                client.CoordonnéesGPS = updateRequest.CoordonnéesGPS;
+            if (updateRequest.Zone != null && updateRequest.Zone != client.Zone)
+                client.Zone = updateRequest.Zone;
+            if (updateRequest.Recommandation != null && updateRequest.Recommandation != client.Recommandation)
+                client.Recommandation = updateRequest.Recommandation;
+            if (updateRequest.Visit_Date != null && updateRequest.Visit_Date != client.Visit_Date)
+                client.Visit_Date = updateRequest.Visit_Date;
+            if (updateRequest.Delivery_Date != null && updateRequest.Delivery_Date != client.Delivery_Date)
+                client.Delivery_Date = updateRequest.Delivery_Date;
+            if (updateRequest.Description != null && updateRequest.Description != client.Description)
+                client.Description = updateRequest.Description;
+
+            _context.Clients.Update(client);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetClientById(int id)
         {

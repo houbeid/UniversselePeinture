@@ -8,5 +8,7 @@
 
 
         public ICollection<Client> Clients { get; set; }
+
+        public ICollection<PortFeuilleClient> PortFeuilleClients { get; set; }
     }
 }
