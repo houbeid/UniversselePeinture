@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniverssellePeintureApi.Model;
 
@@ -11,9 +12,10 @@ using UniverssellePeintureApi.Model;
 namespace UniverssellePeintureApi.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    partial class ApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240716132751_AddPourcentageVenteToProduit")]
+    partial class AddPourcentageVenteToProduit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -345,15 +347,6 @@ namespace UniverssellePeintureApi.Migrations
 
                     b.Property<int>("ProduitId")
                         .HasColumnType("int");
-
-                    b.Property<int>("Quantite")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("prix_actuell")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("prix_vent")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("StockId", "ProduitId");
 

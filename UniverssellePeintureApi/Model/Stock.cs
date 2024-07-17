@@ -1,18 +1,25 @@
-﻿namespace UniverssellePeintureApi.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace UniverssellePeintureApi.Model
 {
     public class Stock
     {
+        [Key]
         public int Id { get; set; }
-        public int Quantite { get; set; }
 
-        // Clé étrangère pour le client
+        [Required]
+        public int Quantity { get; set; }
+
+        [Required]
+        public decimal PrixDeVenteTotal { get; set; }
+
+        // Relation avec Client
         public int ClientId { get; set; }
-
         public Client Client { get; set; }
-        // Clé étrangère pour le produit
-        public int ProduitId { get; set; }
 
-        // Navigation property pour le produit
-        public Produit Produit { get; set; }
+        // Relation avec StockProduit
+        public ICollection<StockProduit> StockProduits { get; set; }
     }
+
+
 }

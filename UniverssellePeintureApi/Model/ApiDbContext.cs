@@ -12,6 +12,10 @@ namespace UniverssellePeintureApi.Model
         public DbSet<Commerce> Commerces { get; set; }
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Produit> Produits { get; set; }
+        public DbSet<StockProduit> StockProduits { get; set; }
+
+        public DbSet<PortFeuilleClient> portFeuilleClients { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,16 +24,28 @@ namespace UniverssellePeintureApi.Model
                 .HasMany(c => c.Clients)
                 .WithOne(c => c.Commerce)
                 .HasForeignKey(c => c.CommercantId);
+            modelBuilder.Entity<Commerce>()
+                .HasMany(c => c.PortFeuilleClients)
+                .WithOne(c => c.Commerce)
+                .HasForeignKey(c => c.CommercantId);
 
             modelBuilder.Entity<Client>()
                 .HasMany(c => c.Stocks)
                 .WithOne(s => s.Client)
                 .HasForeignKey(s => s.ClientId);
 
-            modelBuilder.Entity<Produit>()
-                .HasMany(p => p.Stocks)
-                .WithOne(s => s.Produit)
-                .HasForeignKey(s => s.ProduitId);
+            modelBuilder.Entity<StockProduit>()
+           .HasKey(sp => new { sp.StockId, sp.ProduitId });
+
+            modelBuilder.Entity<StockProduit>()
+                .HasOne(sp => sp.Stock)
+                .WithMany(s => s.StockProduits)
+                .HasForeignKey(sp => sp.StockId);
+
+            modelBuilder.Entity<StockProduit>()
+                .HasOne(sp => sp.Produit)
+                .WithMany(p => p.StockProduits)
+                .HasForeignKey(sp => sp.ProduitId);
 
             modelBuilder.Entity<Client>()
                 .HasIndex(c => c.Code)
