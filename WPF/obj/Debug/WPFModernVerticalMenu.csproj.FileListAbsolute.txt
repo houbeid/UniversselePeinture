@@ -171,3 +171,9 @@ C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\Regis
 C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\RegistreComercial.baml
 C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\bin\Debug\FontAwesome.WPF.dll
 C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\bin\Debug\FontAwesome.WPF.xml
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\AddStock.g.cs
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\AddStock.baml
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\UpdateStock.g.cs
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\UpdateStock.baml
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\ListeComercial.g.cs
+C:\Users\user\Source\Repos\houbeid\UniversselePeinture\WPF\obj\Debug\Pages\ListeComercial.baml

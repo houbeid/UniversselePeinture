@@ -205,16 +205,31 @@ namespace WPFModernVerticalMenu
         }
         // End: Button Close | Restore | Minimize
 
-        private void btnHome_Click(object sender, RoutedEventArgs e)
+        private void btnRegistreCl_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/RegisterClient.xaml", UriKind.RelativeOrAbsolute));
             Button b = sender as Button;
             b.Foreground = new SolidColorBrush(Colors.Yellow);
         }
 
-        private void btnDashboard_Click(object sender, RoutedEventArgs e)
+        private void btnRegistreCo_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/RegistreComercial.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btnAddStock_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/AddStock.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btnUpdateStock_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/UpdateStock.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        private void btnListCom_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/ListeComercial.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void fContainer_Navigated(object sender, NavigationEventArgs e)

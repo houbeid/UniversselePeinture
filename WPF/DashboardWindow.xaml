@@ -69,17 +69,23 @@
 
                     <!-- Start: MenuItem -->
                     <StackPanel Grid.Row="1" Margin="-17 0 0 0">
-                        <Button x:Name="btnHome" Style="{DynamicResource PopupButtonStyle}" Click="btnHome_Click">
+                        <Button x:Name="btnHome" Style="{DynamicResource PopupButtonStyle}" Click="btnRegistreCl_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Inscription Client"/>
                         </Button>
-                        <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnDashboard_Click">
+                        <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnRegistreCo_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Inscription Comercial" VerticalAlignment="Center"/>
                         </Button>
-                        <Button x:Name="btnProducts" Style="{DynamicResource PopupButtonStyle}">
+                        <Button x:Name="btnProducts" Style="{DynamicResource PopupButtonStyle}" Click="btnListCom_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Liste des Comercials" VerticalAlignment="Center"/>
                         </Button>
+                        <Button x:Name="btnAddStock" Style="{DynamicResource PopupButtonStyle}" Click="btnAddStock_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter au Stock" VerticalAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="btnUpdateStock" Style="{DynamicResource PopupButtonStyle}" Click="btnUpdateStock_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Stock" VerticalAlignment="Center"/>
+                        </Button>
                         <Button x:Name="btnProductStock" Style="{DynamicResource PopupButtonStyle}">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Statistique" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Statistiques" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
                         </Button>
                     </StackPanel>
                     <!-- End: MenuItem -->
@@ -121,7 +127,7 @@
                 <!-- Start: Notification and Logout Buttons -->
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,30,560">
                     <Button x:Name="btnNotification" Style="{StaticResource NoBorderButtonStyle}" Width="55" Height="30" Background="Transparent" Click="btnNotification_Click">
-                        <Image Source="/Resources/Bell.png"  Width="20" Height="20" />
+                        <fa:ImageAwesome Icon="Bell" Width="20" Height="20" Foreground="Black"/>
                     </Button>
                     <Button x:Name="btnLogout" Click="btnLogout_Click" Background="#124481" Foreground="White" Padding="5,0" Margin="10,0,0,0" Width="130" Height="35">
                         <StackPanel Orientation="Horizontal">

@@ -106,11 +106,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ListeComercial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RegistreComercial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RegisterClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UpdateStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,11 +136,20 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\AddStock.xaml.cs">
+      <DependentUpon>AddStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ListeComercial.xaml.cs">
+      <DependentUpon>ListeComercial.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\RegistreComercial.xaml.cs">
       <DependentUpon>RegistreComercial.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UpdateStock.xaml.cs">
+      <DependentUpon>UpdateStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
