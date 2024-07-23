@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Controllers",
+    "\\DTO",
     "\\Model"
   ],
-  "SelectedNode": "\\UniverssellePeintureApi.sln",
+  "SelectedNode": "\\Controllers\\StockController.cs",
   "PreviewInSolutionExplorer": false
 }

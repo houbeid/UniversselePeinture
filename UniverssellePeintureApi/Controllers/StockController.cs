@@ -99,7 +99,14 @@ namespace UniverssellePeintureApi.Controllers
                     }
                 }
             }
-
+            var portfeuilleClient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == addStockDto.CodeClient);
+            if (portfeuilleClient == null)
+            {
+                throw new Exception("PortfeuilleClient not found");
+            }
+            portfeuilleClient.PriceCompta += addStockDto.PriceCompta;
+            portfeuilleClient.currentPrice += addStockDto.PriceCompta;
+            portfeuilleClient.depot = addStockDto.Delivery_date;
             await _context.SaveChangesAsync();
         }
 
@@ -174,7 +181,7 @@ namespace UniverssellePeintureApi.Controllers
             Portfeiulleclient.PriceCompta -= updateStockDto.recipe_day;
             Portfeiulleclient.PricePayer = stock.PrixDeVenteTotal - updateStockDto.recipe_day;
             Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
-            Portfeiulleclient.PriceCompta -= updateStockDto.recipe_day;
+            Portfeiulleclient.visit = updateStockDto.Visit_date;
 
             await _context.SaveChangesAsync();
         }

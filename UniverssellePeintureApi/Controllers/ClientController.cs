@@ -50,12 +50,24 @@ namespace UniverssellePeintureApi.Controllers
             };
 
             _context.Clients.Add(client);
+            var portfeuilleclient = new PortFeuilleClient
+            {
+                PriceCompta = 0,
+                currentPrice = 0,
+                Code = client.Code,
+                name = client.Respnsible_Name,
+                zone = client.Zone,
+                CommercantId = commerce.Id,
+                PricePayer = 0
+
+            };
+            _context.portFeuilleClients.Add(portfeuilleclient);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetClientById), new { id = client.Id }, client);
         }
 
-        [HttpPost("{update}")]
+        [HttpPost("update")]
         public async Task<bool> UpdateClientAsync(ClientUpdateRequest updateRequest)
         {
             var client = await _context.Clients
