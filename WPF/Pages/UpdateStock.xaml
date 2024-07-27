@@ -111,7 +111,7 @@
 
             <!-- Add Button -->
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                    Content="Ajouter au Stock" Click="Add_Click" 
+                    Content="Ajouter au Stock"  
                     HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                     Margin="0,20,0,20" Padding="10,5" 
                     Background="#124481" Foreground="White" 
