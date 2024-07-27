@@ -232,6 +232,19 @@ namespace WPFModernVerticalMenu
             fContainer.Navigate(new System.Uri("Pages/ListeComercial.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void btnNotification_Click(object sender, RoutedEventArgs e)
+        {
+            // Toggle the visibility of the notification popup
+            if (notificationPopup.IsOpen)
+            {
+                notificationPopup.IsOpen = false;
+            }
+            else
+            {
+                notificationPopup.IsOpen = true;
+            }
+        }
+
         private void fContainer_Navigated(object sender, NavigationEventArgs e)
         {
 
@@ -241,14 +254,11 @@ namespace WPFModernVerticalMenu
         {
 
         }
-        private void btnNotification_Click(object sender, RoutedEventArgs e)
-        {
-            // Handle notification button click
-        }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             // Handle logout button click
+            //fContainer.Navigate(new System.Uri("MainWindow.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

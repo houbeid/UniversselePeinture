@@ -1,11 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\UniverssellePeintureApi",
-    "\\UniverssellePeintureApi\\DTO",
     "\\WPF",
     "\\WPF\\Pages"
   ],
-  "SelectedNode": "\\WPF\\Pages\\RegisterClient.xaml",
+  "SelectedNode": "\\WPF\\Pages\\UpdateStock.xaml",
   "PreviewInSolutionExplorer": false
 }

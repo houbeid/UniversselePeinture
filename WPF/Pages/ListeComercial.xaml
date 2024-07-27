@@ -8,7 +8,62 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListeComercial">
 
-    <Grid>
-        
+    <Grid Margin="0,53,0,0">
+        <StackPanel>
+            <!-- First item -->
+            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
+                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
+                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
+                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
+                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
+                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
+                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
+                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
+                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </StackPanel>
     </Grid>
 </Page>
+
+
