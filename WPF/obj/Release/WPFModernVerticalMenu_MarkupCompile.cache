@@ -10,11 +10,11 @@ none
 false
 TRACE
 C:\Users\user\Source\Repos\Simo\WPF\App.xaml
-12125779941
+131008274292
 
-131893622939
+141294325339
 171000736367
-Assets\Icons.xaml;Controls\MenuItem.xaml;Controls\UserPopup.xaml;DashboardWindow.xaml;MainWindow.xaml;Pages\AddStock.xaml;Pages\ListeComercial.xaml;Pages\RegistreComercial.xaml;Pages\RegisterClient.xaml;Pages\UpdateStock.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
+Assets\Icons.xaml;Controls\MenuItem.xaml;Controls\UserPopup.xaml;CreateCompte.xaml;DashboardWindow.xaml;MainWindow.xaml;Pages\AddStock.xaml;Pages\ListeComercial.xaml;Pages\RegistreComercial.xaml;Pages\RegisterClient.xaml;Pages\UpdateStock.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
 
 True
 

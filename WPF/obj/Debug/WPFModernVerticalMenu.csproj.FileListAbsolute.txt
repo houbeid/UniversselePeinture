@@ -224,3 +224,5 @@ C:\Users\user\Source\Repos\Simo\WPF\obj\Debug\WPFModernVerticalMenu.Properties.R
 C:\Users\user\Source\Repos\Simo\WPF\obj\Debug\WPFModernVerticalMenu.csproj.GenerateResource.cache
 C:\Users\user\Source\Repos\Simo\WPF\obj\Debug\WPFModernVerticalMenu.csproj.CoreCompileInputs.cache
 C:\Users\user\Source\Repos\Simo\WPF\obj\Debug\WPFModernVerticalMenu.csproj.CopyComplete
+C:\Users\user\Source\Repos\Simo\WPF\obj\Debug\CreateCompte.g.cs
+C:\Users\user\Source\Repos\Simo\WPF\obj\Debug\CreateCompte.baml
