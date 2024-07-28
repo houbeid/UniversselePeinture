@@ -24,5 +24,18 @@ namespace WPFModernVerticalMenu.Pages
         {
             InitializeComponent();
         }
+
+        private void RecapButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Logic to load PDF file into the viewer
+            // Open the popup
+            PdfPopup.IsOpen = true;
+        }
+
+        private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Logic to download the PDF file
+            MessageBox.Show("Download button clicked");
+        }
     }
 }
