@@ -70,14 +70,14 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="5,0,0,20">
-                <TextBlock Text="Ajouter au Stock" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
+                <TextBlock Text="Modifier au Stock" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
             </StackPanel>
 
             <!-- Left Form Panel -->
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
                 <TextBlock Text="Code Client*" Margin="10" Padding="5"/>
                 <TextBox Name="CodeClient" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <TextBlock Text="Date de Delivration*" Margin="10" Padding="5"/>
+                <TextBlock Text="Date de Visite*" Margin="10" Padding="5"/>
                 <DatePicker Name="Delivery_Date" Margin="10" Padding="10" Style="{StaticResource CustomDatePickerStyle}" SelectedDateFormat="Short"/>
                 <TextBlock Text="Produit 1*" Margin="10" Padding="5"/>
                 <ComboBox Name="Prod1" Margin="10" Padding="10">
