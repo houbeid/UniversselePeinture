@@ -259,6 +259,9 @@ namespace WPFModernVerticalMenu
         {
             // Handle logout button click
             //fContainer.Navigate(new System.Uri("MainWindow.xaml", UriKind.RelativeOrAbsolute));
+            MainWindow main = new MainWindow();
+            main.Show();
+            this.Close();
         }
     }
 }

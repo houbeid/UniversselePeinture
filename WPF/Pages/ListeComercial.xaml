@@ -10,7 +10,6 @@
 
     <Grid Margin="0,53,0,0">
         <StackPanel>
-            <!-- First item -->
             <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
                 <DockPanel>
                     <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
@@ -18,7 +17,7 @@
                         <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
+                        <Button Background="#124481" Content="recap" Click="RecapButton_Click" Margin="10" VerticalAlignment="Center"/>
                         <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DockPanel>
@@ -63,6 +62,18 @@
                 </DockPanel>
             </Border>
         </StackPanel>
+        <Popup Name="PdfPopup" StaysOpen="False" Placement="Center" IsOpen="False">
+            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Padding="10" CornerRadius="5">
+                <StackPanel>
+                    <!-- Replace with a proper PDF viewer control -->
+                    <!-- Replace with a proper PDF viewer control -->
+                    <Border Background="Red" Width="800" Height="450">
+                        <!-- PDF content goes here -->
+                    </Border>
+                    <Button Background="#124481" Content="Telecharger" Margin="10" VerticalAlignment="Center" Click="DownloadButton_Click"/>
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
 </Page>
 

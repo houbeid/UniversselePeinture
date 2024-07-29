@@ -59,5 +59,11 @@ namespace WPFModernVerticalMenu
             dashboard.Show();
             this.Close();
         }
+        private void CreateCompte_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCompte create = new CreateCompte();
+            create.Show();
+            this.Close();
+        }
     }
 }
