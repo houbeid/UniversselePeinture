@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,16 +26,19 @@ namespace WPFModernVerticalMenu.Pages
         {
             InitializeComponent();
         }
-        private void Enregistrer_Click(object sender, RoutedEventArgs e)
+
+        private static readonly HttpClient client = new HttpClient();
+        private async void Enregistrer_Click(object sender, RoutedEventArgs e)
         {
             // Validation de saisie
             if (string.IsNullOrEmpty(CodeTextBox.Text) ||
                 string.IsNullOrEmpty(Name_SocietyTextBox.Text) ||
                 string.IsNullOrEmpty(Respnsible_NameTextBox.Text) ||
                 string.IsNullOrEmpty(ZoneTextBox.Text) ||
-                string.IsNullOrEmpty(CommercantIdTextBox.Text))
+                string.IsNullOrEmpty(CommercantIdTextBox.Text) ||
+                string.IsNullOrEmpty(TelephoneTextBox.Text))
             {
-                MessageBox.Show("Tous les champs marqués d'un * sont obligatoires.");
+                MessageBox.Show("Tous les champs marqués par * sont obligatoires.");
                 return;
             }
 
@@ -44,7 +49,7 @@ namespace WPFModernVerticalMenu.Pages
             }
 
             // Enregistrement des donnée
-            var commercant = new Client
+            var clientDto = new Client
             {
                 Code = CodeTextBox.Text,
                 Name_Society = Name_SocietyTextBox.Text,
@@ -52,10 +57,28 @@ namespace WPFModernVerticalMenu.Pages
                 CoordonneesGPS = CoordonnéesGPSTextBox.Text,
                 Zone = ZoneTextBox.Text,
                 Recommandation = RecommandationTextBox.Text,
-                CommercantId = commercantId
+                CommercantId = commercantId,
+                Phone_Number = TelephoneTextBox.Text
             };
 
-            MessageBox.Show("Enregistrement réussi !");
+            var result = await AddClientAsync(clientDto);
+            if (result.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Enregistrement réussi !");
+            }
+            else
+            {
+                MessageBox.Show("Erreur du l'inscription");
+            }
+
+            
+        }
+
+        private async Task<HttpResponseMessage> AddClientAsync(Client clientDto)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(clientDto), Encoding.UTF8, "application/json");
+
+            return await client.PostAsync("https://localhost:7210/api/Clients", content);
         }
     }
     public class Client
@@ -67,7 +90,7 @@ namespace WPFModernVerticalMenu.Pages
         public string Name_Society { get; set; }
 
         public string Respnsible_Name { get; set; }
-        public string Telephone { get; set; }
+        public string Phone_Number { get; set; }
         public string Proprietaire { get; set; }
         public string ContactPerson { get; set; }
         public string Gerant { get; set; }
@@ -77,4 +100,6 @@ namespace WPFModernVerticalMenu.Pages
         public string Recommandation { get; set; }
         public int CommercantId { get; set; }
     }
+
+    
 }

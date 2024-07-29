@@ -64,7 +64,7 @@ namespace UniverssellePeintureApi.Controllers
             _context.portFeuilleClients.Add(portfeuilleclient);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetClientById), new { id = client.Id }, client);
+            return Ok("Client created successfully.");
         }
 
         [HttpPost("update")]

@@ -55,6 +55,6 @@
         </StackPanel>
 
         <!-- Button Section -->
-        <Button Content="Enregistrer" HorizontalAlignment="Center" VerticalAlignment="Top" Width="310" Height="50" Background="#124481" Foreground="White" FontSize="16" Margin="199,37,251,0" Grid.Row="3"/>
+        <Button Content="Enregistrer" Click="Enregistrer_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Width="310" Height="50" Background="#124481" Foreground="White" FontSize="16" Margin="199,37,251,0" Grid.Row="3"/>
     </Grid>
 </Page>

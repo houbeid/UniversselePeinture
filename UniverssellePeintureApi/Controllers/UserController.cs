@@ -102,7 +102,7 @@ namespace UniverssellePeintureApi.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return Unauthorized();
                 }
             }
             return BadRequest(ModelState);
