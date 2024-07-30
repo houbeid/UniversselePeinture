@@ -5,6 +5,7 @@
         public string CodeClient { get; set; }
 
         public DateTime Delivery_date { get; set; }
+        public decimal PriceCompta { get; set; }
 
         public List<StockProduitdto> StockProduitdto { get; set; }
     }
