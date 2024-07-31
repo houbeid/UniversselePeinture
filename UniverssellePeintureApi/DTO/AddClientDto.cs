@@ -6,7 +6,7 @@ namespace UniverssellePeintureApi.DTO
     {
         public string Code { get; set; }
         public string? Name_Society { get; set; }
-        public string Phone_Number { get; set; }
+        public string? Phone_Number { get; set; }
         public string Respnsible_Name { get; set; }
         public string? Gérant { get; set; }
         public string? Solvabilité { get; set; }

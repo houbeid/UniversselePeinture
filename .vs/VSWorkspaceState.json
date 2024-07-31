@@ -1,9 +1,11 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\WPF",
-    "\\WPF\\Pages"
+    ""
   ],
+<<<<<<< Updated upstream
   "SelectedNode": "\\WPF\\WPFModernVerticalMenu.sln",
+=======
+  "SelectedNode": "\\UniverssellePeintureApi.sln",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }

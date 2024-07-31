@@ -22,6 +22,13 @@ namespace UniverssellePeintureApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCommerce([FromBody] AddCommerceDto commerceDto)
         {
+            var comercial = await _context.Commerces
+            .Where(c => c.Telephone == commerceDto.Telephone)
+                .FirstOrDefaultAsync();
+            if (comercial != null)
+            {
+                ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
+            }
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -36,7 +43,7 @@ namespace UniverssellePeintureApi.Controllers
             _context.Commerces.Add(commerce);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCommerceById), new { id = commerce.Id }, commerce);
+            return Ok("Client created successfully.");
         }
 
         [HttpGet("{id}")]
