@@ -87,7 +87,7 @@ namespace WPFModernVerticalMenu
         {
             //if (Tg_Btn.IsChecked == false)
             //{
-            Popup.PlacementTarget = btnProductStock;
+            Popup.PlacementTarget = btnStatistique;
             Popup.Placement = PlacementMode.Right;
             Popup.IsOpen = true;
             Header.PopupText.Text = "Product Stock";
@@ -230,6 +230,14 @@ namespace WPFModernVerticalMenu
         private void btnListCom_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/ListeComercial.xaml", UriKind.RelativeOrAbsolute));
+        }
+        private void btnHistorique_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/Historique.xaml", UriKind.RelativeOrAbsolute));
+        }
+        private void btnSuiviFact_Clic(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/SFacture.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnNotification_Click(object sender, RoutedEventArgs e)
