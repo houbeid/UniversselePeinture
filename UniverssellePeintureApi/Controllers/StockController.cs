@@ -27,6 +27,11 @@ namespace UniverssellePeintureApi.Controllers
                 throw new Exception("Client not found");
             }
 
+            var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Id == client.CommercantId);
+            if (comercial == null)
+            {
+                throw new Exception("Comercial not found");
+            }
             client.Delivery_Date = addStockDto.Delivery_date;
 
             var stock = await _context.Stocks.Include(s => s.StockProduits).FirstOrDefaultAsync(s => s.ClientId == client.Id);
@@ -59,6 +64,15 @@ namespace UniverssellePeintureApi.Controllers
                             };
 
                             _context.StockProduits.Add(stockProduit);
+                            var historiqueProduit = new Historique
+                            {
+                                NameProduit = produit.Name,
+                                Quantite = stockProduitdto.Quantite,
+                                Montant = produit.PrixActuel * stockProduitdto.Quantite,
+                                Delivery_date = addStockDto.Delivery_date,
+                                distributeur = comercial.Nom
+                            };
+                            _context.Historiques.Add(historiqueProduit);
                         }
                     }
    
@@ -96,6 +110,15 @@ namespace UniverssellePeintureApi.Controllers
                         };
 
                         _context.StockProduits.Add(stockProduit);
+                        var historiqueProduit = new Historique
+                        {
+                            NameProduit = produit.Name,
+                            Quantite = stockProduitDto.Quantite,
+                            Montant = produit.PrixActuel * stockProduitDto.Quantite,
+                            Delivery_date = addStockDto.Delivery_date,
+                            distributeur = comercial.Nom
+                        };
+                        _context.Historiques.Add(historiqueProduit);
                     }
                 }
             }

@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages"
+      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages" xmlns:xctk1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="UpdateStock">
@@ -77,13 +77,15 @@
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
                 <TextBlock Text="Code Client*" Margin="10" Padding="5"/>
                 <TextBox Name="CodeClient" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <TextBlock Text="Date de Visite*" Margin="10" Padding="5"/>
-                <DatePicker Name="Delivery_Date" Margin="10" Padding="10" Style="{StaticResource CustomDatePickerStyle}" SelectedDateFormat="Short"/>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <Label Content="Date de visit*" Padding="5"/>
+                    <xctk1:DatePicker Name="Visite_Date" Padding="5" HorizontalAlignment="Left" SelectedDateChanged="Delivery_Date_SelectedDateChanged"/>
+                </StackPanel>
                 <TextBlock Text="Produit 1*" Margin="10" Padding="5"/>
                 <ComboBox Name="Prod1" Margin="10" Padding="10">
-                    <ComboBoxItem Content="Produit A"/>
-                    <ComboBoxItem Content="Produit B"/>
-                    <ComboBoxItem Content="Produit C"/>
+                    <ComboBoxItem Content="P1"/>
+                    <ComboBoxItem Content="P2"/>
+                    <ComboBoxItem Content="P3"/>
                 </ComboBox>
                 <TextBlock Text="Quantiter 1*" Margin="10" Padding="5"/>
                 <TextBox Name="QtP1" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
@@ -93,25 +95,27 @@
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
                 <Label Content="Produit 2" VerticalAlignment="Center" Margin="5"/>
                 <ComboBox Name="Prod2" Margin="10" Padding="10">
-                    <ComboBoxItem Content="Produit A"/>
-                    <ComboBoxItem Content="Produit B"/>
-                    <ComboBoxItem Content="Produit C"/>
+                    <ComboBoxItem Content="P1"/>
+                    <ComboBoxItem Content="P2"/>
+                    <ComboBoxItem Content="P3"/>
                 </ComboBox>
                 <Label Content="Quantiter 2" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Name="QtP2" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
                 <Label Content="Produit 3" VerticalAlignment="Center" Margin="5"/>
                 <ComboBox Name="Prod3" Margin="10" Padding="10">
-                    <ComboBoxItem Content="Produit A"/>
-                    <ComboBoxItem Content="Produit B"/>
-                    <ComboBoxItem Content="Produit C"/>
+                    <ComboBoxItem Content="P1"/>
+                    <ComboBoxItem Content="P2"/>
+                    <ComboBoxItem Content="P3"/>
                 </ComboBox>
                 <Label Content="Quantiter 3" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Name="QtP3" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <Label Content="Description" Margin="10" Padding="5"/>
+                <TextBox Name="description" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
             </StackPanel>
 
             <!-- Add Button -->
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                    Content="Ajouter au Stock"  
+                    Content="Update Stock" Click="Add_Click" 
                     HorizontalAlignment="Center" VerticalAlignment="Bottom" 
                     Margin="0,20,0,20" Padding="10,5" 
                     Background="#124481" Foreground="White" 

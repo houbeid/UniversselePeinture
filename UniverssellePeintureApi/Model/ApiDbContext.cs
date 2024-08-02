@@ -16,6 +16,10 @@ namespace UniverssellePeintureApi.Model
 
         public DbSet<PortFeuilleClient> portFeuilleClients { get; set; }
 
+        public DbSet<Historique> Historiques { get; set; }
+
+        public DbSet<Facture> Factures { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +35,16 @@ namespace UniverssellePeintureApi.Model
 
             modelBuilder.Entity<Client>()
                 .HasMany(c => c.Stocks)
+                .WithOne(s => s.Client)
+                .HasForeignKey(s => s.ClientId);
+
+            modelBuilder.Entity<Client>()
+                .HasMany(c => c.Historiques)
+                .WithOne(s => s.Client)
+                .HasForeignKey(s => s.ClientId);
+
+            modelBuilder.Entity<Client>()
+                .HasMany(c => c.Factures)
                 .WithOne(s => s.Client)
                 .HasForeignKey(s => s.ClientId);
 
@@ -58,6 +72,7 @@ namespace UniverssellePeintureApi.Model
             modelBuilder.Entity<PortFeuilleClient>()
                 .HasIndex(c => c.Code)
                 .IsUnique();
+            
         }
     }
 }
