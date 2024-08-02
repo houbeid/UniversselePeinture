@@ -55,6 +55,13 @@ namespace WPFModernVerticalMenu
             base.OnMouseLeftButtonDown(e);
             DragMove();
         }
+
+        private void CreateCompte_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCompte create = new CreateCompte();
+            create.Show();
+            this.Close();
+        }
         private async void login_Click(object sender, RoutedEventArgs e)
         {
             // Logique d'authentification ici
@@ -90,14 +97,6 @@ namespace WPFModernVerticalMenu
                 MessageBox.Show("An error occurred. Please try again later.");
             }
         }
-<<<<<<< Updated upstream
-        private void CreateCompte_Click(object sender, RoutedEventArgs e)
-        {
-            CreateCompte create = new CreateCompte();
-            create.Show();
-            this.Close();
-        }
-=======
 
         private async Task<HttpResponseMessage> LoginAsync(string username, string password)
         {
@@ -150,6 +149,6 @@ namespace WPFModernVerticalMenu
     public class ErrorResponse
     {
         public Dictionary<string, string[]> Errors { get; set; }
->>>>>>> Stashed changes
+       
     }
 }
