@@ -84,7 +84,13 @@
                         <Button x:Name="btnUpdateStock" Style="{DynamicResource PopupButtonStyle}" Click="btnUpdateStock_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Stock" VerticalAlignment="Center"/>
                         </Button>
-                        <Button x:Name="btnProductStock" Style="{DynamicResource PopupButtonStyle}">
+                        <Button x:Name="btnHistorique" Style="{DynamicResource PopupButtonStyle}" Click="btnHistorique_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Historique"/>
+                        </Button>
+                        <Button x:Name="btnFacture" Style="{DynamicResource PopupButtonStyle}" Click="btnSuiviFact_Clic">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Suivi de Factures" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
+                        </Button>
+                        <Button x:Name="btnStatistique" Style="{DynamicResource PopupButtonStyle}">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Statistiques" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
                         </Button>
                     </StackPanel>
