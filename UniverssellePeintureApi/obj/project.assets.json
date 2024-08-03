@@ -2453,11 +2453,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
+      "projectUniqueName": "C:\\Users\\pc\\source\\repos\\UniverssellePeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
       "projectName": "UniverssellePeintureApi",
-      "projectPath": "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
+      "projectPath": "C:\\Users\\pc\\source\\repos\\UniverssellePeinture\\UniverssellePeintureApi\\UniverssellePeintureApi.csproj",
       "packagesPath": "C:\\Users\\pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\pc\\source\\repos\\UniversselPeinture\\UniverssellePeintureApi\\obj\\",
+      "outputPath": "C:\\Users\\pc\\source\\repos\\UniverssellePeinture\\UniverssellePeintureApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

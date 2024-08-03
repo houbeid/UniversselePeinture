@@ -1,31 +1,15 @@
-<<<<<<< Updated upstream
-﻿C:\Users\user\Source\Repos\Simo\WPF\obj\Release\GeneratedInternalTypeHelper.g.cs
-FC:\Users\user\Source\Repos\Simo\WPF\App.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Assets\Icons.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Controls\MenuItem.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Controls\UserPopup.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\CreateCompte.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\DashboardWindow.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\MainWindow.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Pages\AddStock.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Pages\ListeComercial.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Pages\RegistreComercial.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Pages\RegisterClient.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Pages\UpdateStock.xaml;;
-FC:\Users\user\Source\Repos\Simo\WPF\Themes\DarkTheme.xaml;;
-=======
 ﻿
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\App.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Assets\Icons.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Controls\MenuItem.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Controls\UserPopup.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\DashboardWindow.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\MainWindow.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Pages\AddStock.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Pages\ListeComercial.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Pages\RegistreComercial.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Pages\RegisterClient.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Pages\UpdateStock.xaml;;
-FC:\Users\pc\source\repos\UniversselPeinture\WPF\Themes\DarkTheme.xaml;;
->>>>>>> Stashed changes
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\App.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Assets\Icons.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Controls\MenuItem.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Controls\UserPopup.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\CreateCompte.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\DashboardWindow.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\MainWindow.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Pages\AddStock.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Pages\ListeComercial.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Pages\RegistreComercial.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Pages\RegisterClient.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Pages\UpdateStock.xaml;;
+FC:\Users\pc\source\repos\UniverssellePeinture\WPF\Themes\DarkTheme.xaml;;
 

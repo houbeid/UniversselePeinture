@@ -4,26 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\pc\source\repos\UniversselPeinture\WPF\obj\Release\
+C:\Users\pc\source\repos\UniverssellePeinture\WPF\obj\Release\
 WPFModernVerticalMenu
 none
 false
 TRACE
-<<<<<<< Updated upstream
-C:\Users\user\Source\Repos\Simo\WPF\App.xaml
+C:\Users\pc\source\repos\UniverssellePeinture\WPF\App.xaml
 131008274292
 
 141294325339
-171000736367
+18-631108176
 Assets\Icons.xaml;Controls\MenuItem.xaml;Controls\UserPopup.xaml;CreateCompte.xaml;DashboardWindow.xaml;MainWindow.xaml;Pages\AddStock.xaml;Pages\ListeComercial.xaml;Pages\RegistreComercial.xaml;Pages\RegisterClient.xaml;Pages\UpdateStock.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
-=======
-C:\Users\pc\source\repos\UniversselPeinture\WPF\App.xaml
-12125779941
-
-131893622939
-18-1470887975
-Assets\Icons.xaml;Controls\MenuItem.xaml;Controls\UserPopup.xaml;DashboardWindow.xaml;MainWindow.xaml;Pages\AddStock.xaml;Pages\ListeComercial.xaml;Pages\RegistreComercial.xaml;Pages\RegisterClient.xaml;Pages\UpdateStock.xaml;Styles\MainStyle.xaml;Themes\DarkTheme.xaml;
->>>>>>> Stashed changes
 
 True
 
