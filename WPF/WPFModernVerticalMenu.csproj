@@ -118,6 +118,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DetailsHistorique.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Historique.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\ListeComercial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +137,10 @@
     <Page Include="Pages\RegisterClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SFacture.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\UpdateStock.xaml">
       <SubType>Designer</SubType>
@@ -147,6 +159,12 @@
     <Compile Include="Pages\AddStock.xaml.cs">
       <DependentUpon>AddStock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DetailsHistorique.xaml.cs">
+      <DependentUpon>DetailsHistorique.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Historique.xaml.cs">
+      <DependentUpon>Historique.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ListeComercial.xaml.cs">
       <DependentUpon>ListeComercial.xaml</DependentUpon>
     </Compile>
@@ -155,6 +173,9 @@
     </Compile>
     <Compile Include="Pages\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SFacture.xaml.cs">
+      <DependentUpon>SFacture.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UpdateStock.xaml.cs">
       <DependentUpon>UpdateStock.xaml</DependentUpon>

@@ -15,22 +15,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Stretch">
-            <TextBlock Text="Nom client" FontWeight="Bold" Width="150"/>
-            <TextBlock Text="Num Telephone" FontWeight="Bold" Width="150"/>
             <TextBlock Text="Produit" FontWeight="Bold" Width="150"/>
             <TextBlock Text="Quantité" FontWeight="Bold" Width="150"/>
             <TextBlock Text="Montant" FontWeight="Bold" Width="150"/>
+            <TextBlock Text="Date" FontWeight="Bold" Width="150"/>
+            <TextBlock Text="Commercial" FontWeight="Bold" Width="150"/>
         </StackPanel>
 
         <ListBox Grid.Row="1" Name="historiqueListBox" ItemsSource="{Binding HistoriqueAchats}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding NomClient}" Width="150"/>
-                        <TextBlock Text="{Binding NumTelephone}" Width="150"/>
                         <TextBlock Text="{Binding Produit}" Width="150"/>
                         <TextBlock Text="{Binding Quantite}" Width="150"/>
                         <TextBlock Text="{Binding Montant}" Width="150"/>
+                        <TextBlock Text="{Binding Date}" Width="150"/>
+                        <TextBlock Text="{Binding Commercial}" Width="150"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
