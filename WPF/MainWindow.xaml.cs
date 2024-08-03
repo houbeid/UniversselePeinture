@@ -55,6 +55,13 @@ namespace WPFModernVerticalMenu
             base.OnMouseLeftButtonDown(e);
             DragMove();
         }
+
+        private void CreateCompte_Click(object sender, RoutedEventArgs e)
+        {
+            CreateCompte create = new CreateCompte();
+            create.Show();
+            this.Close();
+        }
         private async void login_Click(object sender, RoutedEventArgs e)
         {
             //        // Logique d'authentification ici
@@ -76,11 +83,11 @@ namespace WPFModernVerticalMenu
             {
                 var content = await result.Content.ReadAsStringAsync();
                 DashboardWindow dashboard = new DashboardWindow();
-            dashboard.Show();
-            this.Close();
-            MessageBox.Show("Login successful!");
-            // Traitez le token JWT ici si nécessaire
-        }
+                dashboard.Show();
+                this.Close();
+                MessageBox.Show("Login successful!");
+                // Traitez le token JWT ici si nécessaire
+            }
                     else if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
                         MessageBox.Show("Invalid username or password.");
@@ -90,12 +97,6 @@ namespace WPFModernVerticalMenu
                         MessageBox.Show("An error occurred. Please try again later.");
                     }
         }
-        private void CreateCompte_Click(object sender, RoutedEventArgs e)
-            {
-                CreateCompte create = new CreateCompte();
-                create.Show();
-                this.Close();
-            }
 
         private async Task<HttpResponseMessage> LoginAsync(string username, string password)
         {
