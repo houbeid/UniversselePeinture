@@ -64,8 +64,8 @@ namespace WPFModernVerticalMenu
         }
         private async void login_Click(object sender, RoutedEventArgs e)
         {
-            // Logique d'authentification ici
-            // Si l'authentification réussit :
+            //        // Logique d'authentification ici
+            //        // Si l'authentification réussit :
 
             // var result = postApiDataAsync(login, "https://localhost:7210/api/User/login");
             if (txtUsername.Text == "")
@@ -85,17 +85,17 @@ namespace WPFModernVerticalMenu
                 DashboardWindow dashboard = new DashboardWindow();
                 dashboard.Show();
                 this.Close();
-                //MessageBox.Show("Login successful!");
+                MessageBox.Show("Login successful!");
                 // Traitez le token JWT ici si nécessaire
             }
-            else if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                MessageBox.Show("Invalid username or password.");
-            }
-            else
-            {
-                MessageBox.Show("An error occurred. Please try again later.");
-            }
+                    else if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                    {
+                        MessageBox.Show("Invalid username or password.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error occurred. Please try again later.");
+                    }
         }
 
         private async Task<HttpResponseMessage> LoginAsync(string username, string password)
@@ -138,7 +138,7 @@ namespace WPFModernVerticalMenu
                 return new[] { "An unexpected error occurred." };
             }
         }
-        
+
     }
     public class Token
     {
@@ -149,6 +149,5 @@ namespace WPFModernVerticalMenu
     public class ErrorResponse
     {
         public Dictionary<string, string[]> Errors { get; set; }
-       
     }
 }

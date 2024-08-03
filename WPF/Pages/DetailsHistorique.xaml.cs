@@ -29,10 +29,10 @@ namespace WPFModernVerticalMenu.Pages
 
             HistoriqueAchats = new ObservableCollection<HistoriqueAchat>
             {
-                new HistoriqueAchat { NomClient = "Client1", NumTelephone = "1234567890", Produit = "Produit1", Quantite = 10, Montant = 100.00 },
-                new HistoriqueAchat { NomClient = "Client2", NumTelephone = "0987654321", Produit = "Produit2", Quantite = 5, Montant = 50.00 },
-                new HistoriqueAchat { NomClient = "Client3", NumTelephone = "1112223334", Produit = "Produit3", Quantite = 7, Montant = 70.00 },
-                new HistoriqueAchat { NomClient = "Client4", NumTelephone = "5556667778", Produit = "Produit4", Quantite = 3, Montant = 30.00 }
+                new HistoriqueAchat { Produit = "Produit1", Quantite = 10, Montant = 100.00, Date = DateTime.Now, Commercial = "Client1" },
+            new HistoriqueAchat { Produit = "Produit2", Quantite = 5, Montant = 50.00, Date = DateTime.Now, Commercial = "Client2" },
+            new HistoriqueAchat { Produit = "Produit3", Quantite = 7, Montant = 70.00, Date = DateTime.Now, Commercial = "Client3" },
+            new HistoriqueAchat { Produit = "Produit4", Quantite = 3, Montant = 30.00, Date = DateTime.Now, Commercial = "Client4" }
             };
 
             DataContext = this;
@@ -46,10 +46,10 @@ namespace WPFModernVerticalMenu.Pages
 
     public class HistoriqueAchat
     {
-        public string NomClient { get; set; }
-        public string NumTelephone { get; set; }
         public string Produit { get; set; }
         public int Quantite { get; set; }
         public double Montant { get; set; }
+        public DateTime Date { get; set; }
+        public string Commercial { get; set; }
     }
 }
