@@ -48,25 +48,25 @@
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
                 <TextBlock Text="Date*" Margin="10" Padding="5"/>
                 <TextBox Grid.Row="0" Grid.Column="1" Name="DateBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <TextBlock Text="Client*" Margin="10" Padding="5"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="ClientBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <TextBlock Text="Addresse*" Margin="10" Padding="5"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="AddresseTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <TextBlock Text="Code*" Margin="10" Padding="5"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Name="CodeTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <TextBlock Text="Code Client*" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="CodeClientBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <!--<TextBlock Text="Addresse*" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="AddresseTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
+                <!--<TextBlock Text="Code*" Margin="10" Padding="5"/>-->
+                <!--<TextBox Grid.Row="3" Grid.Column="1" Name="CodeTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
+                <Label Content="Numero Facture*" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="NumFactTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
             </StackPanel>
 
             <!-- Right Form Panel -->
-            <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
-                <Label Content="Numero Facture*" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Name="NumFactTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,10,30,30">
                 <Label Content="Montant*" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Name="MontantTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
                 <Label Content="Distributeur" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Grid.Row="6" Grid.Column="1" Name="DistrubuteurTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
                 <Button Content="Enregistrer" Click="EnregistrerFact_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,20" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="56"/>
             </StackPanel>
-            <Button Content="Générer le suivi de Factures" Click="SuiviFact_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,345,226,-57" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="94" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"/>
+            <Button Content="Générer le suivi de Factures" Click="SuiviFact_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,278,230,10" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="94" Grid.ColumnSpan="2" Grid.Row="1"/>
         </Grid>
     </ScrollViewer>
 </Page>
