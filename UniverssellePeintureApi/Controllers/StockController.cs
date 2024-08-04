@@ -50,7 +50,17 @@ namespace UniverssellePeintureApi.Controllers
                         {
                             stockproduit.prix_actuell += produit.PrixActuel * stockProduitdto.Quantite;
                             stockproduit.Quantite += stockProduitdto.Quantite;
-
+                            var historiqueProduit = new Historique
+                            {
+                                NameProduit = produit.Name,
+                                Quantite = stockProduitdto.Quantite,
+                                Montant = produit.PrixActuel * stockProduitdto.Quantite,
+                                Delivery_date = addStockDto.Delivery_date,
+                                distributeur = comercial.Nom,
+                                ClientId = client.Id
+                            };
+                            _context.Historiques.Add(historiqueProduit);
+                            await _context.SaveChangesAsync();
                         }
 
                         else
@@ -64,15 +74,19 @@ namespace UniverssellePeintureApi.Controllers
                             };
 
                             _context.StockProduits.Add(stockProduit);
+                            await _context.SaveChangesAsync();
+
                             var historiqueProduit = new Historique
                             {
                                 NameProduit = produit.Name,
                                 Quantite = stockProduitdto.Quantite,
                                 Montant = produit.PrixActuel * stockProduitdto.Quantite,
                                 Delivery_date = addStockDto.Delivery_date,
-                                distributeur = comercial.Nom
+                                distributeur = comercial.Nom,
+                                ClientId = client.Id
                             };
                             _context.Historiques.Add(historiqueProduit);
+                            await _context.SaveChangesAsync();
                         }
                     }
    
@@ -110,15 +124,18 @@ namespace UniverssellePeintureApi.Controllers
                         };
 
                         _context.StockProduits.Add(stockProduit);
+                        await _context.SaveChangesAsync();
                         var historiqueProduit = new Historique
                         {
                             NameProduit = produit.Name,
                             Quantite = stockProduitDto.Quantite,
                             Montant = produit.PrixActuel * stockProduitDto.Quantite,
                             Delivery_date = addStockDto.Delivery_date,
-                            distributeur = comercial.Nom
+                            distributeur = comercial.Nom,
+                            ClientId = client.Id
                         };
                         _context.Historiques.Add(historiqueProduit);
+                        await _context.SaveChangesAsync();
                     }
                 }
             }
