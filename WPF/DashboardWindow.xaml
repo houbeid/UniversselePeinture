@@ -90,7 +90,7 @@
                         <Button x:Name="btnFacture" Style="{DynamicResource PopupButtonStyle}" Click="btnSuiviFact_Clic">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Suivi de Factures" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
                         </Button>
-                        <Button x:Name="btnStatistique" Style="{DynamicResource PopupButtonStyle}">
+                        <Button x:Name="btnStatistique" Style="{DynamicResource PopupButtonStyle}" Click="btnStatistique_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Statistiques" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
                         </Button>
                     </StackPanel>

@@ -240,6 +240,11 @@ namespace WPFModernVerticalMenu
             fContainer.Navigate(new System.Uri("Pages/SFacture.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void btnStatistique_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/Statistique.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         private void btnNotification_Click(object sender, RoutedEventArgs e)
         {
             // Toggle the visibility of the notification popup
