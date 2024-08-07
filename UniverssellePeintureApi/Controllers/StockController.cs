@@ -188,28 +188,29 @@ namespace UniverssellePeintureApi.Controllers
                 var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitDto.NameProduit);
                 if (produit != null)
                 {
-                    var stockproduit = await _context.StockProduits.FirstOrDefaultAsync(p => p.ProduitId == produit.Id);
+                    var stockproduit = await _context.StockProduits.FirstOrDefaultAsync(p => p.ProduitId == produit.Id && p.StockId == stock.Id);
                     if (stockproduit == null)
                     {
                         throw new Exception("Stock not found for this client");
                     }
+                    // Mettre à jour le stock actuel du produit
                     produit.StockActuel -= (stockproduit.Quantite - stockProduitDto.Quantite);
 
                     // Calculer le pourcentage de vente
                     produit.PourcentageVente = ((produit.stock - produit.StockActuel) / produit.stock) * 100;
 
+                    // Mettre à jour les informations du stockProduit existant
+                    stockproduit.Quantite = stockProduitDto.Quantite;
+                    stockproduit.prix_vent = ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel);
+                    stockproduit.prix_actuell = (stockproduit.prix_actuell - ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel));
 
-                    var stockProduit = new StockProduit
-                    {
-                        prix_vent = ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel),
-                        prix_actuell = (stockproduit.prix_actuell - ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel)),
-                        StockId = stock.Id,
-                        ProduitId = produit.Id
-                    };
-                    stock.PrixDeVenteTotal += stockProduit.prix_vent;
-                    _context.StockProduits.RemoveRange(stockproduit);
-                    _context.StockProduits.Add(stockProduit);
-  
+                    // Mettre à jour le prix de vente total du stock
+                    stock.PrixDeVenteTotal += stockproduit.prix_vent;
+
+                    // Marquer les entités comme modifiées
+                    _context.Entry(produit).State = EntityState.Modified;
+                    _context.Entry(stockproduit).State = EntityState.Modified;
+
                 }
             }
             stock.Quantity = updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
@@ -222,7 +223,6 @@ namespace UniverssellePeintureApi.Controllers
             Portfeiulleclient.PricePayer = stock.PrixDeVenteTotal - updateStockDto.recipe_day;
             Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
             Portfeiulleclient.visit = updateStockDto.Visit_date;
-
             await _context.SaveChangesAsync();
         }
     }

@@ -23,18 +23,30 @@ namespace WPFModernVerticalMenu.Pages
     {
         public ObservableCollection<HistoriqueAchat> HistoriqueAchats { get; set; }
 
-        public DetailsHistorique()
+        //public DetailsHistorique()
+        //{
+        //    InitializeComponent();
+
+        //    HistoriqueAchats = new ObservableCollection<HistoriqueAchat>
+        //    {
+        //        new HistoriqueAchat { Produit = "Produit1", Quantite = 10, Montant = 100, Date = DateTime.Now, Commercial = "Client1" },
+        //    new HistoriqueAchat { Produit = "Produit2", Quantite = 5, Montant = 50, Date = DateTime.Now, Commercial = "Client2" },
+        //    new HistoriqueAchat { Produit = "Produit3", Quantite = 7, Montant = 70, Date = DateTime.Now, Commercial = "Client3" },
+        //    new HistoriqueAchat { Produit = "Produit4", Quantite = 3, Montant = 30, Date = DateTime.Now, Commercial = "Client4" }
+        //    };
+
+        //    DataContext = this;
+        //}
+
+        public DetailsHistorique(List<HistoriqueAchat> achats)
         {
             InitializeComponent();
 
-            HistoriqueAchats = new ObservableCollection<HistoriqueAchat>
+            HistoriqueAchats = new ObservableCollection<HistoriqueAchat>();
+            foreach(HistoriqueAchat achat in achats)
             {
-                new HistoriqueAchat { Produit = "Produit1", Quantite = 10, Montant = 100.00, Date = DateTime.Now, Commercial = "Client1" },
-            new HistoriqueAchat { Produit = "Produit2", Quantite = 5, Montant = 50.00, Date = DateTime.Now, Commercial = "Client2" },
-            new HistoriqueAchat { Produit = "Produit3", Quantite = 7, Montant = 70.00, Date = DateTime.Now, Commercial = "Client3" },
-            new HistoriqueAchat { Produit = "Produit4", Quantite = 3, Montant = 30.00, Date = DateTime.Now, Commercial = "Client4" }
-            };
-
+                HistoriqueAchats.Add(achat);
+            }
             DataContext = this;
         }
 
@@ -48,7 +60,7 @@ namespace WPFModernVerticalMenu.Pages
     {
         public string Produit { get; set; }
         public int Quantite { get; set; }
-        public double Montant { get; set; }
+        public decimal Montant { get; set; }
         public DateTime Date { get; set; }
         public string Commercial { get; set; }
     }

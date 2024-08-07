@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages"
+      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages" xmlns:xctk1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SFacture">
@@ -46,8 +46,12 @@
             </StackPanel>
             <!-- Left Navigation Panel -->
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">
-                <TextBlock Text="Date*" Margin="10" Padding="5"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Name="DateBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <!--<TextBlock Text="Date*" Margin="10" Padding="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="DateBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Date*" Margin="10" Padding="5" />
+                    <xctk1:DatePicker Name="Date" Padding="5" HorizontalAlignment="Left" SelectedDateChanged="Date_SelectedDateChanged"/>
+                </StackPanel>
                 <TextBlock Text="Code Client*" Margin="10" Padding="5"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Name="CodeClientBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
                 <!--<TextBlock Text="Addresse*" Margin="10" Padding="5"/>

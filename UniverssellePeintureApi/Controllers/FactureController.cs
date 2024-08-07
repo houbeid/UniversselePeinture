@@ -18,7 +18,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpPost("Add")]
         public async Task<IActionResult> CreateFacture([FromBody] AddFactureDto factureDto)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == factureDto.CodeClient);

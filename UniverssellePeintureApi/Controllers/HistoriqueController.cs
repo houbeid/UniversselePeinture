@@ -34,11 +34,11 @@ namespace UniverssellePeintureApi.Controllers
                 HistoriqueClient.Add(
                     new HistoriqueResponse
                     {
-                        NameProduit = clienthistorique.NameProduit,
-                        Quantity = clienthistorique.Quantite,
-                        delivery_date = clienthistorique.Delivery_date,
-                        montant = clienthistorique.Montant,
-                        distributeur = clienthistorique.distributeur
+                        Produit = clienthistorique.NameProduit,
+                        Quantite = clienthistorique.Quantite,
+                        Date = clienthistorique.Delivery_date,
+                        Montant = clienthistorique.Montant,
+                        Commercial = clienthistorique.distributeur
                     }
                     );
             }

@@ -142,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\Statistique.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\UpdateStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +180,9 @@
     </Compile>
     <Compile Include="Pages\SFacture.xaml.cs">
       <DependentUpon>SFacture.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Statistique.xaml.cs">
+      <DependentUpon>Statistique.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UpdateStock.xaml.cs">
       <DependentUpon>UpdateStock.xaml</DependentUpon>
