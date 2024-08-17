@@ -130,6 +130,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Livraison.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RegistreComercial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,6 +175,9 @@
     </Compile>
     <Compile Include="Pages\ListeComercial.xaml.cs">
       <DependentUpon>ListeComercial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Livraison.xaml.cs">
+      <DependentUpon>Livraison.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistreComercial.xaml.cs">
       <DependentUpon>RegistreComercial.xaml</DependentUpon>

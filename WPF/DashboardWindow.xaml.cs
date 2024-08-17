@@ -217,6 +217,11 @@ namespace WPFModernVerticalMenu
             fContainer.Navigate(new System.Uri("Pages/RegistreComercial.xaml", UriKind.RelativeOrAbsolute));
         }
 
+        private void btnLivraison_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/Livraison.xaml", UriKind.RelativeOrAbsolute));
+        }
+
         private void btnAddStock_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/AddStock.xaml", UriKind.RelativeOrAbsolute));
