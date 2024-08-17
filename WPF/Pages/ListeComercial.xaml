@@ -8,73 +8,53 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ListeComercial">
 
-    <Grid Margin="0,53,0,0">
-        <StackPanel>
-            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
-                <DockPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
-                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <Button Background="#124481" Content="recap" Click="RecapButton_Click" Margin="10" VerticalAlignment="Center"/>
-                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </DockPanel>
-            </Border>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
-                <DockPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
-                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
-                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </DockPanel>
-            </Border>
-
-            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
-                <DockPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
-                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
-                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </DockPanel>
-            </Border>
-
-            <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Margin="10" Padding="10" CornerRadius="5">
-                <DockPanel>
-                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
-                        <TextBlock Text="Nom et Prenom" VerticalAlignment="Center" Margin="10"/>
-                        <TextBlock Text="Numero de telephone" VerticalAlignment="Center" Margin="10"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
-                        <Button Background="#124481" Content="recap" Margin="10" VerticalAlignment="Center"/>
-                        <Button Background="#124481" Content="portefeuille" Margin="10" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </DockPanel>
-            </Border>
+        <!-- En-tête -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Stretch">
+            <TextBlock Text="Nom et Prénom" FontWeight="Bold" Width="300"/>
+            <TextBlock Text="Numéro de téléphone" FontWeight="Bold" Width="200"/>
+            <TextBlock Text="Actions" FontWeight="Bold" Width="200"/>
         </StackPanel>
+
+        <!-- Liste des éléments -->
+        <ListBox Grid.Row="1" Name="comercialListBox" ItemsSource="{Binding ListaComercial}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                            <TextBlock Text="{Binding NomPrenom}" Width="300"/>
+                            <TextBlock Text="{Binding NumeroTelephone}" Width="200"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <Button Background="#124481" Content="Recap" Margin="5" VerticalAlignment="Center" Command="{Binding RecapCommand}"/>
+                            <Button Background="#124481" Content="Portefeuille" Margin="5" VerticalAlignment="Center" Command="{Binding PortefeuilleCommand}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Bouton de téléchargement -->
+        <Button Content="Télécharger" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,10,10" Background="#124481" Click="DownloadButton_Click"/>
+
+        <!-- Popup pour PDF -->
         <Popup Name="PdfPopup" StaysOpen="False" Placement="Center" IsOpen="False">
             <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Padding="10" CornerRadius="5">
                 <StackPanel>
-                    <!-- Replace with a proper PDF viewer control -->
-                    <!-- Replace with a proper PDF viewer control -->
+                    <!-- Remplacer avec un contrôle de visualisation PDF approprié -->
                     <Border Background="Red" Width="800" Height="450">
-                        <!-- PDF content goes here -->
+                        <!-- Contenu du PDF va ici -->
                     </Border>
-                    <Button Background="#124481" Content="Telecharger" Margin="10" VerticalAlignment="Center" Click="DownloadButton_Click"/>
+                    <Button Background="#124481" Content="Télécharger" Margin="10" VerticalAlignment="Center" Click="DownloadButton_Click"/>
                 </StackPanel>
             </Border>
         </Popup>
     </Grid>
 </Page>
-
 
