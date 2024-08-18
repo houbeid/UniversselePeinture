@@ -45,7 +45,7 @@
             <Border Grid.Column="0"
                     Background="{DynamicResource SecundaryBackgroundColor}"
                     CornerRadius="8 0 0 8">
-                <Grid x:Name="GridNav" Width="200">
+                <Grid x:Name="GridNav" Width="250">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="150"/>
                         <RowDefinition Height="*"/>
@@ -74,6 +74,9 @@
                         </Button>
                         <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnRegistreCo_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Inscription Comercial" VerticalAlignment="Center"/>
+                        </Button>
+                        <Button x:Name="btnLivraison" Style="{DynamicResource PopupButtonStyle}" Click="btnLivraison_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Programmes de Livraisons" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnProducts" Style="{DynamicResource PopupButtonStyle}" Click="btnListCom_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Liste des Comercials" VerticalAlignment="Center"/>
