@@ -10,9 +10,6 @@ namespace UniverssellePeintureApi.DTO.Response
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Telephone { get; set; }
-
-
-        public List<ClientResponse> Clients { get; set; }
     }
 
     public class ClientResponse

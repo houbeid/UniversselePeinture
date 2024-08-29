@@ -20,6 +20,8 @@ namespace UniverssellePeintureApi.Model
 
         public DbSet<Facture> Factures { get; set; }
 
+        public DbSet<Command> Commands { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

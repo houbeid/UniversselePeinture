@@ -25,6 +25,8 @@ namespace WPFModernVerticalMenu.Pages
             InitializeComponent();
         }
 
-        private void Enregistrer_Click(object sender, RoutedEventArgs e) { }
+        private void Enregistrer_Click(object sender, RoutedEventArgs e) {
+            
+        }
     }
 }

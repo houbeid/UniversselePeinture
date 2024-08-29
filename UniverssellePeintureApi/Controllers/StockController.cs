@@ -147,6 +147,7 @@ namespace UniverssellePeintureApi.Controllers
             portfeuilleClient.PriceCompta += addStockDto.PriceCompta;
             portfeuilleClient.currentPrice += addStockDto.PriceCompta;
             portfeuilleClient.depot = addStockDto.Delivery_date;
+            portfeuilleClient.phone = client.Phone_Number;
             await _context.SaveChangesAsync();
         }
 
@@ -223,6 +224,7 @@ namespace UniverssellePeintureApi.Controllers
             Portfeiulleclient.PricePayer = stock.PrixDeVenteTotal - updateStockDto.recipe_day;
             Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
             Portfeiulleclient.visit = updateStockDto.Visit_date;
+            Portfeiulleclient.Date_RDV = updateStockDto.Description;
             await _context.SaveChangesAsync();
         }
     }

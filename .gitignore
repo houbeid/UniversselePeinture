@@ -6,3 +6,7 @@ WPF/obj/
 
 UniverssellePeintureApi/.vs/
 UniverssellePeintureApi/obj/
+/WPF/bin/Debug
+/WPF/packages
+/UniverssellePeintureApi/bin/Debug/net6.0
+/UniverssellePeintureApi/Migrations

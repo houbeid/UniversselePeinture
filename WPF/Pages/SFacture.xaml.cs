@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -29,6 +31,18 @@ namespace WPFModernVerticalMenu.Pages
         }
 
         private static readonly HttpClient client = new HttpClient();
+
+        private bool _isPopupOpen;
+
+        public bool IsPopupOpen
+        {
+            get { return _isPopupOpen; }
+            set
+            {
+                _isPopupOpen = value;
+                OnPropertyChanged(nameof(IsPopupOpen));
+            }
+        }
         private void Date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DatePicker datePicker = sender as DatePicker;
@@ -82,9 +96,70 @@ namespace WPFModernVerticalMenu.Pages
                 HandleError(result.StatusCode, errorContent);
             }
         }
+
+        private async void ShowPdfInPopup(string fileUrl)
+        {
+            // Ajouter l'ID en tant que paramètre de requête à l'URL
+            DateTime date = DateTime.Now.Date;
+            string formattedDate = date.ToString("yyyy-MM-dd");
+            string urlWithId = $"{fileUrl}?FactureDate={formattedDate}";
+
+            // Ouvrir la popup
+            PdfPopup.IsOpen = true;
+
+            try
+            {
+                // Créer un client HTTP
+                var client = new HttpClient();
+
+                // Effectuer la requête GET avec l'URL mise à jour
+                var response = await client.GetAsync(urlWithId);
+
+                // Vérifier si la réponse est réussie
+                if (!response.IsSuccessStatusCode)
+                {
+                    // Lire le message d'erreur depuis le backend
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                // Lire le flux de réponse PDF
+                var pdfStream = await response.Content.ReadAsStreamAsync();
+                var pdfPath = System.IO.Path.GetTempFileName() + ".pdf";
+
+                // Écrire le flux dans un fichier temporaire
+                using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
+                {
+                    await pdfStream.CopyToAsync(fileStream);
+                }
+
+                // Naviguer vers le fichier PDF dans le contrôleur WebBrowser
+                PdfViewer.Navigate(new Uri(pdfPath));
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // Erreur de réseau ou d'appel HTTP
+                MessageBox.Show($"HTTP Request Error: {httpEx.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception ex)
+            {
+                // Toute autre exception non gérée
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                // Fermer la popup en cas d'erreur
+                if (!PdfPopup.IsOpen)
+                {
+                    PdfPopup.IsOpen = false;
+                }
+            }
+        }
+
         private void SuiviFact_Click(object sender, RoutedEventArgs e)
         {
-
+            ShowPdfInPopup("https://localhost:7210/api/Facture/GenerateFacturePdf");
         }
         private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto Facture)
         {
@@ -129,6 +204,12 @@ namespace WPFModernVerticalMenu.Pages
 
             // Si la désérialisation échoue ou que Errors est null, retourner le contenu brut de l'erreur
             return new[] { errorContent };
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
