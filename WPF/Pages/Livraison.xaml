@@ -83,7 +83,7 @@
                 <TextBox Grid.Row="7" Grid.Column="1" x:Name="apayerTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
                 <Button Content="Enregistrer" Click="Enregistrer_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,20" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="56"/>
             </StackPanel>
-            <!--<Button Content="Générer le suivi de Factures" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,278,230,10" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="94" Grid.ColumnSpan="2" Grid.Row="1"/>-->
+            <Button Content="Générer le suivi de Factures" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,450,0,0" Padding="10,5" Background="#124481" Foreground="White" Width="336" Height="86" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"/>
         </Grid>
     </ScrollViewer>
 </Page>
