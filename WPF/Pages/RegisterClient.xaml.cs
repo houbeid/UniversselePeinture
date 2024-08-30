@@ -32,7 +32,6 @@ namespace WPFModernVerticalMenu.Pages
         {
             // Validation de saisie
             if (string.IsNullOrEmpty(CodeTextBox.Text) ||
-                string.IsNullOrEmpty(Name_SocietyTextBox.Text) ||
                 string.IsNullOrEmpty(Respnsible_NameTextBox.Text) ||
                 string.IsNullOrEmpty(ZoneTextBox.Text) ||
                 string.IsNullOrEmpty(CommercantIdTextBox.Text) ||

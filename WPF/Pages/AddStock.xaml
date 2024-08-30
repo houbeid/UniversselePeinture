@@ -60,7 +60,7 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Margin="5,0,0,20">
-                <TextBlock Text="Ajouter au Stock" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
+                <TextBlock Text="Ajouter au Stock Client" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
             </StackPanel>
 
             <!-- Left Form Panel -->
