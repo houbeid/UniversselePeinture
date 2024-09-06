@@ -1,7 +1,6 @@
 ﻿namespace UniverssellePeintureApi.DTO
 {
-    namespace UniverssellePeintureApi.DTO
-    {
+   
         public class AddCommandDto
         {
             public string CodeClient { get; set; }
@@ -27,6 +26,5 @@
 
             public decimal poid { get; set; }
         }
-    }
 
 }

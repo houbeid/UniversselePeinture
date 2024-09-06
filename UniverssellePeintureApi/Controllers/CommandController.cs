@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniverssellePeintureApi.DTO;
-using UniverssellePeintureApi.DTO.UniverssellePeintureApi.DTO;
 using UniverssellePeintureApi.Model;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
