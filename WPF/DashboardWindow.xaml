@@ -72,20 +72,23 @@
                         <Button x:Name="btnHome" Style="{DynamicResource PopupButtonStyle}" Click="btnRegistreCl_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Inscription Client"/>
                         </Button>
-                        <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnRegistreCo_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Inscription Comercial" VerticalAlignment="Center"/>
-                        </Button>
                         <Button x:Name="btnLivraison" Style="{DynamicResource PopupButtonStyle}" Click="btnLivraison_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Programmes de Livraisons" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnProducts" Style="{DynamicResource PopupButtonStyle}" Click="btnListCom_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Liste des Comercials" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Portefeilles des Comercials" VerticalAlignment="Center" Loaded="MenuItem_Loaded_1"/>
                         </Button>
                         <Button x:Name="btnAddStock" Style="{DynamicResource PopupButtonStyle}" Click="btnAddStock_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter au Stock" VerticalAlignment="Center"/>
                         </Button>
+                        <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnBtier_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter Balance Tier" VerticalAlignment="Center"/>
+                        </Button>
                         <Button x:Name="btnUpdateStock" Style="{DynamicResource PopupButtonStyle}" Click="btnUpdateStock_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Stock" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Stock" VerticalAlignment="Center" Loaded="MenuItem_Loaded_2"/>
+                        </Button>
+                        <Button x:Name="btnRecette" Style="{DynamicResource PopupButtonStyle}" Click="btnRecette_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Recette" VerticalAlignment="Center" Loaded="MenuItem_Loaded_2"/>
                         </Button>
                         <Button x:Name="btnHistorique" Style="{DynamicResource PopupButtonStyle}" Click="btnHistorique_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Historique"/>

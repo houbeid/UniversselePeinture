@@ -153,6 +153,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\BTier.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DetailsHistorique.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -169,7 +173,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RegistreComercial.xaml">
+    <Page Include="Pages\Recette.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -202,6 +206,9 @@
     <Compile Include="Pages\AddStock.xaml.cs">
       <DependentUpon>AddStock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BTier.xaml.cs">
+      <DependentUpon>BTier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DetailsHistorique.xaml.cs">
       <DependentUpon>DetailsHistorique.xaml</DependentUpon>
     </Compile>
@@ -214,8 +221,8 @@
     <Compile Include="Pages\Livraison.xaml.cs">
       <DependentUpon>Livraison.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RegistreComercial.xaml.cs">
-      <DependentUpon>RegistreComercial.xaml</DependentUpon>
+    <Compile Include="Pages\Recette.xaml.cs">
+      <DependentUpon>Recette.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
