@@ -145,7 +145,10 @@ namespace UniverssellePeintureApi.Controllers
                     table.AddCell(new PdfPCell(new Phrase(facture.Adress ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(facture.Code, cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(facture.facture, cellFont)));
-                    table.AddCell(new PdfPCell(new Phrase(facture.Montant.ToString(), cellFont)));
+                    if (facture.Montant == 0)
+                        table.AddCell(new PdfPCell(new Phrase("", cellFont)));
+                    else
+                        table.AddCell(new PdfPCell(new Phrase(facture.Montant.ToString(), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(facture.distributeur ?? "", cellFont)));
                 }
 

@@ -114,7 +114,7 @@ namespace WPFModernVerticalMenu.Pages
             // Ajouter l'ID en tant que paramètre de requête à l'URL
             DateTime date = DateTime.Now.Date;
             string formattedDate = date.ToString("yyyy-MM-dd");
-            string urlWithId = $"{fileUrl}?FactureDate={formattedDate}";
+            string urlWithId = $"{fileUrl}?commandDate={formattedDate}";
 
             // Ouvrir la popup
             PdfPopup.IsOpen = true;
@@ -169,9 +169,9 @@ namespace WPFModernVerticalMenu.Pages
             }
         }
 
-        private void SuiviFact_Click(object sender, RoutedEventArgs e)
+        private void SuiviCommand_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://localhost:7210/api/Facture/GenerateFacturePdf");
+            ShowPdfInPopup("https://localhost:7210/api/Command/GenerateCommandPdf");
         }
         private async Task<HttpResponseMessage> AddCommandAsync(AddCommandDto Facture)
         {
@@ -233,10 +233,6 @@ namespace WPFModernVerticalMenu.Pages
         public decimal A_Payer { get; set; }
 
         public decimal cach { get; set; }
-
-        public string distributaire { get; set; }
-
-        public string CommercialPhone { get; set; }
 
 
 

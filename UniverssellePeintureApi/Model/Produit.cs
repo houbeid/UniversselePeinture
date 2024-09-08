@@ -19,6 +19,9 @@ namespace UniverssellePeintureApi.Model
         [Required]
         public decimal PrixActuel { get; set; }
 
+        
+        public decimal poid { get; set; }
+
         [Required]
         public int StockActuel { get; set; }
 

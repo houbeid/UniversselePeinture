@@ -25,29 +25,28 @@ namespace UniverssellePeintureApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateCommand([FromBody] AddCommandDto command)
         {
-            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == command.CodeClient);
+            var client = await _context.Clients.Include(c => c.Commerce).FirstOrDefaultAsync(c => c.Code == command.CodeClient);
             if (client == null)
             {
                 throw new Exception("Client not found");
             }
-
-            var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Telephone == command.CommercialPhone);
-            if (comercial == null)
-            {
-                throw new Exception("Comercial not found");
-            }
             int i = 0;
             foreach (var stockCommanddto in command.StockCommanddto)
             {
+                var produit = await _context.Produits.FirstOrDefaultAsync(c => c.Name == stockCommanddto.NameProduit);
+                if (produit == null)
+                {
+                    throw new Exception("Produit not found");
+                }
+
                 if (i != 0)
                 {
                     var newCommand = new Command
                     {
                         produit = stockCommanddto.NameProduit,
                         Qte = stockCommanddto.Quantite,
-                        poids = stockCommanddto.poid,
+                        poids = produit.poid,
                         TotalPoids = stockCommanddto.Quantite * stockCommanddto.poid,
-                        Code = command.CodeClient,
                         Command_Date = command.Command_date
                     };
                     _context.Commands.Add(newCommand);
@@ -59,11 +58,11 @@ namespace UniverssellePeintureApi.Controllers
                     {
                         produit = stockCommanddto.NameProduit,
                         Qte = stockCommanddto.Quantite,
-                        poids = stockCommanddto.poid,
+                        poids = produit.poid,
                         TotalPoids = stockCommanddto.Quantite * stockCommanddto.poid,
                         Code = command.CodeClient,
                         client = client.Respnsible_Name,
-                        distrubitaire = comercial.Nom,
+                        distrubitaire = client.Commerce.Nom,
                         A_Payer = command.A_Payer,
                         Cach = command.cach,
                         phone = client.Phone_Number,
@@ -150,9 +149,15 @@ namespace UniverssellePeintureApi.Controllers
                     table.AddCell(new PdfPCell(new Phrase(command.TotalPoids.ToString("0.00"), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Zone ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Code ?? "", cellFont)));
-                    table.AddCell(new PdfPCell(new Phrase(command.Cach.ToString("0.00"), cellFont)));
+                    if (command.Cach == 0)
+                        table.AddCell(new PdfPCell(new Phrase("", cellFont)));
+                    else
+                        table.AddCell(new PdfPCell(new Phrase(command.Cach.ToString() ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.phone ?? "", cellFont)));
-                    table.AddCell(new PdfPCell(new Phrase(command.A_Payer.ToString("0.00"), cellFont)));
+                    if (command.A_Payer == 0)
+                        table.AddCell(new PdfPCell(new Phrase("", cellFont)));
+                    else
+                        table.AddCell(new PdfPCell(new Phrase(command.A_Payer.ToString() ?? "", cellFont)));
                 }
 
                 // Ajouter la ligne de total

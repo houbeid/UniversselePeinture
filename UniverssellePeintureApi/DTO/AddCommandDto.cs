@@ -10,10 +10,6 @@
 
             public decimal cach { get; set; }
 
-            public string distributaire { get; set; }
-
-            public string CommercialPhone { get; set; }
-
 
 
             public List<StockCommandDto> StockCommanddto { get; set; }
