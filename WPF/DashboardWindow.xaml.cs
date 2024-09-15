@@ -212,9 +212,9 @@ namespace WPFModernVerticalMenu
             b.Foreground = new SolidColorBrush(Colors.Yellow);
         }
 
-        private void btnRegistreCo_Click(object sender, RoutedEventArgs e)
+        private void btnBtier_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new System.Uri("Pages/RegistreComercial.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/BTier.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnLivraison_Click(object sender, RoutedEventArgs e)
@@ -243,6 +243,10 @@ namespace WPFModernVerticalMenu
         private void btnSuiviFact_Clic(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/SFacture.xaml", UriKind.RelativeOrAbsolute));
+        }
+        private void btnRecette_Clic(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/Recette.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void btnStatistique_Click(object sender, RoutedEventArgs e)
@@ -280,6 +284,16 @@ namespace WPFModernVerticalMenu
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
+        }
+
+        private void MenuItem_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Loaded_2(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

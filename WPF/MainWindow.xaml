@@ -44,7 +44,7 @@
                         FontSize="18" Content="Connetez-Vous" Click="login_Click" />
                 <Button Margin="0 20 0 0" x:Name="signupBtn" Background="#124481"
                         Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10"
-                        FontSize="18" Content="Créer un Compte" Click="CreateCompte_Click"/>
+                        FontSize="18" Content="Créer un Nouveau Commercial" Click="CreateCompte_Click"/>
             </StackPanel>
         </materialDesign:DialogHost>
     </materialDesign:Card>
