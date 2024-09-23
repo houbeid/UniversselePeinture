@@ -35,19 +35,19 @@
 
                 <!-- Identifiant -->
                 <TextBox Margin="0 20 0 0" Width="300" FontSize="18"
-                         materialDesign:HintAssist.Hint="Entrez un nouveau Identifiant" BorderThickness="2"
+                         materialDesign:HintAssist.Hint="Entrez un nouveau Identifiant" Name="IdTextBox" BorderThickness="2"
                           />
                 <!-- Mots de Passe -->
-                <PasswordBox Margin="0 20 0 0" Width="300" FontSize="18"
-                         materialDesign:HintAssist.Hint="Mots de Passe" BorderThickness="2"
+                <TextBox Margin="0 20 0 0" Width="300" FontSize="18"
+                         materialDesign:HintAssist.Hint="Mots de Passe" Name="PasswordTextBox" BorderThickness="2"
                          />
                 <!-- Email -->
                 <TextBox Margin="0 20 0 0" Width="300" FontSize="18"
-                         materialDesign:HintAssist.Hint="Email" BorderThickness="2"
+                         materialDesign:HintAssist.Hint="Email" Name="EmailTextBox" BorderThickness="2"
                           />
                 <!-- Numero de telephone -->
                 <TextBox Margin="0 20 0 0" Width="300" FontSize="18"
-                         materialDesign:HintAssist.Hint="Numero de telephone" BorderThickness="2"
+                         materialDesign:HintAssist.Hint="Numero de telephone" Name="PhoneTextBox" BorderThickness="2"
                           />
                 <!-- Cocher Si c'est Admin -->
                 <CheckBox Content="Cocher Si c'est Admin" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0"

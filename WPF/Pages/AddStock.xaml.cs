@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
@@ -23,9 +24,14 @@ namespace WPFModernVerticalMenu.Pages
     /// </summary>
     public partial class AddStock : Page
     {
+
+        public ObservableCollection<string> Produits { get; set; }
         public AddStock()
         {
             InitializeComponent();
+            Produits = new ObservableCollection<string>();
+            DataContext = this;
+            Addproduit();
         }
 
         private static readonly HttpClient client = new HttpClient();
@@ -64,40 +70,48 @@ namespace WPFModernVerticalMenu.Pages
             if (ValidateInputs())
             {
                 // Créer l'objet AddStockdto et le remplir avec les données saisies
+                // Créez une instance de votre DTO avec les données du formulaire
                 AddStockdto stockDto = new AddStockdto
                 {
                     CodeClient = CodeClient.Text,
                     Delivery_date = Delivery_Date.SelectedDate.Value,
-                    PriceCompta = decimal.Parse(PrixCompta.Text, CultureInfo.InvariantCulture),
-                    StockProduitdto = new List<StockProduitdto>
-                    {
-                        new StockProduitdto { NameProduit = ((ComboBoxItem)Prod1.SelectedItem).Content.ToString(), Quantite = int.Parse(QtP1.Text) }
-                    }
+                    StockProduitdto = new List<StockProduitdto>()
                 };
 
-                // Ajouter produit 2 si disponible
-                if (Prod2.SelectedItem != null && !string.IsNullOrWhiteSpace(QtP2.Text))
+                // Ajouter produit 1 si disponible
+                if (Prod1.SelectedItem is StockProduitDto selectedProduit1)
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
-                        NameProduit = ((ComboBoxItem)Prod2.SelectedItem).Content.ToString(),
+                        NameProduit = selectedProduit1.Name,
+                        Quantite = int.Parse(QtP1.Text)
+                    });
+                }
+
+                // Ajouter produit 2 si disponible
+                if (Prod2.SelectedItem is StockProduitDto selectedProduit2 && !string.IsNullOrWhiteSpace(QtP2.Text))
+                {
+                    stockDto.StockProduitdto.Add(new StockProduitdto
+                    {
+                        NameProduit = selectedProduit2.Name,
                         Quantite = int.Parse(QtP2.Text)
                     });
                 }
 
                 // Ajouter produit 3 si disponible
-                if (Prod3.SelectedItem != null && !string.IsNullOrWhiteSpace(QtP3.Text))
+                if (Prod3.SelectedItem is StockProduitDto selectedProduit3 && !string.IsNullOrWhiteSpace(QtP3.Text))
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
-                        NameProduit = ((ComboBoxItem)Prod3.SelectedItem).Content.ToString(),
+                        NameProduit = selectedProduit3.Name,
                         Quantite = int.Parse(QtP3.Text)
                     });
                 }
 
+                // Envoyer le DTO à l'API
                 var result = await AddStockAsync(stockDto);
 
-                // Traiter l'objet stockDto (ex: l'envoyer à un service, le sauvegarder dans une base de données, etc.)
+                // Traiter la réponse de l'API
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Les données ont été ajoutées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -121,13 +135,6 @@ namespace WPFModernVerticalMenu.Pages
             if (!Delivery_Date.SelectedDate.HasValue)
             {
                 MessageBox.Show("La Date de Délivration ne peut pas être vide.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            decimal priceCompta;
-            if (!decimal.TryParse(PrixCompta.Text, out priceCompta))
-            {
-                MessageBox.Show("La Prise Comptable doit être un nombre décimal.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 
@@ -160,6 +167,23 @@ namespace WPFModernVerticalMenu.Pages
             // Logique pour traiter l'objet stockDto (ex: l'envoyer à un service, le sauvegarder dans une base de données, etc.)
             MessageBox.Show("Les données ont été ajoutées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
         }
+
+        public async void Addproduit()
+        {
+            var response = await client.GetAsync("https://localhost:7210/api/Stock/Produits");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var produits = JsonConvert.DeserializeObject<List<StockProduitDto>>(jsonString);
+                if (produits != null)
+                {
+                    Prod1.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod2.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod3.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                }
+            }
+        }
+
 
         private async Task<HttpResponseMessage> AddStockAsync(AddStockdto stock)
         {
@@ -221,5 +245,10 @@ namespace WPFModernVerticalMenu.Pages
     {
         public string NameProduit { get; set; }
         public int Quantite { get; set; }
+    }
+
+    public class StockProduitDto
+    {
+        public string Name { get; set; }
     }
 }

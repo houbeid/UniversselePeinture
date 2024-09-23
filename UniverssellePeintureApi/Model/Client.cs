@@ -32,10 +32,10 @@ namespace UniverssellePeintureApi.Model
         public int CommercantId { get; set; }
 
         // Navigation property pour le commerçant
-        public Commerce Commerce { get; set; }
-        public ICollection<Stock> Stocks { get; set; }
-        public ICollection<Historique> Historiques { get; set; }
+        public Commerce? Commerce { get; set; }
+        public ICollection<Stock>? Stocks { get; set; }
+        public ICollection<Historique>? Historiques { get; set; }
 
-        public ICollection<Facture> Factures { get; set; }
+        public ICollection<Facture>? Factures { get; set; }
     }
 }

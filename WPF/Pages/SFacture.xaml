@@ -71,6 +71,14 @@
                 <Button Content="Enregistrer" Click="EnregistrerFact_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,20" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="56"/>
             </StackPanel>
             <Button Content="Générer le suivi de Factures" Click="SuiviFact_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,278,230,10" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="94" Grid.ColumnSpan="2" Grid.Row="1"/>
+            <Popup Name="PdfPopup" StaysOpen="False" Placement="Center" IsOpen="{Binding IsPopupOpen}">
+                <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Padding="10" CornerRadius="5">
+                    <StackPanel>
+                        <WebBrowser Name="PdfViewer" Width="800" Height="450"/>
+                        <Button Background="#124481" Content="Télécharger" Margin="10" VerticalAlignment="Center" Command="{Binding DownloadCommand}"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
         </Grid>
     </ScrollViewer>
 </Page>

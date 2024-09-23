@@ -20,10 +20,10 @@ namespace UniverssellePeintureApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] AddClientDto clientDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             var commerce = await _context.Commerces.FindAsync(clientDto.CommercantId);
             if (commerce == null)
@@ -113,6 +113,18 @@ namespace UniverssellePeintureApi.Controllers
         public async Task<IActionResult> GetClientById(int id)
         {
             var client = await _context.Clients.Include(c => c.Commerce).FirstOrDefaultAsync(c => c.Id == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(client);
+        }
+
+        [HttpGet("clientByCode")]
+        public async Task<IActionResult> GetClientByCode(string code)
+        {
+            var client = await _context.Clients.Include(c => c.Commerce).FirstOrDefaultAsync(c => c.Code == code);
             if (client == null)
             {
                 return NotFound();

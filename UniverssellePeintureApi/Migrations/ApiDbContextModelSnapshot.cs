@@ -216,6 +216,56 @@ namespace UniverssellePeintureApi.Migrations
                     b.ToTable("Clients");
                 });
 
+            modelBuilder.Entity("UniverssellePeintureApi.Model.Command", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal?>("A_Payer")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Cach")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Command_Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Qte")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPoids")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Zone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("client")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("distrubitaire")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("poids")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("produit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Commands");
+                });
+
             modelBuilder.Entity("UniverssellePeintureApi.Model.Commerce", b =>
                 {
                     b.Property<int>("Id")
@@ -331,6 +381,9 @@ namespace UniverssellePeintureApi.Migrations
                     b.Property<int>("CommercantId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Date_RDV")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal?>("PriceCompta")
                         .HasColumnType("decimal(18,2)");
 
@@ -345,6 +398,9 @@ namespace UniverssellePeintureApi.Migrations
 
                     b.Property<string>("name")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("visit")
@@ -376,14 +432,20 @@ namespace UniverssellePeintureApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<decimal>("PourcentageVente")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("PourcentageProduit")
+                        .HasColumnType("float");
+
+                    b.Property<double>("PourcentageVente")
+                        .HasColumnType("float");
 
                     b.Property<decimal>("PrixActuel")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("StockActuel")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("poid")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("stock")
                         .HasColumnType("int");

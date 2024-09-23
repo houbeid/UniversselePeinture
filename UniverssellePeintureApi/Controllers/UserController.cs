@@ -15,14 +15,16 @@ namespace UniverssellePeintureApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        public UserController(UserManager<User> userManager, IConfiguration configuration) {
+        public UserController(UserManager<User> userManager, IConfiguration configuration, ApiDbContext context) {
 
             _userManager = userManager;
             _configuration = configuration;
+            _context = context;
         }
 
         private readonly UserManager<User> _userManager;
-        private readonly IConfiguration _configuration; 
+        private readonly IConfiguration _configuration;
+        private readonly ApiDbContext _context;
 
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterNewUser(AddUserDto model)
@@ -42,6 +44,26 @@ namespace UniverssellePeintureApi.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "Admin");
                     }
+                    var comercial = await _context.Commerces
+                    .Where(c => c.Telephone == model.phone)
+                        .FirstOrDefaultAsync();
+                    if (comercial != null)
+                    {
+                        ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
+                    }
+                    if (!ModelState.IsValid)
+                    {
+                        return BadRequest(ModelState);
+                    }
+
+                    var commerce = new Commerce
+                    {
+                        Nom = model.userName,
+                        Telephone = model.phone
+                    };
+
+                    _context.Commerces.Add(commerce);
+                    await _context.SaveChangesAsync();
                     return Ok(new { Result = "User registered successfully" });
                 }
                 else
@@ -88,12 +110,22 @@ namespace UniverssellePeintureApi.Controllers
                             claims: claims,
                             expires: DateTime.Now.AddMinutes(30),
                             signingCredentials: creds);
-                        var _token = new
+                        //var _token = new
+                        //{
+                        //    token = new JwtSecurityTokenHandler().WriteToken(token),
+                        //    expiratin = token.ValidTo,
+                        //};
+                        var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                        var clients = await _context.Clients
+                            .Where(c => EF.Functions.DateDiffDay(c.Visit_Date, DateTime.Now) >= 7)
+                            .ToListAsync();
+                        var result = new
                         {
-                            token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiratin = token.ValidTo,
+                            Token = tokenString,
+                            Expiration = token.ValidTo,
+                            Clients = clients
                         };
-                        return Ok(_token);
+                        return Ok(result);
                     }
                     else
                     {

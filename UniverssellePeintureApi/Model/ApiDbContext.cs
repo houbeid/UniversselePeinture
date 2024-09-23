@@ -20,9 +20,13 @@ namespace UniverssellePeintureApi.Model
 
         public DbSet<Facture> Factures { get; set; }
 
+        public DbSet<Command> Commands { get; set; }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Commerce>()
                 .HasMany(c => c.Clients)
@@ -54,7 +58,7 @@ namespace UniverssellePeintureApi.Model
             modelBuilder.Entity<StockProduit>()
                 .HasOne(sp => sp.Stock)
                 .WithMany(s => s.StockProduits)
-                .HasForeignKey(sp => sp.StockId);
+               .HasForeignKey(sp => sp.StockId);
 
             modelBuilder.Entity<StockProduit>()
                 .HasOne(sp => sp.Produit)
@@ -72,7 +76,7 @@ namespace UniverssellePeintureApi.Model
             modelBuilder.Entity<PortFeuilleClient>()
                 .HasIndex(c => c.Code)
                 .IsUnique();
-            
+
         }
     }
 }

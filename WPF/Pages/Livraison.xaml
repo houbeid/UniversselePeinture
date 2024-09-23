@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages"
+      xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages" xmlns:xctk1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Livraison">
@@ -50,40 +50,47 @@
                 <TextBox Grid.Row="0" Grid.Column="1" Name="CodeTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
                 <TextBlock Text="Produit 1*" Margin="10" Padding="5"/>
                 <!--<TextBox Grid.Row="1" Grid.Column="1" Name="Produit1" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
-                <ComboBox Name="Prod1" Margin="10" Padding="10">
-                    <ComboBoxItem Content="p1"/>
-                    <ComboBoxItem Content="p2"/>
-                    <ComboBoxItem Content="p3"/>
+                <ComboBox Name="Prod1" Margin="10" Padding="10" DisplayMemberPath="Name">
                 </ComboBox>
                 <TextBlock Text="Produit 2" Margin="10" Padding="5"/>
                 <!--<TextBox Grid.Row="2" Grid.Column="1" Name="Produit2" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
-                <ComboBox Name="Prod2" Margin="10" Padding="10">
-                    <ComboBoxItem Content="p1"/>
-                    <ComboBoxItem Content="p2"/>
-                    <ComboBoxItem Content="p3"/>
+                <ComboBox Name="Prod2" Margin="10" Padding="10" DisplayMemberPath="Name">
                 </ComboBox>
                 <TextBlock Text="Produit 3" Margin="10" Padding="5"/>
                 <!--<TextBox Grid.Row="3" Grid.Column="1" Name="Produit3" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
-                <ComboBox Name="Prod3" Margin="10" Padding="10">
-                    <ComboBoxItem Content="p1"/>
-                    <ComboBoxItem Content="p2"/>
-                    <ComboBoxItem Content="p3"/>
+                <ComboBox Name="Prod3" Margin="10" Padding="10" DisplayMemberPath="Name">
                 </ComboBox>
             </StackPanel>
 
             <!-- Right Form Panel -->
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
-                <Label Content="Qté" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Name="QuantiteTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
-                <Label Content="Poids" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Name="poidsTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <Label Content="Qté1" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="Quantite1TextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}" />
+                <Label Content="Qté2" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Name="Quantite2TextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <Label Content="Qté3" VerticalAlignment="Center" Margin="5"/>
+                
+                <TextBox Grid.Row="5" Grid.Column="1" Name="Quantite3TextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <TextBlock Text="Date de Délivration*" Padding="5" />
+                    <xctk1:DatePicker Name="Delivery_Date" Padding="5" HorizontalAlignment="Left" SelectedDateChanged="Delivery_Date_SelectedDateChanged"/>
+                </StackPanel>
                 <Label Content="Cash" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Grid.Row="6" Grid.Column="1" Name="CashTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <Label Content="A PAYER" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="7" Grid.Column="1" x:Name="apayerTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
+                <!--<Label Content="A PAYER" VerticalAlignment="Center" Margin="5"/>
+                <TextBox Grid.Row="7" Grid.Column="1" x:Name="apayerTextBox" Margin="10"  Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>-->
                 <Button Content="Enregistrer" Click="Enregistrer_Click" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,20,20,20" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="56"/>
             </StackPanel>
-            <Button Content="Générer les Commandes" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,450,0,0" Padding="10,5" Background="#124481" Foreground="White" Width="336" Height="86" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"/>
+            <Button Content="Générer les commandes"   Click="SuiviCommand_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,450,0,0" Padding="10,5" Background="#124481" Foreground="White" Width="336" Height="86" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"/>
+            <!--<Button Content="Générer le suivi de Factures" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,278,230,10" Padding="10,5" Background="#124481" Foreground="White" Width="376" Height="94" Grid.ColumnSpan="2" Grid.Row="1"/>-->
+            <Popup Name="PdfPopup" StaysOpen="False" Placement="Center" IsOpen="{Binding IsPopupOpen}">
+                <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Padding="10" CornerRadius="5">
+                    <StackPanel>
+                        <WebBrowser Name="PdfViewer" Width="800" Height="450"/>
+                        <Button Background="#124481" Content="Télécharger" Margin="10" VerticalAlignment="Center" Command="{Binding DownloadCommand}"/>
+                    </StackPanel>
+                </Border>
+            </Popup>
         </Grid>
     </ScrollViewer>
 </Page>

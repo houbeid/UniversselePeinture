@@ -1,4 +1,4 @@
-﻿<Page x:Class="WPFModernVerticalMenu.Pages.Statistique"
+﻿    <Page x:Class="WPFModernVerticalMenu.Pages.Statistique"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -33,11 +33,11 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Produit}" Width="150"/>
-                        <TextBlock Text="{Binding StockF}" Width="150"/>
-                        <TextBlock Text="{Binding StockA}" Width="150"/>
-                        <TextBlock Text="{Binding PourcentageV}" Width="150"/>
-                        <TextBlock Text="{Binding PourcentagePs}" Width="150"/>
+                        <TextBlock Text="{Binding produit}" Width="150"/>
+                        <TextBlock Text="{Binding stock_fabrique}" Width="150"/>
+                        <TextBlock Text="{Binding stock_actuel}" Width="150"/>
+                        <TextBlock Text="{Binding pourcentage_vent}" Width="150"/>
+                        <TextBlock Text="{Binding pourcentage_produit}" Width="150"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -50,7 +50,7 @@
         </StackPanel>
 
         <!-- Coverage List -->
-        <ListBox Grid.Row="3" Margin="0,15,0,0" Name="coverageListBox" ItemsSource="{Binding CoverageData}" SelectionChanged="coverageListBox_SelectionChanged">
+        <ListBox Grid.Row="3" Margin="0,15,0,0" Name="coverageListBox" ItemsSource="{Binding CoverageData}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

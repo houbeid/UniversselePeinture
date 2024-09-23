@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Org.BouncyCastle.Bcpg.OpenPgp;
+using System.ComponentModel.DataAnnotations;
 
 namespace UniverssellePeintureApi.Model
 {
@@ -19,6 +20,10 @@ namespace UniverssellePeintureApi.Model
         public decimal? PriceCompta { get; set; }
 
         public decimal? PricePayer { get; set; }
+
+        public string? phone { get; set; }
+
+        public string? Date_RDV { get; set; }
 
         // Clé étrangère pour le commerçant
         public int CommercantId { get; set; }

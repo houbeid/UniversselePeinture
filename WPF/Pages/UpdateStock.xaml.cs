@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace WPFModernVerticalMenu.Pages
 {
@@ -23,9 +24,13 @@ namespace WPFModernVerticalMenu.Pages
     /// </summary>
     public partial class UpdateStock : Page
     {
+        public ObservableCollection<string> Produits { get; set; }
         public UpdateStock()
         {
             InitializeComponent();
+            Produits = new ObservableCollection<string>();
+            DataContext = this;
+            Updateproduit();
         }
         private static readonly HttpClient client = new HttpClient();
 
@@ -62,34 +67,41 @@ namespace WPFModernVerticalMenu.Pages
             // Valider les données avant de créer l'objet
             if (ValidateInputs())
             {
-                // Créer l'objet AddStockdto et le remplir avec les données saisies
+                // Créer l'objet UpdateStockdto et le remplir avec les données saisies
                 UpdateStockdto stockDto = new UpdateStockdto
                 {
                     CodeClient = CodeClient.Text,
                     Visit_date = Visite_Date.SelectedDate.Value,
                     Description = description.Text,
-                    StockProduitdto = new List<StockProduitdto>
-                    {
-                        new StockProduitdto { NameProduit = ((ComboBoxItem)Prod1.SelectedItem).Content.ToString(), Quantite = int.Parse(QtP1.Text) }
-                    }
+                    StockProduitdto = new List<StockProduitdto>()
                 };
 
-                // Ajouter produit 2 si disponible
-                if (Prod2.SelectedItem != null && !string.IsNullOrWhiteSpace(QtP2.Text))
+                // Ajouter produit 1 si disponible
+                if (Prod1.SelectedItem is UpdateProduitDto selectedProduit1)
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
-                        NameProduit = ((ComboBoxItem)Prod2.SelectedItem).Content.ToString(),
+                        NameProduit = selectedProduit1.Name,
+                        Quantite = int.Parse(QtP1.Text)
+                    });
+                }
+
+                // Ajouter produit 2 si disponible
+                if (Prod2.SelectedItem is UpdateProduitDto selectedProduit2 && !string.IsNullOrWhiteSpace(QtP2.Text))
+                {
+                    stockDto.StockProduitdto.Add(new StockProduitdto
+                    {
+                        NameProduit = selectedProduit2.Name,
                         Quantite = int.Parse(QtP2.Text)
                     });
                 }
 
                 // Ajouter produit 3 si disponible
-                if (Prod3.SelectedItem != null && !string.IsNullOrWhiteSpace(QtP3.Text))
+                if (Prod3.SelectedItem is UpdateProduitDto selectedProduit3 && !string.IsNullOrWhiteSpace(QtP3.Text))
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
-                        NameProduit = ((ComboBoxItem)Prod3.SelectedItem).Content.ToString(),
+                        NameProduit = selectedProduit3.Name,
                         Quantite = int.Parse(QtP3.Text)
                     });
                 }
@@ -99,12 +111,29 @@ namespace WPFModernVerticalMenu.Pages
                 // Traiter l'objet stockDto (ex: l'envoyer à un service, le sauvegarder dans une base de données, etc.)
                 if (result.IsSuccessStatusCode)
                 {
-                    MessageBox.Show("Les données ont été ajoutées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Les données ont été modifiées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
                     var errorContent = await result.Content.ReadAsStringAsync();
                     HandleError(result.StatusCode, errorContent);
+                }
+            }
+        }
+
+
+        public async void Updateproduit()
+        {
+            var response = await client.GetAsync("https://localhost:7210/api/Stock/Produits");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var produits = JsonConvert.DeserializeObject<List<UpdateProduitDto>>(jsonString);
+                if (produits != null)
+                {
+                    Prod1.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod2.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod3.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
                 }
             }
         }
@@ -210,5 +239,10 @@ namespace WPFModernVerticalMenu.Pages
         public string Description { get; set; }
 
         public List<StockProduitdto> StockProduitdto { get; set; }
+    }
+
+    public class UpdateProduitDto
+    {
+        public string Name { get; set; }
     }
 }
