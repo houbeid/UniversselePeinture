@@ -64,6 +64,12 @@ namespace UniverssellePeintureApi.Controllers
                 };
                 statistiqueList.coverageDatas.Add(coverage);
             }
+            CoverageData Coverage = new CoverageData
+            {
+                Address = "Mauritanie",
+                Coverage = Math.Round(((double)zones.Capacity / 30) * 100, 2)
+            };
+            statistiqueList.coverageDatas.Add(Coverage);
 
             return statistiqueList;
         }

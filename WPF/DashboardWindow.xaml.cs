@@ -260,7 +260,7 @@ namespace WPFModernVerticalMenu
         {
             fContainer.Navigate(new System.Uri("Pages/SFacture.xaml", UriKind.RelativeOrAbsolute));
         }
-        private void btnRecette_Clic(object sender, RoutedEventArgs e)
+        private void btnRecette_Click(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/Recette.xaml", UriKind.RelativeOrAbsolute));
         }

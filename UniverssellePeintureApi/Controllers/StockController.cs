@@ -165,7 +165,7 @@ namespace UniverssellePeintureApi.Controllers
             await _context.SaveChangesAsync();
         }
 
-        [HttpPost("PriseCompta")]
+        [HttpPost("recette")]
         public async Task Addreceitte(PriseComptaDto priseComptadto)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == priseComptadto.CodeClient);

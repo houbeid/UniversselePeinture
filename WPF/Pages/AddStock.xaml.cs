@@ -75,7 +75,6 @@ namespace WPFModernVerticalMenu.Pages
                 {
                     CodeClient = CodeClient.Text,
                     Delivery_date = Delivery_Date.SelectedDate.Value,
-                    PriceCompta = decimal.Parse(PrixCompta.Text, CultureInfo.InvariantCulture),
                     StockProduitdto = new List<StockProduitdto>()
                 };
 
@@ -136,13 +135,6 @@ namespace WPFModernVerticalMenu.Pages
             if (!Delivery_Date.SelectedDate.HasValue)
             {
                 MessageBox.Show("La Date de Délivration ne peut pas être vide.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
-            }
-
-            decimal priceCompta;
-            if (!decimal.TryParse(PrixCompta.Text, out priceCompta))
-            {
-                MessageBox.Show("La Prise Comptable doit être un nombre décimal.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
                 return false;
             }
 

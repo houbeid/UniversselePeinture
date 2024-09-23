@@ -98,4 +98,3 @@ async Task CreateRoles(IServiceProvider serviceProvider)
         }
     }
 }
-
