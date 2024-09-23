@@ -62,7 +62,15 @@ namespace UniverssellePeintureApi.Controllers
 
             };
             _context.portFeuilleClients.Add(portfeuilleclient);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                // Log the inner exception for more details
+                return StatusCode(500, ex.InnerException?.Message ?? ex.Message);
+            }
 
             return Ok("Client created successfully.");
         }
