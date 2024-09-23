@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -25,9 +26,13 @@ namespace WPFModernVerticalMenu.Pages
     /// </summary>
     public partial class Livraison : Page
     {
+        public ObservableCollection<string> Produits { get; set; }
         public Livraison()
         {
             InitializeComponent();
+            Produits = new ObservableCollection<string>();
+            DataContext = this;
+            Livproduit();
         }
         private static readonly HttpClient client = new HttpClient();
 
@@ -59,40 +64,40 @@ namespace WPFModernVerticalMenu.Pages
                 return;
             }
 
-            if (!int.TryParse(CashTextBox.Text, out int commercantId))
-            {
-                MessageBox.Show("Montant doit être un nombre entier.");
-                return;
-            }
-
             AddCommandDto facture = new AddCommandDto
             {
                 CodeClient = CodeTextBox.Text,
                 Command_date = Delivery_Date.SelectedDate.Value,
-                A_Payer = decimal.Parse(apayerTextBox.Text, System.Globalization.CultureInfo.InvariantCulture),
-                cach = decimal.Parse(CashTextBox.Text, System.Globalization.CultureInfo.InvariantCulture),
-
-                StockCommanddto = new List<StockCommandDto>
-                    {
-                        new StockCommandDto { NameProduit = ((ComboBoxItem)Prod1.SelectedItem).Content.ToString(), Quantite = int.Parse(Quantite1TextBox.Text) }
-                    }
+                cach = CashTextBox.Text,
+                StockCommanddto = new List<StockCommandDto>()
             };
 
-            if (Prod2.SelectedItem != null && !string.IsNullOrWhiteSpace(Quantite2TextBox.Text))
+            // Ajouter produit 1 si disponible
+            if (Prod1.SelectedItem is LivProduitDto selectedProduit1)
             {
                 facture.StockCommanddto.Add(new StockCommandDto
                 {
-                    NameProduit = ((ComboBoxItem)Prod2.SelectedItem).Content.ToString(),
+                    NameProduit = selectedProduit1.Name,
+                    Quantite = int.Parse(Quantite1TextBox.Text)
+                });
+            }
+
+            // Ajouter produit 2 si disponible
+            if (Prod2.SelectedItem is LivProduitDto selectedProduit2 && !string.IsNullOrWhiteSpace(Quantite2TextBox.Text))
+            {
+                facture.StockCommanddto.Add(new StockCommandDto
+                {
+                    NameProduit = selectedProduit2.Name,
                     Quantite = int.Parse(Quantite2TextBox.Text)
                 });
             }
 
             // Ajouter produit 3 si disponible
-            if (Prod3.SelectedItem != null && !string.IsNullOrWhiteSpace(Quantite3TextBox.Text))
+            if (Prod3.SelectedItem is LivProduitDto selectedProduit3 && !string.IsNullOrWhiteSpace(Quantite3TextBox.Text))
             {
                 facture.StockCommanddto.Add(new StockCommandDto
                 {
-                    NameProduit = ((ComboBoxItem)Prod3.SelectedItem).Content.ToString(),
+                    NameProduit = selectedProduit3.Name,
                     Quantite = int.Parse(Quantite3TextBox.Text)
                 });
             }
@@ -102,12 +107,32 @@ namespace WPFModernVerticalMenu.Pages
             if (result.IsSuccessStatusCode)
             {
                 MessageBox.Show("Les données ont été ajoutées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearForm();
             }
             else
             {
                 var errorContent = await result.Content.ReadAsStringAsync();
                 HandleError(result.StatusCode, errorContent);
             }
+
+        }
+
+        private void ClearForm()
+        {
+            // Réinitialiser les TextBox
+            CodeTextBox.Text = string.Empty;
+            CashTextBox.Text = string.Empty;
+            Quantite1TextBox.Text = string.Empty;
+            Quantite2TextBox.Text = string.Empty;
+            Quantite3TextBox.Text = string.Empty;
+
+            // Réinitialiser les ComboBox
+            Prod1.SelectedIndex = -1;
+            Prod2.SelectedIndex = -1;
+            Prod3.SelectedIndex = -1;
+
+            // Réinitialiser la date
+            Delivery_Date.SelectedDate = null;
         }
         private async void ShowPdfInPopup(string fileUrl)
         {
@@ -165,6 +190,22 @@ namespace WPFModernVerticalMenu.Pages
                 if (!PdfPopup.IsOpen)
                 {
                     PdfPopup.IsOpen = false;
+                }
+            }
+        }
+
+        public async void Livproduit()
+        {
+            var response = await client.GetAsync("https://localhost:7210/api/Stock/Produits");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var produits = JsonConvert.DeserializeObject<List<LivProduitDto>>(jsonString);
+                if (produits != null)
+                {
+                    Prod1.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod2.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod3.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
                 }
             }
         }
@@ -230,9 +271,8 @@ namespace WPFModernVerticalMenu.Pages
         public string CodeClient { get; set; }
 
         public DateTime Command_date { get; set; }
-        public decimal A_Payer { get; set; }
 
-        public decimal cach { get; set; }
+        public string cach { get; set; }
 
 
 
@@ -243,6 +283,11 @@ namespace WPFModernVerticalMenu.Pages
     {
         public string NameProduit { get; set; }
         public int Quantite { get; set; }
+    }
+
+    public class LivProduitDto
+    {
+        public string Name { get; set; }
     }
 
 

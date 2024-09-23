@@ -33,6 +33,10 @@ namespace WPFModernVerticalMenu.Pages
             //    new CoverageData { Address = "Address2", Coverage = 50 },
             //    new CoverageData { Address = "Address3", Coverage = 90 },
             //};
+            Statistiques = new ObservableCollection<StatistiquProduit>();
+            CoverageData = new ObservableCollection<CoverageData>();
+
+
             LoadStatistique();
 
             DataContext = this;

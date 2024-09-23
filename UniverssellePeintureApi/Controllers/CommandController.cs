@@ -30,6 +30,11 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("Client not found");
             }
+            var portfeuille = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == client.Code);
+            if (portfeuille == null)
+            {
+                throw new Exception("portfeuille not found");
+            }
             int i = 0;
             foreach (var stockCommanddto in command.StockCommanddto)
             {
@@ -63,7 +68,7 @@ namespace UniverssellePeintureApi.Controllers
                         Code = command.CodeClient,
                         client = client.Respnsible_Name,
                         distrubitaire = client.Commerce.Nom,
-                        A_Payer = command.A_Payer,
+                        A_Payer = portfeuille.PriceCompta - portfeuille.currentPrice,
                         Cach = command.cach,
                         phone = client.Phone_Number,
                         Zone = client.Zone,
@@ -149,10 +154,7 @@ namespace UniverssellePeintureApi.Controllers
                     table.AddCell(new PdfPCell(new Phrase(command.TotalPoids.ToString("0.00"), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Zone ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Code ?? "", cellFont)));
-                    if (command.Cach == 0)
-                        table.AddCell(new PdfPCell(new Phrase("", cellFont)));
-                    else
-                        table.AddCell(new PdfPCell(new Phrase(command.Cach.ToString() ?? "", cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(command.Cach ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.phone ?? "", cellFont)));
                     if (command.A_Payer == 0)
                         table.AddCell(new PdfPCell(new Phrase("", cellFont)));

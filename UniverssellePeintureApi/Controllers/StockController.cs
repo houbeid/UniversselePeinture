@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniverssellePeintureApi.DTO;
+using UniverssellePeintureApi.DTO.Response;
 using UniverssellePeintureApi.Model;
 
 namespace UniverssellePeintureApi.Controllers
@@ -144,10 +145,47 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("PortfeuilleClient not found");
             }
-            portfeuilleClient.PriceCompta += addStockDto.PriceCompta;
-            portfeuilleClient.currentPrice += addStockDto.PriceCompta;
+            //portfeuilleClient.PriceCompta += addStockDto.PriceCompta;
+            //portfeuilleClient.currentPrice += addStockDto.PriceCompta;
             portfeuilleClient.depot = addStockDto.Delivery_date;
             portfeuilleClient.phone = client.Phone_Number;
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpPost("PriseCompta")]
+        public async Task AddPrisecompta(PriseComptaDto priseComptadto)
+        {
+            var portfeuilleClient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == priseComptadto.CodeClient);
+            if (portfeuilleClient == null)
+            {
+                throw new Exception("PortfeuilleClient not found");
+            }
+            portfeuilleClient.PriceCompta += priseComptadto.priseCompta;
+            portfeuilleClient.currentPrice += priseComptadto.priseCompta;
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpPost("PriseCompta")]
+        public async Task Addreceitte(PriseComptaDto priseComptadto)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == priseComptadto.CodeClient);
+            if (client == null)
+            {
+                throw new Exception("Client not found");
+            }
+            var stock = await _context.Stocks.Include(s => s.StockProduits).FirstOrDefaultAsync(s => s.ClientId == client.Id);
+            if (stock == null)
+            {
+                throw new Exception("Stock not found for this client");
+            }
+            var portfeuilleClient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == priseComptadto.CodeClient);
+            if (portfeuilleClient == null)
+            {
+                throw new Exception("PortfeuilleClient not found");
+            }
+            portfeuilleClient.PriceCompta -= priseComptadto.priseCompta;
+            portfeuilleClient.PricePayer = stock.PrixDeVenteTotal - priseComptadto.priseCompta;
+            portfeuilleClient.currentPrice = portfeuilleClient.PriceCompta - stock.PrixDeVenteTotal;
             await _context.SaveChangesAsync();
         }
 
@@ -184,6 +222,7 @@ namespace UniverssellePeintureApi.Controllers
             // _context.StockProduits.RemoveRange(stock.StockProduits);
 
             // Ajouter les nouvelles associations de produits et mettre à jour les informations de stock
+            var stockProduit = await _context.Produits.SumAsync(c => c.stock);
             foreach (var stockProduitDto in updateStockDto.StockProduitdto)
             {
                 var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitDto.NameProduit);
@@ -198,19 +237,21 @@ namespace UniverssellePeintureApi.Controllers
                     produit.StockActuel -= (stockproduit.Quantite - stockProduitDto.Quantite);
 
                     // Calculer le pourcentage de vente
-                    produit.PourcentageVente = ((produit.stock - produit.StockActuel) / produit.stock) * 100;
+                    produit.PourcentageProduit = Math.Round(((produit.stock - produit.StockActuel) / (double)produit.stock) * 100, 2);
+                    produit.PourcentageVente = Math.Round(((produit.stock - produit.StockActuel) / (double)stockProduit) * 100, 2);
 
                     // Mettre à jour les informations du stockProduit existant
                     stockproduit.Quantite = stockProduitDto.Quantite;
                     stockproduit.prix_vent = ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel);
                     stockproduit.prix_actuell = (stockproduit.prix_actuell - ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel));
-
+                                                                         
                     // Mettre à jour le prix de vente total du stock
                     stock.PrixDeVenteTotal += stockproduit.prix_vent;
 
                     // Marquer les entités comme modifiées
                     _context.Entry(produit).State = EntityState.Modified;
                     _context.Entry(stockproduit).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
 
                 }
             }
@@ -220,12 +261,26 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("PortFeuilleClient not found");
             }
-            Portfeiulleclient.PriceCompta -= updateStockDto.recipe_day;
-            Portfeiulleclient.PricePayer = stock.PrixDeVenteTotal - updateStockDto.recipe_day;
-            Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
+            
             Portfeiulleclient.visit = updateStockDto.Visit_date;
             Portfeiulleclient.Date_RDV = updateStockDto.Description;
             await _context.SaveChangesAsync();
+        }
+
+        
+        [HttpGet("Produits")]
+        public async Task<List<StockProduitDto>> getProduit()
+        {
+            
+
+            var Produits = await _context.Produits
+                   .Select(c => new StockProduitDto
+                   {
+                       Name = c.Name
+                       
+                   })
+    .ToListAsync();
+            return Produits;
         }
     }
 }

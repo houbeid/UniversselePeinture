@@ -1,7 +1,7 @@
 ﻿<Page x:Class="WPFModernVerticalMenu.Pages.SFacture"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages" xmlns:xctk1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
       mc:Ignorable="d" 
@@ -42,7 +42,7 @@
 
             <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Top" Margin="5,0,0,20">
                 <TextBlock Text="Suivi De Factures" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
-                <TextBlock Text="Veuillez écrire les informations correctes pour la facture de chaque client." FontSize="12" Foreground="#6A6A6A"/>
+                <!--<TextBlock Text="Veuillez écrire les informations correctes pour la facture de chaque client." FontSize="12" Foreground="#6A6A6A"/>-->
             </StackPanel>
             <!-- Left Navigation Panel -->
             <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top">

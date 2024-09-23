@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,26 @@ namespace WPFModernVerticalMenu
     /// </summary>
     public partial class DashboardWindow : Window
     {
-        public DashboardWindow()
+
+        public ObservableCollection<Notification> Notifications { get; set; }
+        public DashboardWindow(List<ClientResponse> clients)
         {
+
             InitializeComponent();
+
+            Notifications = new ObservableCollection<Notification>();
+            DataContext = this;
+            foreach (var client in clients)
+            {
+                Notifications.Add(new Notification { CommercialId = client.CommercantId, ClientName = client.Respnsible_Name });
+            }
+
         }
 
+        public void AddNotification(int CommercantId, string clientName)
+        {
+            Notifications.Add(new Notification { CommercialId = CommercantId, ClientName = clientName });
+        }
         private void BG_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // Tg_Btn.IsChecked = true;
@@ -280,6 +296,19 @@ namespace WPFModernVerticalMenu
             MainWindow main = new MainWindow();
             main.Show();
             this.Close();
+        }
+    }
+    public class Notification
+    {
+        public int CommercialId { get; set; }
+        public string ClientName { get; set; }
+
+        public string Message
+        {
+            get
+            {
+                return $"{CommercialId} doit visiter {ClientName}";
+            }
         }
     }
 }

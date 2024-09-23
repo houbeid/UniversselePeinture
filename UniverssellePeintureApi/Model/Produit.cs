@@ -25,7 +25,9 @@ namespace UniverssellePeintureApi.Model
         [Required]
         public int StockActuel { get; set; }
 
-        public decimal PourcentageVente { get; set; }
+        public double PourcentageVente { get; set; }
+
+        public double PourcentageProduit { get; set; }
 
         // Relation avec StockProduit
         public ICollection<StockProduit> StockProduits { get; set; }

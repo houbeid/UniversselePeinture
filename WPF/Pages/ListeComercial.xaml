@@ -29,9 +29,9 @@
                         <TextBlock Text="{Binding Nom}" Width="200"/>
                         <TextBlock Text="{Binding Telephone}" Width="200"/>
                         <StackPanel Orientation="Horizontal" Width="200">
-               
-                            <Button Content="Récap" Click="RecapButton_Click" Margin="5,0" Tag="{Binding Id}"/>
-                            <Button Content="Portefeuille" Click="PortefeuilleButton_Click" Margin="5,0" Tag="{Binding Id}"/>
+
+                            <Button Content="Recette" Background="#124481" Click="RecapButton_Click" Margin="5,0" Tag="{Binding Id}"/>
+                            <Button Content="Portefeuille" Background="#124481" Click="PortefeuilleButton_Click" Margin="5,0" Tag="{Binding Id}"/>
 
                         </StackPanel>
                     </StackPanel>

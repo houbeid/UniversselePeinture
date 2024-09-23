@@ -100,6 +100,7 @@ namespace UniverssellePeintureApi.Controllers
             var comercial = await _context.Commerces
             .Where(c => c.Id == idcomerce)
                 .FirstOrDefaultAsync();
+            
 
             var reciette  = await _context.portFeuilleClients
             .Where(c => c.CommercantId == idcomerce).ToListAsync();

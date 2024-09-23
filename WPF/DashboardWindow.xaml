@@ -152,11 +152,12 @@
                     <Border Background="White" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Width="182">
                         <StackPanel>
                             <TextBlock Text="Notifications" FontWeight="Bold" Margin="10"/>
-                            <ListBox x:Name="notificationList" Width="200" Height="200">
-                                <!-- Example notifications -->
-                                <ListBoxItem>Notification 1</ListBoxItem>
-                                <ListBoxItem>Notification 2</ListBoxItem>
-                                <ListBoxItem>Notification 3</ListBoxItem>
+                            <ListBox x:Name="notificationList" Width="200" Height="200" ItemsSource="{Binding Notifications}">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Message}" />
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
                             </ListBox>
                         </StackPanel>
                     </Border>

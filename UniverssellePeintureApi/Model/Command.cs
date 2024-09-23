@@ -22,11 +22,11 @@ namespace UniverssellePeintureApi.Model
 
         public string? Code { get; set; }
 
-        public decimal Cach { get; set; }
+        public string Cach { get; set; }
 
         public string? phone { get; set; }
 
-        public decimal A_Payer { get; set; }
+        public decimal? A_Payer { get; set; }
 
         public DateTime? Command_Date { get; set; }
     }

@@ -75,26 +75,28 @@ namespace WPFModernVerticalMenu
             }
             if (txtPassword.Password == "")
             {
-                MessageBox.Show("Entrez password");
+                MessageBox.Show("Entrez mots de passe");
                 return;
             }
             var result = await LoginAsync(txtUsername.Text, txtPassword.Password);
+            var responseString = await result.Content.ReadAsStringAsync();
+            var responseDetails = JsonConvert.DeserializeObject<Token>(responseString);
             if (result.IsSuccessStatusCode)
             {
                 var content = await result.Content.ReadAsStringAsync();
-                DashboardWindow dashboard = new DashboardWindow();
+                DashboardWindow dashboard = new DashboardWindow(responseDetails.clients);
                 dashboard.Show();
                 this.Close();
-                MessageBox.Show("Login successful!");
+                MessageBox.Show("Connexion Valider!");
                 // Traitez le token JWT ici si nécessaire
             }
                     else if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
                     {
-                        MessageBox.Show("Invalid username or password.");
+                        MessageBox.Show("Invalid username ou mots de passe!");
                     }
                     else
                     {
-                        MessageBox.Show("An error occurred. Please try again later.");
+                        MessageBox.Show("Une eurrer est survenue");
                     }
         }
 
@@ -163,6 +165,8 @@ namespace WPFModernVerticalMenu
 
         public DateTime? Delivery_Date { get; set; }
         public string Description { get; set; }
+
+        public int CommercantId { get; set; }
     }
 
     public class ErrorResponse

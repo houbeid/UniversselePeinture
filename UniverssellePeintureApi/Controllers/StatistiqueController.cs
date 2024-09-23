@@ -37,7 +37,8 @@ namespace UniverssellePeintureApi.Controllers
                     produit = Produit.Name,
                     stock_fabrique = Produit.stock,
                     stock_actuel = Produit.StockActuel,
-                    pourcentage_produit = Produit.PourcentageVente
+                    pourcentage_produit = Produit.PourcentageProduit,
+                    pourcentage_vent = Produit.PourcentageVente
                 });
                 stock_fabrique_total += Produit.stock;
                 stock_actuel_total += Produit.StockActuel;
@@ -47,7 +48,7 @@ namespace UniverssellePeintureApi.Controllers
                 produit = "Total",
                 stock_fabrique = stock_fabrique_total,
                 stock_actuel = stock_actuel_total,
-                pourcentage_vent = ((stock_fabrique_total - stock_actuel_total) / (double)stock_fabrique_total) * 100
+     
             });
 
             var clients = await _context.Clients.ToListAsync();
@@ -59,7 +60,7 @@ namespace UniverssellePeintureApi.Controllers
                 CoverageData coverage = new CoverageData
                 {
                     Address = zoneGroup.Key,
-                    Coverage = (zoneGroup.Count() / (double)initialClientCount) * 100
+                    Coverage = Math.Round((zoneGroup.Count() / (double)initialClientCount) * 100, 2)
                 };
                 statistiqueList.coverageDatas.Add(coverage);
             }

@@ -10,3 +10,4 @@ UniverssellePeintureApi/obj/
 /WPF/packages
 /UniverssellePeintureApi/bin/Debug/net6.0
 /UniverssellePeintureApi/Migrations
+/UniverssellePeintureApi/Model/Specialites.cs

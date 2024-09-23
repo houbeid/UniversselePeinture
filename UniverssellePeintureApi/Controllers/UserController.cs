@@ -44,6 +44,26 @@ namespace UniverssellePeintureApi.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "Admin");
                     }
+                    var comercial = await _context.Commerces
+                    .Where(c => c.Telephone == model.phone)
+                        .FirstOrDefaultAsync();
+                    if (comercial != null)
+                    {
+                        ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
+                    }
+                    if (!ModelState.IsValid)
+                    {
+                        return BadRequest(ModelState);
+                    }
+
+                    var commerce = new Commerce
+                    {
+                        Nom = model.userName,
+                        Telephone = model.phone
+                    };
+
+                    _context.Commerces.Add(commerce);
+                    await _context.SaveChangesAsync();
                     return Ok(new { Result = "User registered successfully" });
                 }
                 else

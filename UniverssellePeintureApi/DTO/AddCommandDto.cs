@@ -6,9 +6,8 @@
             public string CodeClient { get; set; }
 
             public DateTime Command_date { get; set; }
-            public decimal A_Payer { get; set; }
 
-            public decimal cach { get; set; }
+            public string? cach { get; set; }
 
 
 
@@ -22,5 +21,11 @@
 
             public decimal poid { get; set; }
         }
+
+    public class PriseComptaDto
+    {
+        public string CodeClient { get; set; }
+        public decimal priseCompta { get; set; }
+    }
 
 }
