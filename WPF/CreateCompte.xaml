@@ -31,7 +31,7 @@
                 <TextBlock Margin="0 25 0 5" HorizontalAlignment="Center" FontSize="28"
                            FontWeight="Bold" Text="Universelle Peinture"/>
                 <TextBlock FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" TextWrapping="Wrap"
-                           Text="Veillez Creer un Compte pour Vous connecter" Margin="0,0,0,10"/>
+                           Text="Veillez Creer un Commercial pour Vous connecter" Margin="0,0,0,10"/>
 
                 <!-- Identifiant -->
                 <TextBox Margin="0 20 0 0" Width="300" FontSize="18"
@@ -56,7 +56,7 @@
                 <!-- Créer un nouveau Compte button -->
                 <Button Margin="0 30 0 0" Background="#124481"
                         Height="53" Width="300" materialDesign:ButtonAssist.CornerRadius="10"
-                        FontSize="18" Content="Créer un nouveau Compte" Click="Enregistrer_Click"/>
+                        FontSize="18" Content="Créer un nouveau Commercial" />
             </StackPanel>
         </materialDesign:DialogHost>
     </materialDesign:Card>

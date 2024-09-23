@@ -100,7 +100,7 @@
                 </ComboBox>
                 <Label Content="Quantiter 3" VerticalAlignment="Center" Margin="5"/>
                 <TextBox Name="QtP3" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
-                <Label Content="Description" Margin="10" Padding="5"/>
+                <Label Content="Conclusion" Margin="10" Padding="5"/>
                 <TextBox x:Name="description" Margin="10" Padding="10" Style="{StaticResource CustomTextBoxStyle}"/>
             </StackPanel>
 
