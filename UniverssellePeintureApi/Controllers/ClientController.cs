@@ -57,6 +57,7 @@ namespace UniverssellePeintureApi.Controllers
                 Code = client.Code,
                 name = client.Respnsible_Name,
                 zone = client.Zone,
+                phone = client.Phone_Number,
                 CommercantId = commerce.Id,
                 PricePayer = 0
 
