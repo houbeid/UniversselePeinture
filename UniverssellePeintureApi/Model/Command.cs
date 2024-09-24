@@ -29,5 +29,9 @@ namespace UniverssellePeintureApi.Model
         public decimal? A_Payer { get; set; }
 
         public DateTime? Command_Date { get; set; }
+
+        public int Valeur_Stock { get; set; }
+
+        public int Produit_Vendue { get; set; }
     }
 }

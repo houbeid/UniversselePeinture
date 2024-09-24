@@ -35,6 +35,21 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("portfeuille not found");
             }
+
+            var stock = await _context.Stocks.FirstOrDefaultAsync(c => c.ClientId == client.Id);
+            int valeur_stock;
+            int produit_vendu;
+            if (stock == null)
+            {
+                valeur_stock = 0;
+                produit_vendu = 0;
+            }
+            else
+            {
+                valeur_stock = stock.Quantity;
+                produit_vendu = stock.Produit_Vendue;
+            }
+
             int i = 0;
             foreach (var stockCommanddto in command.StockCommanddto)
             {
@@ -72,7 +87,9 @@ namespace UniverssellePeintureApi.Controllers
                         Cach = command.cach,
                         phone = client.Phone_Number,
                         Zone = client.Zone,
-                        Command_Date = command.Command_date
+                        Command_Date = command.Command_date,
+                        Valeur_Stock = valeur_stock,
+                        Produit_Vendue = produit_vendu
                     };
                     _context.Commands.Add(newCommand);
                 }

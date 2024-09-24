@@ -10,6 +10,9 @@ namespace UniverssellePeintureApi.Model
         [Required]
         public int Quantity { get; set; }
 
+        public int Produit_Vendue { get; set; }
+
+
         [Required]
         public decimal PrixDeVenteTotal { get; set; }
 

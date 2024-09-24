@@ -99,6 +99,7 @@ namespace UniverssellePeintureApi.Controllers
                 var newStock = new Stock
                 {
                     Quantity = addStockDto.StockProduitdto.Sum(sp => sp.Quantite),
+                    Produit_Vendue = 0,
                     PrixDeVenteTotal = 0, // Vous pouvez calculer le prix total si nécessaire
                     ClientId = client.Id
                 };
@@ -184,8 +185,7 @@ namespace UniverssellePeintureApi.Controllers
                 throw new Exception("PortfeuilleClient not found");
             }
             portfeuilleClient.PriceCompta -= priseComptadto.priseCompta;
-            portfeuilleClient.PricePayer = stock.PrixDeVenteTotal - priseComptadto.priseCompta;
-            portfeuilleClient.currentPrice = portfeuilleClient.PriceCompta - stock.PrixDeVenteTotal;
+            portfeuilleClient.PricePayer += stock.PrixDeVenteTotal - priseComptadto.priseCompta;
             await _context.SaveChangesAsync();
         }
 
@@ -255,6 +255,7 @@ namespace UniverssellePeintureApi.Controllers
 
                 }
             }
+            stock.Produit_Vendue += stock.Quantity - updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
             stock.Quantity = updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
             var Portfeiulleclient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == updateStockDto.CodeClient);
             if (Portfeiulleclient == null)
@@ -264,6 +265,8 @@ namespace UniverssellePeintureApi.Controllers
             
             Portfeiulleclient.visit = updateStockDto.Visit_date;
             Portfeiulleclient.Date_RDV = updateStockDto.Description;
+            Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
+
             await _context.SaveChangesAsync();
         }
 
