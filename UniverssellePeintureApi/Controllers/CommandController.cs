@@ -144,8 +144,8 @@ namespace UniverssellePeintureApi.Controllers
                 document.Add(new Paragraph(" ")); // Espace
 
                 // Création du tableau
-                PdfPTable table = new PdfPTable(11) { WidthPercentage = 100 };
-                table.SetWidths(new float[] { 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f});
+                PdfPTable table = new PdfPTable(12) { WidthPercentage = 100 };
+                table.SetWidths(new float[] { 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f, 15f});
 
                 // En-têtes du tableau
                 table.AddCell(new PdfPCell(new Phrase("Distributeur", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
@@ -154,6 +154,7 @@ namespace UniverssellePeintureApi.Controllers
                 table.AddCell(new PdfPCell(new Phrase("Qté", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Poids", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Total Poids", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
+                table.AddCell(new PdfPCell(new Phrase("Produit Vendu", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Zone", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Codes", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
                 table.AddCell(new PdfPCell(new Phrase("Cash", headerFont)) { BackgroundColor = BaseColor.LIGHT_GRAY });
@@ -169,6 +170,7 @@ namespace UniverssellePeintureApi.Controllers
                     table.AddCell(new PdfPCell(new Phrase(command.Qte.ToString(), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.poids.ToString("0.00"), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.TotalPoids.ToString("0.00"), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(command.Produit_Vendue.ToString("0.00"), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Zone ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Code ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Cach ?? "", cellFont)));
@@ -186,6 +188,7 @@ namespace UniverssellePeintureApi.Controllers
                 table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                 table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                 table.AddCell(new PdfPCell(new Phrase(commands.Sum(c => c.TotalPoids).ToString("0.00"), cellFont)));
+                table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                 table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                 table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                 table.AddCell(new PdfPCell(new Phrase("", cellFont)));
