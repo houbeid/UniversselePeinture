@@ -210,7 +210,7 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("Stock not found for this client");
             }
-            stock.PrixDeVenteTotal = 0;
+            decimal PrixDeVenteTotal = 0;
 
             // Mettre à jour les informations du stock
             //stock.PrixDeVenteTotal = updateStockDto.PrixDeVenteTotal;
@@ -241,12 +241,13 @@ namespace UniverssellePeintureApi.Controllers
                     produit.PourcentageVente = Math.Round(((produit.stock - produit.StockActuel) / (double)stockProduit) * 100, 2);
 
                     // Mettre à jour les informations du stockProduit existant
-                    stockproduit.Quantite = stockProduitDto.Quantite;
                     stockproduit.prix_vent = ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel);
                     stockproduit.prix_actuell = (stockproduit.prix_actuell - ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel));
-                                                                         
+                    PrixDeVenteTotal += ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel);
+                    stockproduit.Quantite = stockProduitDto.Quantite;
+                                                                                             
                     // Mettre à jour le prix de vente total du stock
-                    stock.PrixDeVenteTotal += stockproduit.prix_vent;
+                    
 
                     // Marquer les entités comme modifiées
                     _context.Entry(produit).State = EntityState.Modified;
@@ -257,6 +258,7 @@ namespace UniverssellePeintureApi.Controllers
             }
             stock.Produit_Vendue += stock.Quantity - updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
             stock.Quantity = updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
+            stock.PrixDeVenteTotal = PrixDeVenteTotal;
             var Portfeiulleclient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == updateStockDto.CodeClient);
             if (Portfeiulleclient == null)
             {
@@ -266,6 +268,7 @@ namespace UniverssellePeintureApi.Controllers
             Portfeiulleclient.visit = updateStockDto.Visit_date;
             Portfeiulleclient.Date_RDV = updateStockDto.Description;
             Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
+            Portfeiulleclient.PricePayer = stock.PrixDeVenteTotal;
 
             await _context.SaveChangesAsync();
         }
