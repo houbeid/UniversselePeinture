@@ -95,7 +95,7 @@ namespace UniverssellePeintureApi.Controllers
                 }
                 i++;
             }
-            await _context.SaveChangesAsync();
+            
             return Ok("Command created successfully.");
         }
 
@@ -170,7 +170,7 @@ namespace UniverssellePeintureApi.Controllers
                     table.AddCell(new PdfPCell(new Phrase(command.Qte.ToString(), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.poids.ToString("0.00"), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.TotalPoids.ToString("0.00"), cellFont)));
-                    table.AddCell(new PdfPCell(new Phrase(command.Produit_Vendue.ToString("0.00"), cellFont)));
+                    table.AddCell(new PdfPCell(new Phrase(command.Produit_Vendue.ToString(), cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Zone ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Code ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(command.Cach ?? "", cellFont)));

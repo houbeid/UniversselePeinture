@@ -30,8 +30,8 @@ namespace UniverssellePeintureApi.Model
 
         public DateTime? Command_Date { get; set; }
 
-        public int Valeur_Stock { get; set; }
+        public int? Valeur_Stock { get; set; }
 
-        public int Produit_Vendue { get; set; }
+        public int? Produit_Vendue { get; set; }
     }
 }

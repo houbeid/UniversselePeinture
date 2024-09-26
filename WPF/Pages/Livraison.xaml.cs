@@ -58,7 +58,8 @@ namespace WPFModernVerticalMenu.Pages
         {
             // Validation de saisie
             if (string.IsNullOrEmpty(CodeTextBox.Text) ||
-                string.IsNullOrEmpty(Quantite1TextBox.Text))
+                string.IsNullOrEmpty(Quantite1TextBox.Text)||
+                Delivery_Date.SelectedDate == null )
             {
                 MessageBox.Show("Tous les champs marqués d'un * sont obligatoires.");
                 return;
