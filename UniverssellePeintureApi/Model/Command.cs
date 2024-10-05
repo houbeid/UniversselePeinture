@@ -22,7 +22,7 @@ namespace UniverssellePeintureApi.Model
 
         public string? Code { get; set; }
 
-        public string Cach { get; set; }
+        public string? Cach { get; set; }
 
         public string? phone { get; set; }
 

@@ -156,11 +156,11 @@ namespace WPFModernVerticalMenu.Pages
             
         }
 
-        private void DownloadButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Logic to download the PDF file
-            MessageBox.Show("Download button clicked");
-        }
+        //private void DownloadButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // Logic to download the PDF file
+        //    MessageBox.Show("Download button clicked");
+        //}
 
         private async void LoadCommercials()
         {

@@ -7,6 +7,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -195,31 +196,68 @@ namespace WPFModernVerticalMenu.Pages
             }
         }
 
-        public async void Livproduit()
+        private async Task Livproduit()
         {
-            var response = await client.GetAsync("https://localhost:7210/api/Stock/Produits");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var produits = JsonConvert.DeserializeObject<List<LivProduitDto>>(jsonString);
-                if (produits != null)
+                // Créer une requête GET pour obtenir les produits
+                var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7210/api/Stock/Produits");
+
+                // Ajouter l'en-tête Authorization avec le token JWT (si nécessaire)
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                // Envoyer la requête
+                var response = await client.SendAsync(request);
+
+                // Vérifier si la requête a réussi
+                if (response.IsSuccessStatusCode)
                 {
-                    Prod1.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
-                    Prod2.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
-                    Prod3.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    // Lire le contenu de la réponse
+                    var jsonString = await response.Content.ReadAsStringAsync();
+
+                    // Désérialiser le JSON en une liste de produits
+                    var produits = JsonConvert.DeserializeObject<List<LivProduitDto>>(jsonString);
+
+                    if (produits != null)
+                    {
+                        // Lier la liste des produits aux ComboBox
+                        Prod1.ItemsSource = produits;
+                        Prod2.ItemsSource = produits;
+                        Prod3.ItemsSource = produits;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine($"Erreur lors de la récupération des produits : {response.ReasonPhrase}");
                 }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Une erreur est survenue : {ex.Message}");
+            }
         }
+
 
         private void SuiviCommand_Click(object sender, RoutedEventArgs e)
         {
             ShowPdfInPopup("https://localhost:7210/api/Command/GenerateCommandPdf");
         }
-        private async Task<HttpResponseMessage> AddCommandAsync(AddCommandDto Facture)
+        private async Task<HttpResponseMessage> AddCommandAsync(AddCommandDto facture)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(Facture), Encoding.UTF8, "application/json");
+            // Convertir l'objet Facture en JSON
+            var content = new StringContent(JsonConvert.SerializeObject(facture), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/Command", content);
+            // Créer une requête POST pour ajouter la commande
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Command");
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+            // Attacher le contenu JSON à la requête
+            request.Content = content;
+
+            // Envoyer la requête et retourner la réponse
+            return await client.SendAsync(request);
         }
 
         private void HandleError(System.Net.HttpStatusCode statusCode, string errorContent)

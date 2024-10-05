@@ -19,6 +19,8 @@ namespace UniverssellePeintureApi.Model
         public decimal? currentPrice { get; set; }
         public decimal? PriceCompta { get; set; }
 
+        public decimal? LastPrise { get; set; }
+
         public decimal? PricePayer { get; set; }
 
         public string? phone { get; set; }

@@ -43,6 +43,14 @@ namespace UniverssellePeintureApi.Controllers
                 ClientId = client.Id
             };
             _context.Factures.Add(facture);
+            var portfeuilleClient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == factureDto.CodeClient);
+            if (portfeuilleClient == null)
+            {
+                throw new Exception("PortfeuilleClient not found");
+            }
+            portfeuilleClient.PriceCompta += factureDto.Montant;
+            portfeuilleClient.currentPrice += factureDto.Montant;
+            portfeuilleClient.LastPrise = factureDto.Montant;
             await _context.SaveChangesAsync();
             return Ok("facture created successfully.");
         }

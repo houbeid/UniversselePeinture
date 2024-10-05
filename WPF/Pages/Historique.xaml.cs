@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,23 +43,39 @@ namespace WPFModernVerticalMenu.Pages
         }
         private async Task<List<HistoriqueAchat>> GetHistoriqueClient(string codeclient)
         {
-            var query = JsonConvert.SerializeObject(codeclient);
+            // Construire l'URL avec le code client en paramètre
             var url = $"https://localhost:7210/api/Historique?codeclient={codeclient}";
-            var test = await client.GetAsync(url);
-            if (test.IsSuccessStatusCode)
-            {
-                var responseString = await test.Content.ReadAsStringAsync();
-                var responseDetails = JsonConvert.DeserializeObject<List<HistoriqueAchat>>(responseString);
 
-                // La reponse 
+            // Créer une requête GET pour récupérer l'historique du client
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+            // Envoyer la requête
+            var response = await client.SendAsync(request);
+
+            // Vérifier si la requête a réussi
+            if (response.IsSuccessStatusCode)
+            {
+                // Lire le contenu de la réponse en chaîne de caractères
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                // Désérialiser le JSON reçu en une liste d'objets HistoriqueAchat
+                var historiqueAchats = JsonConvert.DeserializeObject<List<HistoriqueAchat>>(responseString);
+
+                // Afficher la réponse pour débogage
                 Console.WriteLine(responseString);
-                return responseDetails;
+
+                return historiqueAchats;
             }
             else
             {
-                Console.WriteLine($"Error: {test.ReasonPhrase}");
+                // En cas d'échec, afficher l'erreur et retourner null
+                Console.WriteLine($"Error: {response.ReasonPhrase}");
                 return null;
             }
         }
+
     }
 }

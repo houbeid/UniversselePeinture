@@ -83,7 +83,9 @@ namespace WPFModernVerticalMenu
             var responseDetails = JsonConvert.DeserializeObject<Token>(responseString);
             if (result.IsSuccessStatusCode)
             {
+                TokenStorage.Token = responseDetails.token;
                 var content = await result.Content.ReadAsStringAsync();
+                
                 DashboardWindow dashboard = new DashboardWindow(responseDetails.clients);
                 dashboard.Show();
                 this.Close();
@@ -173,4 +175,9 @@ namespace WPFModernVerticalMenu
     {
         public Dictionary<string, string[]> Errors { get; set; }
     }
+}
+
+public static class TokenStorage
+{
+    public static string Token { get; set; }
 }

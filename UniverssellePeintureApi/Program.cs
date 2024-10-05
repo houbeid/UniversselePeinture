@@ -1,8 +1,10 @@
 using UniverssellePeintureApi.Model;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using UniverssellePeintureApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,8 +39,9 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Mise à jour ici : Utilisation de MySQL au lieu de SQL Server
 builder.Services.AddDbContext<ApiDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
+    options.UseMySQL(builder.Configuration.GetConnectionString("DevConnection")));  // Changement vers MySQL
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -48,6 +51,27 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+// **Configuration JWT**
+var key = Encoding.ASCII.GetBytes(builder.Configuration["JWT:SecretKey"]);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(key)
+    };
+});
 
 var app = builder.Build();
 
@@ -62,6 +86,8 @@ app.UseMiddleware<CustomExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
+// **Ajout de UseAuthentication avant UseAuthorization**
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
@@ -98,3 +124,4 @@ async Task CreateRoles(IServiceProvider serviceProvider)
         }
     }
 }
+
