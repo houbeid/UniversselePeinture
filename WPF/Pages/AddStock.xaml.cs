@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -79,7 +80,7 @@ namespace WPFModernVerticalMenu.Pages
                 };
 
                 // Ajouter produit 1 si disponible
-                if (Prod1.SelectedItem is StockProduitDto selectedProduit1)
+                if (Prod1.SelectedItem is UpdateProduitDto selectedProduit1)
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
@@ -89,7 +90,7 @@ namespace WPFModernVerticalMenu.Pages
                 }
 
                 // Ajouter produit 2 si disponible
-                if (Prod2.SelectedItem is StockProduitDto selectedProduit2 && !string.IsNullOrWhiteSpace(QtP2.Text))
+                if (Prod2.SelectedItem is UpdateProduitDto selectedProduit2 && !string.IsNullOrWhiteSpace(QtP2.Text))
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
@@ -99,7 +100,7 @@ namespace WPFModernVerticalMenu.Pages
                 }
 
                 // Ajouter produit 3 si disponible
-                if (Prod3.SelectedItem is StockProduitDto selectedProduit3 && !string.IsNullOrWhiteSpace(QtP3.Text))
+                if (Prod3.SelectedItem is UpdateProduitDto selectedProduit3 && !string.IsNullOrWhiteSpace(QtP3.Text))
                 {
                     stockDto.StockProduitdto.Add(new StockProduitdto
                     {
@@ -170,11 +171,13 @@ namespace WPFModernVerticalMenu.Pages
 
         public async void Addproduit()
         {
-            var response = await client.GetAsync("https://localhost:7210/api/Stock/Produits");
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7210/api/Stock/Produits");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+            var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
-                var produits = JsonConvert.DeserializeObject<List<StockProduitDto>>(jsonString);
+                var produits = JsonConvert.DeserializeObject<List<UpdateProduitDto>>(jsonString);
                 if (produits != null)
                 {
                     Prod1.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
@@ -187,9 +190,20 @@ namespace WPFModernVerticalMenu.Pages
 
         private async Task<HttpResponseMessage> AddStockAsync(AddStockdto stock)
         {
+            // Convertir l'objet stock en JSON
             var content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/Stock/Add", content);
+            // Créer une requête POST pour ajouter du stock
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Stock/Add");
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+            // Attacher le contenu JSON à la requête
+            request.Content = content;
+
+            // Envoyer la requête
+            return await client.SendAsync(request);
         }
 
         private void HandleError(System.Net.HttpStatusCode statusCode, string errorContent)

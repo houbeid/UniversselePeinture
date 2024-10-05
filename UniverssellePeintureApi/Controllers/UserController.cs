@@ -44,25 +44,25 @@ namespace UniverssellePeintureApi.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "Admin");
                     }
-                    var comercial = await _context.Commerces
-                    .Where(c => c.Telephone == model.phone)
-                        .FirstOrDefaultAsync();
-                    if (comercial != null)
-                    {
-                        ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
-                    }
+                    //var comercial = await _context.Commerces
+                    //.Where(c => c.Telephone == model.phone)
+                    //    .FirstOrDefaultAsync();
+                    //if (comercial != null)
+                    //{
+                    //    ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
+                    //}
                     if (!ModelState.IsValid)
                     {
                         return BadRequest(ModelState);
                     }
 
-                    var commerce = new Commerce
-                    {
-                        Nom = model.userName,
-                        Telephone = model.phone
-                    };
+                    //var commerce = new Commerce
+                    //{
+                    //    Nom = model.userName,
+                    //    Telephone = model.phone
+                    //};
 
-                    _context.Commerces.Add(commerce);
+                    //_context.Commerces.Add(commerce);
                     await _context.SaveChangesAsync();
                     return Ok(new { Result = "User registered successfully" });
                 }
@@ -116,9 +116,10 @@ namespace UniverssellePeintureApi.Controllers
                         //    expiratin = token.ValidTo,
                         //};
                         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                        var clients = await _context.Clients
-                            .Where(c => EF.Functions.DateDiffDay(c.Visit_Date, DateTime.Now) >= 7)
-                            .ToListAsync();
+                        var clients = new List<Client>();
+                        //var clients = await _context.Clients
+                        //                .Where(c => c.Visit_Date != null && EF.Functions.DateDiffDay(c.Visit_Date.Value, DateTime.Now) >= 7)
+                        //                .ToListAsync();
                         var result = new
                         {
                             Token = tokenString,

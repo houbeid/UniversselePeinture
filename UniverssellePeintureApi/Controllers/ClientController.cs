@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniverssellePeintureApi.DTO;
@@ -17,6 +18,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] AddClientDto clientDto)
         {
@@ -25,7 +27,9 @@ namespace UniverssellePeintureApi.Controllers
             //    return BadRequest(ModelState);
             //}
 
-            var commerce = await _context.Commerces.FindAsync(clientDto.CommercantId);
+            var username = User.Identity.Name;
+
+            var commerce = await _context.Commerces.FindAsync(username);
             if (commerce == null)
             {
                 return NotFound("Commerce not found.");
@@ -54,6 +58,7 @@ namespace UniverssellePeintureApi.Controllers
             {
                 PriceCompta = 0,
                 currentPrice = 0,
+                LastPrise = 0,
                 Code = client.Code,
                 name = client.Respnsible_Name,
                 zone = client.Zone,

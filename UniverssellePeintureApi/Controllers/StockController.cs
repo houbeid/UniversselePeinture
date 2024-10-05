@@ -27,8 +27,10 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("Client not found");
             }
+            var username = User?.Identity?.Name;
 
-            var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Id == client.CommercantId);
+            var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Nom == username);
+            //var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Id == client.CommercantId);
             if (comercial == null)
             {
                 throw new Exception("Comercial not found");
@@ -161,8 +163,9 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("PortfeuilleClient not found");
             }
-            portfeuilleClient.PriceCompta += priseComptadto.priseCompta;
-            portfeuilleClient.currentPrice += priseComptadto.priseCompta;
+            //decimal? prise = portfeuilleClient.LastPrise - priseComptadto.priseCompta;
+            portfeuilleClient.PriceCompta = priseComptadto.priseCompta;
+            portfeuilleClient.currentPrice = priseComptadto.priseCompta;
             await _context.SaveChangesAsync();
         }
 

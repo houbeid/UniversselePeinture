@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,10 +61,30 @@ namespace WPFModernVerticalMenu.Pages
 
         private async Task<HttpResponseMessage> AddrecetteAsync(RecetteDto recette)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(recette), Encoding.UTF8, "application/json");
+            try
+            {
+                // Sérialiser l'objet recette en JSON
+                var content = new StringContent(JsonConvert.SerializeObject(recette), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/Stock/recette", content);
+                // Créer une requête POST pour ajouter la recette
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Stock/recette");
+
+                // Ajouter l'en-tête Authorization avec le token JWT
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                // Attacher le contenu JSON à la requête
+                request.Content = content;
+
+                // Envoyer la requête et retourner la réponse
+                return await client.SendAsync(request);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur lors de l'ajout de la recette : {ex.Message}");
+                throw; // Relancer l'exception pour que l'appelant puisse la gérer
+            }
         }
+
     }
     public class RecetteDto
     {

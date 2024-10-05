@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -161,12 +162,33 @@ namespace WPFModernVerticalMenu.Pages
         {
             ShowPdfInPopup("https://localhost:7210/api/Facture/GenerateFacturePdf");
         }
-        private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto Facture)
+        private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto facture)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(Facture), Encoding.UTF8, "application/json");
+            try
+            {
+                // Sérialiser l'objet Facture en JSON
+                var content = new StringContent(JsonConvert.SerializeObject(facture), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/Facture/Add", content);
+                // Créer une requête POST pour ajouter une facture
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Facture/Add");
+
+                // Ajouter l'en-tête Authorization avec le token JWT
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                // Attacher le contenu JSON à la requête
+                request.Content = content;
+
+                // Envoyer la requête et retourner la réponse
+                return await client.SendAsync(request);
+            }
+            catch (Exception ex)
+            {
+                // Gérer les exceptions pour éviter un crash
+                Console.WriteLine($"Erreur lors de l'ajout de la facture : {ex.Message}");
+                throw; // Relancer l'exception pour que l'appelant puisse la gérer
+            }
         }
+
 
         private void HandleError(System.Net.HttpStatusCode statusCode, string errorContent)
         {

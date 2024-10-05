@@ -51,51 +51,69 @@ namespace UniverssellePeintureApi.Controllers
             }
 
             int i = 0;
-            foreach (var stockCommanddto in command.StockCommanddto)
+            try
             {
-                var produit = await _context.Produits.FirstOrDefaultAsync(c => c.Name == stockCommanddto.NameProduit);
-                if (produit == null)
+                foreach (var stockCommanddto in command.StockCommanddto)
                 {
-                    throw new Exception("Produit not found");
-                }
-
-                if (i != 0)
-                {
-                    var newCommand = new Command
+                    var produit = await _context.Produits.FirstOrDefaultAsync(c => c.Name == stockCommanddto.NameProduit);
+                    if (produit == null)
                     {
-                        produit = stockCommanddto.NameProduit,
-                        Qte = stockCommanddto.Quantite,
-                        poids = produit.poid,
-                        TotalPoids = stockCommanddto.Quantite * stockCommanddto.poid,
-                        Command_Date = command.Command_date
-                    };
-                    _context.Commands.Add(newCommand);
+                        throw new Exception("Produit not found");
+                    }
 
-                }
-                else
-                {
-                    var newCommand = new Command
+                    if (i != 0)
                     {
-                        produit = stockCommanddto.NameProduit,
-                        Qte = stockCommanddto.Quantite,
-                        poids = produit.poid,
-                        TotalPoids = stockCommanddto.Quantite * stockCommanddto.poid,
-                        Code = command.CodeClient,
-                        client = client.Respnsible_Name,
-                        distrubitaire = client.Commerce.Nom,
-                        A_Payer = portfeuille.PriceCompta - portfeuille.currentPrice,
-                        Cach = command.cach,
-                        phone = client.Phone_Number,
-                        Zone = client.Zone,
-                        Command_Date = command.Command_date,
-                        Valeur_Stock = valeur_stock,
-                        Produit_Vendue = produit_vendu
-                    };
-                    _context.Commands.Add(newCommand);
+                        var newCommand = new Command
+                        {
+                            produit = stockCommanddto.NameProduit,
+                            Qte = stockCommanddto.Quantite,
+                            poids = produit.poid,
+                            TotalPoids = stockCommanddto.Quantite * stockCommanddto.poid,
+                            Command_Date = command.Command_date
+                        };
+                        _context.Commands.Add(newCommand);
+
+                    }
+                    else
+                    {
+                        var newCommand = new Command
+                        {
+                            produit = stockCommanddto.NameProduit,
+                            Qte = stockCommanddto.Quantite,
+                            poids = produit.poid,
+                            TotalPoids = stockCommanddto.Quantite * stockCommanddto.poid,
+                            Code = command.CodeClient,
+                            client = client.Respnsible_Name,
+                            distrubitaire = client.Commerce.Nom,
+                            A_Payer = portfeuille.PriceCompta - portfeuille.currentPrice,
+                            Cach = command.cach,
+                            phone = client.Phone_Number,
+                            Zone = client.Zone,
+                            Command_Date = command.Command_date,
+                            Valeur_Stock = valeur_stock,
+                            Produit_Vendue = produit_vendu
+                        };
+                        _context.Commands.Add(newCommand);
+                    }
+                    i++;
                 }
-                i++;
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException dbEx)
+                {
+                    // Log or return detailed information about the exception
+                    return BadRequest($"Erreur lors de la sauvegarde des changements dans la base de données : {dbEx.Message} - {dbEx.InnerException?.Message}");
+                }
             }
-            
+            catch (Exception ex)
+            {
+                // Capture de l'exception
+                return BadRequest($"Erreur lors de la création de la commande : {ex.Message}");
+            }
+
+
             return Ok("Command created successfully.");
         }
 
@@ -105,7 +123,7 @@ namespace UniverssellePeintureApi.Controllers
         {
             // Récupérer les commandes pour la date donnée
             var commands = await _context.Commands
-                                         .Where(c => c.Command_Date == commandDate.Date)
+                                         .Where(c => c.Command_Date.Value == commandDate.Date)
                                          .ToListAsync();
 
             if (commands == null || !commands.Any())

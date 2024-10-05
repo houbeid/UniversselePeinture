@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Net.Http.Headers;
 
 namespace WPFModernVerticalMenu.Pages
 {
@@ -124,7 +125,9 @@ namespace WPFModernVerticalMenu.Pages
 
         public async void Updateproduit()
         {
-            var response = await client.GetAsync("https://localhost:7210/api/Stock/Produits");
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7210/api/Stock/Produits");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+            var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();
@@ -184,9 +187,20 @@ namespace WPFModernVerticalMenu.Pages
 
         private async Task<HttpResponseMessage> UpdateStockAsync(UpdateStockdto stock)
         {
+            // Convertir l'objet stock en JSON
             var content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/Stock/update", content);
+            // Créer la requête POST
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Stock/update");
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+            // Attacher le contenu JSON à la requête
+            request.Content = content;
+
+            // Envoyer la requête
+            return await client.SendAsync(request);
         }
 
         private void HandleError(System.Net.HttpStatusCode statusCode, string errorContent)

@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Net.Http.Headers;
 
 namespace WPFModernVerticalMenu.Pages
 {
@@ -75,9 +76,29 @@ namespace WPFModernVerticalMenu.Pages
 
         private async Task<HttpResponseMessage> AddClientAsync(Client clientDto)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(clientDto), Encoding.UTF8, "application/json");
+            try
+            {
+                // Convertir l'objet clientDto en JSON
+                var content = new StringContent(JsonConvert.SerializeObject(clientDto), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/Clients", content);
+                // Créer une requête POST pour ajouter un client
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Clients");
+
+                // Ajouter l'en-tête Authorization avec le token JWT
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                // Attacher le contenu JSON à la requête
+                request.Content = content;
+
+                // Envoyer la requête et retourner la réponse
+                return await client.SendAsync(request);
+            }
+            catch (Exception ex)
+            {
+                // Gérer les exceptions pour éviter un crash
+                Console.WriteLine($"Erreur lors de l'ajout du client : {ex.Message}");
+                throw; // Relancer l'exception pour que l'appelant puisse la gérer
+            }
         }
     }
     public class Client
