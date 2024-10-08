@@ -240,7 +240,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private void SuiviCommand_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://52.47.142.28/api/Command/GenerateCommandPdf");
+            ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Command/GenerateCommandPdf");
         }
         private async Task<HttpResponseMessage> AddCommandAsync(AddCommandDto facture)
         {
@@ -248,7 +248,7 @@ namespace WPFModernVerticalMenu.Pages
             var content = new StringContent(JsonConvert.SerializeObject(facture), Encoding.UTF8, "application/json");
 
             // Créer une requête POST pour ajouter la commande
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Command");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://universellepeintre.oneposts.io/api/Command");
 
             // Ajouter l'en-tête Authorization avec le token JWT
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

@@ -86,7 +86,7 @@ namespace WPFModernVerticalMenu
         {
             var content = new StringContent(JsonConvert.SerializeObject(userdto), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/User/Register", content);
+            return await client.PostAsync("https://universellepeintre.oneposts.io/api/User/Register", content);
         }
         public event PropertyChangedEventHandler PropertyChanged;
 

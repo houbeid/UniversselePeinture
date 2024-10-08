@@ -191,7 +191,7 @@ namespace WPFModernVerticalMenu.Pages
             var content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json");
 
             // Créer la requête POST
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Stock/update");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://universellepeintre.oneposts.io/api/Stock/update");
 
             // Ajouter l'en-tête Authorization avec le token JWT
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
