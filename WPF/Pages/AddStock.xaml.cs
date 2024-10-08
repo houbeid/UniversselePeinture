@@ -65,6 +65,18 @@ namespace WPFModernVerticalMenu.Pages
             }
         }
 
+        private void ClearInputs()
+        {
+            CodeClient.Text = string.Empty;
+            Delivery_Date.SelectedDate = null;
+            Prod1.SelectedItem = null;
+            Prod2.SelectedItem = null;
+            Prod3.SelectedItem = null;
+            QtP1.Text = string.Empty;
+            QtP2.Text = string.Empty;
+            QtP3.Text = string.Empty;
+        }
+
         private async void Add_Click(object sender, RoutedEventArgs e)
         {
             // Valider les données avant de créer l'objet
@@ -116,6 +128,7 @@ namespace WPFModernVerticalMenu.Pages
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Les données ont été ajoutées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ClearInputs();
                 }
                 else
                 {
@@ -171,7 +184,7 @@ namespace WPFModernVerticalMenu.Pages
 
         public async void Addproduit()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7210/api/Stock/Produits");
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://52.47.142.28/api/Stock/Produits");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
@@ -194,7 +207,7 @@ namespace WPFModernVerticalMenu.Pages
             var content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json");
 
             // Créer une requête POST pour ajouter du stock
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Stock/Add");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Stock/Add");
 
             // Ajouter l'en-tête Authorization avec le token JWT
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

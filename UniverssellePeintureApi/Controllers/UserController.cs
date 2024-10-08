@@ -29,6 +29,13 @@ namespace UniverssellePeintureApi.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterNewUser(AddUserDto model)
         {
+            var comercial = await _context.Commerces
+                    .Where(c => c.Telephone == model.phone)
+                        .FirstOrDefaultAsync();
+            if (comercial != null)
+            {
+                ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
+            }
             if (ModelState.IsValid)
             {
                 User user = new()
@@ -44,25 +51,19 @@ namespace UniverssellePeintureApi.Controllers
                     {
                         await _userManager.AddToRoleAsync(user, "Admin");
                     }
-                    //var comercial = await _context.Commerces
-                    //.Where(c => c.Telephone == model.phone)
-                    //    .FirstOrDefaultAsync();
-                    //if (comercial != null)
-                    //{
-                    //    ModelState.AddModelError("Commercial: ", "Commercial exist deja!");
-                    //}
+                    
                     if (!ModelState.IsValid)
                     {
                         return BadRequest(ModelState);
                     }
 
-                    //var commerce = new Commerce
-                    //{
-                    //    Nom = model.userName,
-                    //    Telephone = model.phone
-                    //};
+                    var commerce = new Commerce
+                    {
+                        Nom = model.userName,
+                        Telephone = model.phone
+                    };
 
-                    //_context.Commerces.Add(commerce);
+                    _context.Commerces.Add(commerce);
                     await _context.SaveChangesAsync();
                     return Ok(new { Result = "User registered successfully" });
                 }
@@ -77,6 +78,50 @@ namespace UniverssellePeintureApi.Controllers
             }
             return BadRequest(ModelState);
         }
+
+
+        [HttpPost("ChangePasswordWithoutCurrent")]
+        public async Task<IActionResult> ChangePasswordWithoutCurrent(LoginDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Trouver l'utilisateur par son nom d'utilisateur
+                var user = await _userManager.FindByNameAsync(model.userName);
+
+                if (user == null)
+                {
+                    return BadRequest(new { message = "User not found" });
+                }
+
+                // Supprimer l'ancien mot de passe (s'il y en a un)
+                var removePasswordResult = await _userManager.RemovePasswordAsync(user);
+
+                if (!removePasswordResult.Succeeded)
+                {
+                    return BadRequest(new { message = "Failed to remove the old password", errors = removePasswordResult.Errors });
+                }
+
+                // Ajouter le nouveau mot de passe
+                var addPasswordResult = await _userManager.AddPasswordAsync(user, model.password);
+
+                if (addPasswordResult.Succeeded)
+                {
+                    return Ok(new { Result = "Password changed successfully" });
+                }
+                else
+                {
+                    foreach (var error in addPasswordResult.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    return BadRequest(ModelState);
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
@@ -110,16 +155,12 @@ namespace UniverssellePeintureApi.Controllers
                             claims: claims,
                             expires: DateTime.Now.AddMinutes(30),
                             signingCredentials: creds);
-                        //var _token = new
-                        //{
-                        //    token = new JwtSecurityTokenHandler().WriteToken(token),
-                        //    expiratin = token.ValidTo,
-                        //};
                         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                        var clients = new List<Client>();
-                        //var clients = await _context.Clients
-                        //                .Where(c => c.Visit_Date != null && EF.Functions.DateDiffDay(c.Visit_Date.Value, DateTime.Now) >= 7)
-                        //                .ToListAsync();
+
+                        var thresholdDate = DateTime.Now.AddDays(-7);
+                        var clients = await _context.Clients
+                                        .Where(c => c.Visit_Date != null && c.Visit_Date.Value <= thresholdDate)
+                                        .ToListAsync();
                         var result = new
                         {
                             Token = tokenString,

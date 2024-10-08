@@ -64,7 +64,7 @@ namespace WPFModernVerticalMenu.Pages
             var content = new StringContent(JsonConvert.SerializeObject(recette), Encoding.UTF8, "application/json");
 
             // Créer une requête POST pour ajouter la prise comptable
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Stock/PriseCompta");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Stock/PriseCompta");
 
             // Ajouter l'en-tête Authorization avec le token JWT
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

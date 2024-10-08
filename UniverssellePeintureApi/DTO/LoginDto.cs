@@ -10,4 +10,6 @@ namespace UniverssellePeintureApi.DTO
         [Required] 
         public string password { get; set; }
     }
+
+
 }

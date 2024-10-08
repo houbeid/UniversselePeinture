@@ -29,7 +29,7 @@ namespace UniverssellePeintureApi.Controllers
 
             var username = User.Identity.Name;
 
-            var commerce = await _context.Commerces.FindAsync(username);
+            var commerce = await _context.Commerces.FirstOrDefaultAsync(c => c.Nom == username);
             if (commerce == null)
             {
                 return NotFound("Commerce not found.");

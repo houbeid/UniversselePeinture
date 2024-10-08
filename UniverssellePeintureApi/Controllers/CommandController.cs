@@ -8,6 +8,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using Command = UniverssellePeintureApi.Model.Command;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniverssellePeintureApi.Controllers
 {
@@ -22,6 +23,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateCommand([FromBody] AddCommandDto command)
         {
@@ -117,6 +119,7 @@ namespace UniverssellePeintureApi.Controllers
             return Ok("Command created successfully.");
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GenerateCommandPdf")]
         public async Task<IActionResult> GenerateCommandPdf(DateTime commandDate)

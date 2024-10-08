@@ -82,7 +82,7 @@ namespace WPFModernVerticalMenu.Pages
                 var content = new StringContent(JsonConvert.SerializeObject(clientDto), Encoding.UTF8, "application/json");
 
                 // Créer une requête POST pour ajouter un client
-                var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Clients");
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Clients");
 
                 // Ajouter l'en-tête Authorization avec le token JWT
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

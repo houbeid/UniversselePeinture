@@ -138,7 +138,7 @@ namespace WPFModernVerticalMenu.Pages
             {
                 int commercialId = (int)button.Tag;
                 // Logique pour afficher le récapitulatif du commercial
-                ShowPdfInPopup("https://localhost:7210/api/Commerces/GenerateRecettePdf", commercialId);
+                ShowPdfInPopup("https://52.47.142.28/api/Commerces/GenerateRecettePdf", commercialId);
             }
             
         }
@@ -151,7 +151,7 @@ namespace WPFModernVerticalMenu.Pages
             {
                 int commercialId = (int)button.Tag;
                 // Logique pour afficher le récapitulatif du commercial
-                ShowPdfInPopup("https://localhost:7210/api/Commerces/GenerateRecapPdf", commercialId);
+                ShowPdfInPopup("https://52.47.142.28/api/Commerces/GenerateRecapPdf", commercialId);
             }
             
         }
@@ -164,7 +164,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private async void LoadCommercials()
         {
-            var response = await client.GetAsync("https://localhost:7210/api/Commerces");
+            var response = await client.GetAsync("https://52.47.142.28/api/Commerces");
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();

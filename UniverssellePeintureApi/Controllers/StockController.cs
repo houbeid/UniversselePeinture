@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniverssellePeintureApi.DTO;
@@ -18,6 +19,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpPost("Add")]
         public async Task AddStock([FromBody]  AddStockdto addStockDto)
         {
@@ -155,6 +157,7 @@ namespace UniverssellePeintureApi.Controllers
             await _context.SaveChangesAsync();
         }
 
+        [Authorize]
         [HttpPost("PriseCompta")]
         public async Task AddPrisecompta(PriseComptaDto priseComptadto)
         {
@@ -169,6 +172,7 @@ namespace UniverssellePeintureApi.Controllers
             await _context.SaveChangesAsync();
         }
 
+        [Authorize]
         [HttpPost("recette")]
         public async Task Addreceitte(PriseComptaDto priseComptadto)
         {
@@ -192,6 +196,7 @@ namespace UniverssellePeintureApi.Controllers
             await _context.SaveChangesAsync();
         }
 
+        [Authorize]
         [HttpPost("update")]
         public async Task UpdateStockAsync(UpdateStockdto updateStockDto)
         {
@@ -276,7 +281,8 @@ namespace UniverssellePeintureApi.Controllers
             await _context.SaveChangesAsync();
         }
 
-        
+
+        [Authorize]
         [HttpGet("Produits")]
         public async Task<List<StockProduitDto>> getProduit()
         {
