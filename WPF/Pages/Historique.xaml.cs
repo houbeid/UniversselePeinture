@@ -44,7 +44,7 @@ namespace WPFModernVerticalMenu.Pages
         private async Task<List<HistoriqueAchat>> GetHistoriqueClient(string codeclient)
         {
             // Construire l'URL avec le code client en paramètre
-            var url = $"https://localhost:7210/api/Historique?codeclient={codeclient}";
+            var url = $"https://52.47.142.28/api/Historique?codeclient={codeclient}";
 
             // Créer une requête GET pour récupérer l'historique du client
             var request = new HttpRequestMessage(HttpMethod.Get, url);

@@ -9,6 +9,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniverssellePeintureApi.Controllers
 {
@@ -23,6 +24,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateCommerce([FromBody] AddCommerceDto commerceDto)
         {
@@ -50,6 +52,7 @@ namespace UniverssellePeintureApi.Controllers
             return Ok("Client created successfully.");
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCommerceById(int id)
         {
@@ -62,9 +65,9 @@ namespace UniverssellePeintureApi.Controllers
             return Ok(commerce);
         }
 
-        
 
 
+        [Authorize]
         [HttpGet]
         public async Task<List<ComerceResponse>> GetAllCommerces()
         {
@@ -93,6 +96,7 @@ namespace UniverssellePeintureApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GenerateRecettePdf")]
         public async Task<IActionResult> GenerateRecapPdf(int idcomerce)

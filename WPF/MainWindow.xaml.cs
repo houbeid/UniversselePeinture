@@ -67,7 +67,7 @@ namespace WPFModernVerticalMenu
             //        // Logique d'authentification ici
             //        // Si l'authentification réussit :
 
-            // var result = postApiDataAsync(login, "https://localhost:7210/api/User/login");
+            // var result = postApiDataAsync(login, "https://52.47.142.28:5000/api/User/login");
             if (txtUsername.Text == "")
             {
                 MessageBox.Show("Entrez username");
@@ -112,7 +112,7 @@ namespace WPFModernVerticalMenu
 
             var content = new StringContent(JsonConvert.SerializeObject(loginDto), Encoding.UTF8, "application/json");
 
-            return await client.PostAsync("https://localhost:7210/api/User/login", content);
+            return await client.PostAsync("https://52.47.142.28/api/User/login", content);
         }
 
         private void HandleError(System.Net.HttpStatusCode statusCode, string errorContent)

@@ -47,7 +47,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private async void LoadStatistique()
         {
-            var response = await client.GetAsync("https://localhost:7210/api/Statistique");
+            var response = await client.GetAsync("https://52.47.142.28/api/Statistique");
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();

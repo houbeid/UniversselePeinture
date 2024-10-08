@@ -9,6 +9,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniverssellePeintureApi.Controllers
 {
@@ -23,6 +24,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpPost("Add")]
         public async Task<IActionResult> CreateFacture([FromBody] AddFactureDto factureDto)
         {
@@ -55,6 +57,7 @@ namespace UniverssellePeintureApi.Controllers
             return Ok("facture created successfully.");
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<List<FactureResponse>> GetFacture()
         {
@@ -88,6 +91,7 @@ namespace UniverssellePeintureApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GenerateFacturePdf")]
         public async Task<IActionResult> GenerateCommandPdf(DateTime FactureDate)

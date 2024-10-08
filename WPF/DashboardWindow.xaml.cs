@@ -321,7 +321,7 @@ namespace WPFModernVerticalMenu
         {
             get
             {
-                return $"{CommercialId} doit visiter {ClientName}";
+                return $"Il faut visiter le client {ClientName}";
             }
         }
     }

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using UniverssellePeintureApi.DTO;
 using UniverssellePeintureApi.Model;
 using UniverssellePeintureApi.DTO.Response;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UniverssellePeintureApi.Controllers
 {
@@ -18,6 +19,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<List<HistoriqueResponse>> GetHistoriqueClient(string codeClient)
         {
