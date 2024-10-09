@@ -50,6 +50,17 @@ namespace WPFModernVerticalMenu.Pages
             }
         }
 
+        private void ClearInputs()
+        {
+            CodeClient.Text = string.Empty;
+            Visite_Date.SelectedDate = null;
+            Prod1.SelectedItem = null;
+            Prod2.SelectedItem = null;
+            Prod3.SelectedItem = null;
+            QtP1.Text = string.Empty;
+            QtP2.Text = string.Empty;
+            QtP3.Text = string.Empty;
+        }
         private void PriseCompta_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -113,6 +124,7 @@ namespace WPFModernVerticalMenu.Pages
                 if (result.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Les données ont été modifiées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ClearInputs();
                 }
                 else
                 {
@@ -125,7 +137,7 @@ namespace WPFModernVerticalMenu.Pages
 
         public async void Updateproduit()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://localhost:7210/api/Stock/Produits");
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://universellepeintre.oneposts.io/api/Stock/Produits");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
@@ -191,7 +203,7 @@ namespace WPFModernVerticalMenu.Pages
             var content = new StringContent(JsonConvert.SerializeObject(stock), Encoding.UTF8, "application/json");
 
             // Créer la requête POST
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Stock/update");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://universellepeintre.oneposts.io/api/Stock/update");
 
             // Ajouter l'en-tête Authorization avec le token JWT
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

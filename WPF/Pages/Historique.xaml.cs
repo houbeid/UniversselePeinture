@@ -29,53 +29,72 @@ namespace WPFModernVerticalMenu.Pages
             InitializeComponent();
         }
 
-         private async void Rechercher_Click(object sender, RoutedEventArgs e)
+        private async void Rechercher_Click(object sender, RoutedEventArgs e)
         {
 
-            var result = await GetHistoriqueClient(FirstNavigationTabTextBox.Text);
+            GetHistoriqueClient(FirstNavigationTabTextBox.Text);
             //HistoriqueAchat historique = new HistoriqueAchat()
             //{
 
             //};
-           // NavigationService.Navigate(new DetailsHistorique());
-            NavigationService.Navigate(new DetailsHistorique(result));
+            // NavigationService.Navigate(new DetailsHistorique());
+
+
 
         }
-        private async Task<List<HistoriqueAchat>> GetHistoriqueClient(string codeclient)
+        private async void GetHistoriqueClient(string codeclient)
         {
-            // Construire l'URL avec le code client en paramètre
-            var url = $"https://52.47.142.28/api/Historique?codeclient={codeclient}";
-
-            // Créer une requête GET pour récupérer l'historique du client
-            var request = new HttpRequestMessage(HttpMethod.Get, url);
-
-            // Ajouter l'en-tête Authorization avec le token JWT
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
-
-            // Envoyer la requête
-            var response = await client.SendAsync(request);
-
-            // Vérifier si la requête a réussi
-            if (response.IsSuccessStatusCode)
+            try
             {
-                // Lire le contenu de la réponse en chaîne de caractères
-                var responseString = await response.Content.ReadAsStringAsync();
+                // Construire l'URL avec le code client en paramètre
+                var url = $"https://universellepeintre.oneposts.io/api/Historique?codeclient={codeclient}";
 
-                // Désérialiser le JSON reçu en une liste d'objets HistoriqueAchat
-                var historiqueAchats = JsonConvert.DeserializeObject<List<HistoriqueAchat>>(responseString);
+                // Créer une requête GET pour récupérer l'historique du client
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
 
-                // Afficher la réponse pour débogage
-                Console.WriteLine(responseString);
+                // Ajouter l'en-tête Authorization avec le token JWT
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
 
-                return historiqueAchats;
+                // Envoyer la requête
+                var response = await client.SendAsync(request);
+
+                // Vérifier si la requête a réussi
+                if (response.IsSuccessStatusCode)
+                {
+                    // Lire le contenu de la réponse en chaîne de caractères
+                    var responseString = await response.Content.ReadAsStringAsync();
+
+                    // Désérialiser le JSON reçu en une liste d'objets HistoriqueAchat
+                    var historiqueAchats = JsonConvert.DeserializeObject<List<HistoriqueAchat>>(responseString);
+
+                    // Afficher la réponse pour débogage
+                    Console.WriteLine(responseString);
+
+                    // Naviguer vers la page des détails de l'historique
+                    NavigationService.Navigate(new DetailsHistorique(historiqueAchats));
+                }
+                else
+                {
+                    // En cas d'échec, afficher l'erreur et retourner null
+                    Console.WriteLine($"Error: {response.ReasonPhrase}");
+                }
             }
-            else
+            catch (HttpRequestException ex)
             {
-                // En cas d'échec, afficher l'erreur et retourner null
-                Console.WriteLine($"Error: {response.ReasonPhrase}");
-                return null;
+                // Gérer les erreurs liées à la requête HTTP
+                Console.WriteLine($"Erreur de requête HTTP: {ex.Message}");
+            }
+            catch (JsonSerializationException ex)
+            {
+                // Gérer les erreurs liées à la désérialisation JSON
+                Console.WriteLine($"Erreur de désérialisation JSON: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Gérer les autres erreurs générales
+                Console.WriteLine($"Une erreur s'est produite: {ex.Message}");
             }
         }
-
     }
+
 }

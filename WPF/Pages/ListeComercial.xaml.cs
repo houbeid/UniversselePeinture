@@ -18,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System;
 using System.IO;
+using System.Net.Http.Headers;
 
 namespace WPFModernVerticalMenu.Pages
 {
@@ -69,9 +70,13 @@ namespace WPFModernVerticalMenu.Pages
             {
                 // Créer un client HTTP
                 var client = new HttpClient();
+                var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
+
+                // Ajouter l'en-tête Authorization avec le token JWT
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
 
                 // Effectuer la requête GET avec l'URL mise à jour
-                var response = await client.GetAsync(urlWithId);
+                var response = await client.SendAsync(request);
 
                 // Vérifier si la réponse est réussie
                 if (!response.IsSuccessStatusCode)
@@ -138,7 +143,7 @@ namespace WPFModernVerticalMenu.Pages
             {
                 int commercialId = (int)button.Tag;
                 // Logique pour afficher le récapitulatif du commercial
-                ShowPdfInPopup("https://52.47.142.28/api/Commerces/GenerateRecettePdf", commercialId);
+                ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecettePdf", commercialId);
             }
             
         }
@@ -151,7 +156,7 @@ namespace WPFModernVerticalMenu.Pages
             {
                 int commercialId = (int)button.Tag;
                 // Logique pour afficher le récapitulatif du commercial
-                ShowPdfInPopup("https://52.47.142.28/api/Commerces/GenerateRecapPdf", commercialId);
+                ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecapPdf", commercialId);
             }
             
         }
@@ -164,7 +169,19 @@ namespace WPFModernVerticalMenu.Pages
 
         private async void LoadCommercials()
         {
-            var response = await client.GetAsync("https://52.47.142.28/api/Commerces");
+            // Créer une requête GET pour récupérer l'historique du client
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://universellepeintre.oneposts.io/api/Commerces");
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+            // Envoyer la requête
+
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            var response = await client.SendAsync(request);
+            
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();

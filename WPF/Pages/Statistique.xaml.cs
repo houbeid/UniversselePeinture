@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -47,7 +48,21 @@ namespace WPFModernVerticalMenu.Pages
 
         private async void LoadStatistique()
         {
-            var response = await client.GetAsync("https://52.47.142.28/api/Statistique");
+
+
+            
+            // Créer une requête GET pour récupérer l'historique du client
+
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://universellepeintre.oneposts.io/api/Statistique");
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+            // Envoyer la requête
+            
+
+            // Ajouter l'en-tête Authorization avec le token JWT
+            var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();

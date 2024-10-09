@@ -44,6 +44,14 @@ namespace WPFModernVerticalMenu.Pages
                 OnPropertyChanged(nameof(IsPopupOpen));
             }
         }
+
+        private void ClearInputs()
+        {
+            CodeClientBox.Text = string.Empty;
+            NumFactTextBox.Text  = string.Empty;
+            MontantTextBox.Text = string.Empty;
+            DistrubuteurTextBox.Text = string.Empty;
+        }
         private void Date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             DatePicker datePicker = sender as DatePicker;
@@ -90,6 +98,7 @@ namespace WPFModernVerticalMenu.Pages
             if (result.IsSuccessStatusCode)
             {
                 MessageBox.Show("Les données ont été ajoutées avec succès.", "Succès", MessageBoxButton.OK, MessageBoxImage.Information);
+                ClearInputs();
             }
             else
             {
@@ -160,7 +169,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private void SuiviFact_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://52.47.142.28/api/Facture/GenerateFacturePdf");
+            ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Facture/GenerateFacturePdf");
         }
         private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto facture)
         {
@@ -170,7 +179,7 @@ namespace WPFModernVerticalMenu.Pages
                 var content = new StringContent(JsonConvert.SerializeObject(facture), Encoding.UTF8, "application/json");
 
                 // Créer une requête POST pour ajouter une facture
-                var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Facture/Add");
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://universellepeintre.oneposts.io/api/Facture/Add");
 
                 // Ajouter l'en-tête Authorization avec le token JWT
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

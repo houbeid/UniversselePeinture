@@ -38,23 +38,29 @@ namespace WPFModernVerticalMenu.Pages
                 return;
             }
 
-            // Enregistrement des donnée
-         
-            var  recette = new PriseComptaDto
+            // Enregistrement des données
+            var recette = new PriseComptaDto
             {
                 CodeClient = FirstNavigationTabTextBox.Text,
                 priseCompta = decimal.Parse(SecondNavigationTabTextBox.Text, System.Globalization.CultureInfo.InvariantCulture),
-                
             };
 
             var result = await AddPriseAsync(recette);
             if (result.IsSuccessStatusCode)
             {
                 MessageBox.Show("Enregistrement réussi !");
+
+                // Clear the inputs after successful save
+                FirstNavigationTabTextBox.Text = string.Empty;
+                SecondNavigationTabTextBox.Text = string.Empty;
             }
             else
             {
-                MessageBox.Show("Erreur du l'insertion");
+                MessageBox.Show("Erreur de l'insertion");
+
+                // Optionally clear inputs even in case of error
+                FirstNavigationTabTextBox.Text = string.Empty;
+                SecondNavigationTabTextBox.Text = string.Empty;
             }
         }
 
@@ -64,7 +70,7 @@ namespace WPFModernVerticalMenu.Pages
             var content = new StringContent(JsonConvert.SerializeObject(recette), Encoding.UTF8, "application/json");
 
             // Créer une requête POST pour ajouter la prise comptable
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://52.47.142.28/api/Stock/PriseCompta");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://universellepeintre.oneposts.io/api/Stock/PriseCompta");
 
             // Ajouter l'en-tête Authorization avec le token JWT
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);

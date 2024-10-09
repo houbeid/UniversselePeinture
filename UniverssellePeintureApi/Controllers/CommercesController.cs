@@ -194,6 +194,7 @@ namespace UniverssellePeintureApi.Controllers
             }
         }
 
+
         [HttpGet]
         [Route("GenerateRecapPdf")]
         public async Task<IActionResult> GenerateStockPdf(int idcomerce)

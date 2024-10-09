@@ -184,7 +184,7 @@ namespace WPFModernVerticalMenu.Pages
 
         public async void Addproduit()
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, "https://52.47.142.28/api/Stock/Produits");
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://universellepeintre.oneposts.io/api/Stock/Produits");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
             var response = await client.SendAsync(request);
             if (response.IsSuccessStatusCode)
