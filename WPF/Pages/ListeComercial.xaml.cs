@@ -194,7 +194,13 @@ namespace WPFModernVerticalMenu.Pages
                 {
                     // Lire le flux de réponse
                     var pdfStream = await response.Content.ReadAsStreamAsync();
-                    var savePath = "C:\\Users\\Public\\Downloads\\fichier.pdf";  // Chemin de téléchargement du fichier
+
+                    // Obtenir le chemin du dossier Téléchargements de l'utilisateur
+                    string userDownloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+                    // Générer un nom unique avec la date et l'heure actuelles
+                    string uniqueFileName = $"fichier_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"; // Exemple: fichier_20241010_153045.pdf
+                    string savePath = System.IO.Path.Combine(userDownloadsPath, uniqueFileName);
 
                     using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
                     {
@@ -213,6 +219,7 @@ namespace WPFModernVerticalMenu.Pages
                 MessageBox.Show($"Erreur lors du téléchargement : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
 
