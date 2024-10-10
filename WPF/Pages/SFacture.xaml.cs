@@ -136,16 +136,18 @@ namespace WPFModernVerticalMenu.Pages
 
                 // Lire le flux de réponse PDF
                 var pdfStream = await response.Content.ReadAsStreamAsync();
-                var pdfPath = System.IO.Path.GetTempFileName() + ".pdf";
+
+                // Utiliser un chemin temporaire valide pour n'importe quel PC
+                string tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"fichier_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
 
                 // Écrire le flux dans un fichier temporaire
-                using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
+                using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
                 {
                     await pdfStream.CopyToAsync(fileStream);
                 }
 
                 // Naviguer vers le fichier PDF dans le contrôleur WebBrowser
-                PdfViewer.Navigate(new Uri(pdfPath));
+                PdfViewer.Navigate(new Uri(tempPath));
             }
             catch (HttpRequestException httpEx)
             {
@@ -166,6 +168,7 @@ namespace WPFModernVerticalMenu.Pages
                 }
             }
         }
+
 
         private void SuiviFact_Click(object sender, RoutedEventArgs e)
         {
