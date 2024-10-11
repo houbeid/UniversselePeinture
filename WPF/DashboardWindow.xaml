@@ -82,7 +82,7 @@
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter au Stock" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnBtier_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter Balance Tier" VerticalAlignment="Center"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Balance Tier" VerticalAlignment="Center"/>
                         </Button>
                         <Button x:Name="btnUpdateStock" Style="{DynamicResource PopupButtonStyle}" Click="btnUpdateStock_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Stock" VerticalAlignment="Center" Loaded="MenuItem_Loaded_2"/>

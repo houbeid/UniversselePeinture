@@ -41,7 +41,7 @@
 
         <!-- Title Section -->
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Margin="0,0,0,20">
-            <TextBlock Text="Ajouter Balance Tier" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
+            <TextBlock Text="Modifier Balance Tier" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
             <!--<TextBlock Text="rgjnerog solgrnerog solgrtneor woetignero sogiwneor eogrinero eorgin soejg" FontSize="12" Foreground="#6A6A6A"/>-->
         </StackPanel>
 
