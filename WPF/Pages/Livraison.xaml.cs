@@ -205,13 +205,15 @@ namespace WPFModernVerticalMenu.Pages
         //    }
         //}
 
+        private string _currentPdfUrl;
+
         private async void ShowPdfInPopup(string fileUrl)
         {
             // Ajouter l'ID en tant que paramètre de requête à l'URL
             DateTime date = DateTime.Now.Date;
             string formattedDate = date.ToString("yyyy-MM-dd");
             string urlWithId = $"{fileUrl}?commandDate={formattedDate}";
-
+            _currentPdfUrl = urlWithId;
             // Ouvrir la popup
             PdfPopup.IsOpen = true;
 
@@ -273,6 +275,53 @@ namespace WPFModernVerticalMenu.Pages
                 {
                     PdfPopup.IsOpen = false;
                 }
+            }
+        }
+
+        private async void DownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(_currentPdfUrl))
+            {
+                MessageBox.Show("Aucun PDF à télécharger.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                // Créer un client HTTP pour télécharger le PDF
+                var client = new HttpClient();
+                var request = new HttpRequestMessage(HttpMethod.Get, _currentPdfUrl);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                var response = await client.SendAsync(request);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Lire le flux de réponse
+                    var pdfStream = await response.Content.ReadAsStreamAsync();
+
+                    // Obtenir le chemin du dossier Téléchargements de l'utilisateur
+                    string userDownloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+                    // Générer un nom unique avec la date et l'heure actuelles
+                    string uniqueFileName = $"fichier_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"; // Exemple: fichier_20241010_153045.pdf
+                    string savePath = System.IO.Path.Combine(userDownloadsPath, uniqueFileName);
+
+                    using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
+                    {
+                        await pdfStream.CopyToAsync(fileStream);
+                    }
+
+                    MessageBox.Show($"PDF téléchargé avec succès : {savePath}", "Téléchargement terminé", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Erreur lors du téléchargement du fichier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors du téléchargement : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

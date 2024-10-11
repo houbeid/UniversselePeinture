@@ -87,7 +87,7 @@
                 <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Padding="10" CornerRadius="5">
                     <StackPanel>
                         <WebBrowser Name="PdfViewer" Width="800" Height="450"/>
-                        <Button Background="#124481" Content="Télécharger"  Click="SuiviCommand_Click" Margin="10" VerticalAlignment="Center" Command="{Binding DownloadCommand}"/>
+                        <Button Background="#124481" Content="Télécharger"  Click="DownloadButton_Click" Margin="10" VerticalAlignment="Center" Command="{Binding DownloadCommand}"/>
                     </StackPanel>
                 </Border>
             </Popup>
