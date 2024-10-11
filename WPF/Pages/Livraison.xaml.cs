@@ -136,6 +136,75 @@ namespace WPFModernVerticalMenu.Pages
             // Réinitialiser la date
             Delivery_Date.SelectedDate = null;
         }
+        //private async void ShowPdfInPopup(string fileUrl)
+        //{
+        //    // Ajouter l'ID en tant que paramètre de requête à l'URL
+        //    DateTime date = DateTime.Now.Date;
+        //    string formattedDate = date.ToString("yyyy-MM-dd");
+        //    string urlWithId = $"{fileUrl}?commandDate={formattedDate}";
+
+        //    // Ouvrir la popup
+        //    PdfPopup.IsOpen = true;
+
+        //    try
+        //    {
+        //        // Créer un client HTTP
+        //        var client = new HttpClient();
+
+        //        // Créer une requête GET pour obtenir les produits
+        //        var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
+
+        //        // Ajouter l'en-tête Authorization avec le token JWT (si nécessaire)
+        //        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+        //        // Envoyer la requête
+        //        var response = await client.SendAsync(request);
+
+        //        // Effectuer la requête GET avec l'URL mise à jour
+        //       // var response = await client.GetAsync(urlWithId);
+
+        //        // Vérifier si la réponse est réussie
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            // Lire le message d'erreur depuis le backend
+        //            var errorMessage = await response.Content.ReadAsStringAsync();
+        //            MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            return;
+        //        }
+
+        //        // Lire le flux de réponse PDF
+        //        var pdfStream = await response.Content.ReadAsStreamAsync();
+        //        var pdfPath = System.IO.Path.GetTempFileName() + ".pdf";
+
+        //        // Écrire le flux dans un fichier temporaire
+        //        using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
+        //        {
+        //            await pdfStream.CopyToAsync(fileStream);
+        //        }
+
+        //        // Naviguer vers le fichier PDF dans le contrôleur WebBrowser
+        //        PdfViewer.Navigate(new Uri(pdfPath));
+        //    }
+        //    catch (HttpRequestException httpEx)
+        //    {
+        //        // Erreur de réseau ou d'appel HTTP
+        //        MessageBox.Show($"HTTP Request Error: {httpEx.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Toute autre exception non gérée
+        //        MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //    finally
+        //    {
+        //        // Fermer la popup en cas d'erreur
+        //        if (!PdfPopup.IsOpen)
+        //        {
+        //            PdfPopup.IsOpen = false;
+        //        }
+        //    }
+        //}
+
         private async void ShowPdfInPopup(string fileUrl)
         {
             // Ajouter l'ID en tant que paramètre de requête à l'URL
@@ -151,8 +220,17 @@ namespace WPFModernVerticalMenu.Pages
                 // Créer un client HTTP
                 var client = new HttpClient();
 
+                // Créer une requête GET pour obtenir les produits
+                var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
+
+                // Ajouter l'en-tête Authorization avec le token JWT (si nécessaire)
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                // Envoyer la requête
+                var response = await client.SendAsync(request);
+
                 // Effectuer la requête GET avec l'URL mise à jour
-                var response = await client.GetAsync(urlWithId);
+                //var response = await client.GetAsync(urlWithId);
 
                 // Vérifier si la réponse est réussie
                 if (!response.IsSuccessStatusCode)
@@ -166,8 +244,8 @@ namespace WPFModernVerticalMenu.Pages
                 // Lire le flux de réponse PDF
                 var pdfStream = await response.Content.ReadAsStreamAsync();
 
-                // Utiliser un chemin temporaire universel et un nom de fichier unique
-                string tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"commande_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
+                // Utiliser un chemin temporaire valide pour n'importe quel PC
+                string tempPath = System.IO.Path.Combine(System.IO.Path.GetTempPath(), $"fichier_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
 
                 // Écrire le flux dans un fichier temporaire
                 using (var fileStream = new FileStream(tempPath, FileMode.Create, FileAccess.Write))
@@ -197,6 +275,7 @@ namespace WPFModernVerticalMenu.Pages
                 }
             }
         }
+
 
 
         private async Task Livproduit()
@@ -243,7 +322,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private void SuiviCommand_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Command/GenerateCommandPdf");
+            ShowPdfInPopup("https://localhost:7210/api/Command/GenerateCommandPdf");
         }
         private async Task<HttpResponseMessage> AddCommandAsync(AddCommandDto facture)
         {

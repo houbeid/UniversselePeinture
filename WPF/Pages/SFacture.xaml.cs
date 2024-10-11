@@ -121,9 +121,17 @@ namespace WPFModernVerticalMenu.Pages
             {
                 // Créer un client HTTP
                 var client = new HttpClient();
+                // Créer une requête GET pour obtenir les produits
+                var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
+
+                // Ajouter l'en-tête Authorization avec le token JWT (si nécessaire)
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+                // Envoyer la requête
+                var response = await client.SendAsync(request);
 
                 // Effectuer la requête GET avec l'URL mise à jour
-                var response = await client.GetAsync(urlWithId);
+                //var response = await client.GetAsync(urlWithId);
 
                 // Vérifier si la réponse est réussie
                 if (!response.IsSuccessStatusCode)
@@ -170,9 +178,10 @@ namespace WPFModernVerticalMenu.Pages
         }
 
 
+
         private void SuiviFact_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Facture/GenerateFacturePdf");
+            ShowPdfInPopup("https://localhost:7210/api/Facture/GenerateFacturePdf");
         }
         private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto facture)
         {

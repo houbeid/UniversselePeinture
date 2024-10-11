@@ -35,16 +35,9 @@ namespace WPFModernVerticalMenu.Pages
             if (string.IsNullOrEmpty(CodeTextBox.Text) ||
                 string.IsNullOrEmpty(Respnsible_NameTextBox.Text) ||
                 string.IsNullOrEmpty(ZoneTextBox.Text) ||
-                string.IsNullOrEmpty(CommercantIdTextBox.Text) ||
                 string.IsNullOrEmpty(TelephoneTextBox.Text))
             {
                 MessageBox.Show("Tous les champs marqués par * sont obligatoires.");
-                return;
-            }
-
-            if (!int.TryParse(CommercantIdTextBox.Text, out int commercantId))
-            {
-                MessageBox.Show("CommercantId doit être un nombre entier.");
                 return;
             }
 
@@ -57,7 +50,6 @@ namespace WPFModernVerticalMenu.Pages
                 CoordonneesGPS = CoordonnéesGPSTextBox.Text,
                 Zone = ZoneTextBox.Text,
                 Recommandation = RecommandationTextBox.Text,
-                CommercantId = commercantId,
                 Phone_Number = TelephoneTextBox.Text
             };
 
@@ -65,6 +57,13 @@ namespace WPFModernVerticalMenu.Pages
             if (result.IsSuccessStatusCode)
             {
                 MessageBox.Show("Enregistrement réussi !");
+                CodeTextBox.Text = string.Empty;
+                Name_SocietyTextBox.Text = string.Empty;
+                Respnsible_NameTextBox.Text = string.Empty;
+                CoordonnéesGPSTextBox.Text = string.Empty;
+                ZoneTextBox.Text = string.Empty;
+                RecommandationTextBox.Text = string.Empty;
+                TelephoneTextBox.Text = string.Empty;
             }
             else
             {
@@ -82,7 +81,7 @@ namespace WPFModernVerticalMenu.Pages
                 var content = new StringContent(JsonConvert.SerializeObject(clientDto), Encoding.UTF8, "application/json");
 
                 // Créer une requête POST pour ajouter un client
-                var request = new HttpRequestMessage(HttpMethod.Post, "https://universellepeintre.oneposts.io/api/Clients");
+                var request = new HttpRequestMessage(HttpMethod.Post, "https://localhost:7210/api/Clients");
 
                 // Ajouter l'en-tête Authorization avec le token JWT
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
