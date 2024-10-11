@@ -322,7 +322,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private void SuiviCommand_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://localhost:7210/api/Command/GenerateCommandPdf");
+            ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Command/GenerateCommandPdf");
         }
         private async Task<HttpResponseMessage> AddCommandAsync(AddCommandDto facture)
         {

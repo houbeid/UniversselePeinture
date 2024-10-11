@@ -181,7 +181,7 @@ namespace WPFModernVerticalMenu.Pages
 
         private void SuiviFact_Click(object sender, RoutedEventArgs e)
         {
-            ShowPdfInPopup("https://localhost:7210/api/Facture/GenerateFacturePdf");
+            ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Facture/GenerateFacturePdf");
         }
         private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto facture)
         {
