@@ -32,6 +32,7 @@ namespace UniverssellePeintureApi.Controllers
             var statistiqueList = new StatistiqueResponse();
             int stock_fabrique_total = 0;
             int stock_actuel_total = 0;
+            decimal montant_total = 0;
             foreach (var Produit in produits)
             {
                 statistiqueList.statistiquProduits.Add(new StatistiquProduit()
@@ -40,10 +41,12 @@ namespace UniverssellePeintureApi.Controllers
                     stock_fabrique = Produit.stock,
                     stock_actuel = Produit.StockActuel,
                     pourcentage_produit = Produit.PourcentageProduit,
-                    pourcentage_vent = Produit.PourcentageVente
+                    pourcentage_vent = Produit.PourcentageVente,
+                    Montant = Produit.stock * Produit.PrixActuel
                 });
                 stock_fabrique_total += Produit.stock;
                 stock_actuel_total += Produit.StockActuel;
+                montant_total += Produit.stock * Produit.PrixActuel;
             }
             statistiqueList.statistiquProduits.Add(new StatistiquProduit()
             {
@@ -51,6 +54,13 @@ namespace UniverssellePeintureApi.Controllers
                 stock_fabrique = stock_fabrique_total,
                 stock_actuel = stock_actuel_total,
      
+            });
+            statistiqueList.statistiquProduits.Add(new StatistiquProduit()
+            {
+                produit = "Chiffre D'affaire Total",
+                stock_fabrique = stock_fabrique_total,
+                stock_actuel = stock_actuel_total,
+                Montant = montant_total
             });
 
             var clients = await _context.Clients.ToListAsync();

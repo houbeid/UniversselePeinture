@@ -18,7 +18,7 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
-        [Authorize]
+        
         [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] AddClientDto clientDto)
         {

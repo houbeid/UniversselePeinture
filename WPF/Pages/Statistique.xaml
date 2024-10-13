@@ -26,6 +26,8 @@
             <TextBlock Text="Stock Actuel" FontWeight="Bold" Width="150"/>
             <TextBlock Text="Pourcentage de Vente" FontWeight="Bold" Width="150"/>
             <TextBlock Text="Pourcentage par produits" FontWeight="Bold" Width="150"/>
+            <TextBlock Text="Montant" FontWeight="Bold" Width="150"/>
+
         </StackPanel>
 
         <!-- Product List -->
@@ -38,6 +40,7 @@
                         <TextBlock Text="{Binding stock_actuel}" Width="150"/>
                         <TextBlock Text="{Binding pourcentage_vent}" Width="150"/>
                         <TextBlock Text="{Binding pourcentage_produit}" Width="150"/>
+                        <TextBlock Text="{Binding Montant}" Width="150"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

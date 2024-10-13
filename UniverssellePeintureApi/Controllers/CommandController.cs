@@ -119,7 +119,7 @@ namespace UniverssellePeintureApi.Controllers
             return Ok("Command created successfully.");
         }
 
-        [Authorize]
+        
         [HttpGet]
         [Route("GenerateCommandPdf")]
         public async Task<IActionResult> GenerateCommandPdf(DateTime commandDate)

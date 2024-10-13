@@ -30,6 +30,7 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new ArgumentException("Invalid client", nameof(Historique));
             }
+            decimal montant_total = 0;
             var HistoriqueClient = new List<HistoriqueResponse>();
             foreach (var clienthistorique in client.Historiques) 
             {
@@ -43,7 +44,14 @@ namespace UniverssellePeintureApi.Controllers
                         Commercial = clienthistorique.distributeur
                     }
                     );
+                montant_total += clienthistorique.Montant;
             }
+            HistoriqueClient.Add(
+                new HistoriqueResponse
+                {
+                    Produit = "Chiffre D'affaire",
+                    Montant = montant_total
+                });
             return HistoriqueClient;
         }
     }

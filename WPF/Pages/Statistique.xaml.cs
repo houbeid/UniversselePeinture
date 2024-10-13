@@ -109,7 +109,8 @@ namespace WPFModernVerticalMenu.Pages
 
         public double pourcentage_vent { get; set; }
 
-        public decimal pourcentage_produit { get; set; }
+        public double pourcentage_produit { get; set; }
+        public decimal Montant { get; set; }
 
 
     }

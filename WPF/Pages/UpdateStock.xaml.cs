@@ -161,6 +161,12 @@ namespace WPFModernVerticalMenu.Pages
                 return false;
             }
 
+            if (string.IsNullOrWhiteSpace(description.Text))
+            {
+                MessageBox.Show("Le description  ne peut pas être vide.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             if (!Visite_Date.SelectedDate.HasValue)
             {
                 MessageBox.Show("La Date de Délivration ne peut pas être vide.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);

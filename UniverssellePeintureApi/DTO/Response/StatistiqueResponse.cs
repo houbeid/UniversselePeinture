@@ -24,6 +24,8 @@
 
         public double pourcentage_produit { get; set; }
 
+        public decimal Montant { get; set; }
+
         
     }
 
