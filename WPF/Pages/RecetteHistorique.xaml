@@ -1,4 +1,4 @@
-﻿<Page x:Class="WPFModernVerticalMenu.Pages.Recette"
+﻿<Page x:Class="WPFModernVerticalMenu.Pages.RecetteHistorique"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WPFModernVerticalMenu.Pages" xmlns:xctk1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Recette">
+      Title="RecetteHistorique">
 
     <Page.Resources>
         <Style x:Key="CustomTextBoxStyle" TargetType="TextBox">
@@ -41,23 +41,19 @@
 
         <!-- Title Section -->
         <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Margin="0,0,0,20">
-            <TextBlock Text="Recette" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
+            <TextBlock Text="Recette Historique" FontSize="24" FontWeight="Bold" Foreground="#124481"/>
             <!--<TextBlock Text="rgjnerog solgrnerog solgrtneor woetignero sogiwneor eogrinero eorgin soejg" FontSize="12" Foreground="#6A6A6A"/>-->
         </StackPanel>
 
         <!-- Form Section -->
         <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Margin="0,0,0,20">
-            <TextBlock Text="Code Client" Margin="10,5,0,5"/>
-            <TextBox Name="FirstNavigationTabTextBox" Style="{StaticResource CustomTextBoxStyle}" Margin="10,5,0,20"/>
-            <TextBlock Text="Montant de la Recette" Margin="10,5,0,5"/>
-            <TextBox Name="SecondNavigationTabTextBox" Style="{StaticResource CustomTextBoxStyle}" Margin="10,5,0,20"/>
             <StackPanel Orientation="Vertical" Margin="10">
                 <TextBlock Text="Date de Recette*" Padding="5" />
-                <xctk1:DatePicker Name="Recette_Date" Padding="5" HorizontalAlignment="Left" SelectedDateChanged="Delivery_Date_SelectedDateChanged"/>
+                <xctk1:DatePicker Name="Delivery_Date" Padding="5" HorizontalAlignment="Left" SelectedDateChanged="Delivery_Date_SelectedDateChanged"/>
             </StackPanel>
         </StackPanel>
 
         <!-- Button Section -->
-        <Button Content="Enregistrer" Click="Enregistrer_Click" HorizontalAlignment="Center" VerticalAlignment="Top" Width="310" Height="50" Background="#124481" Foreground="White" FontSize="16" Margin="199,37,251,0" Grid.Row="3"/>
+        <Button Content="Rechercher" HorizontalAlignment="Center" VerticalAlignment="Top" Width="310" Height="50" Background="#124481" Foreground="White" FontSize="16" Margin="199,37,251,0" Grid.Row="3" Click="Rechercher_Click"/>
     </Grid>
 </Page>

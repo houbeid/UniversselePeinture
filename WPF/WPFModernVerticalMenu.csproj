@@ -161,6 +161,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DetailleHistoriqueRecette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\DetailsHistorique.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -178,6 +182,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Recette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RecetteHistorique.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +221,9 @@
     <Compile Include="Pages\BTier.xaml.cs">
       <DependentUpon>BTier.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DetailleHistoriqueRecette.xaml.cs">
+      <DependentUpon>DetailleHistoriqueRecette.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DetailsHistorique.xaml.cs">
       <DependentUpon>DetailsHistorique.xaml</DependentUpon>
     </Compile>
@@ -227,6 +238,9 @@
     </Compile>
     <Compile Include="Pages\Recette.xaml.cs">
       <DependentUpon>Recette.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RecetteHistorique.xaml.cs">
+      <DependentUpon>RecetteHistorique.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>

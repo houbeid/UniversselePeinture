@@ -256,6 +256,12 @@ namespace WPFModernVerticalMenu
         {
             fContainer.Navigate(new System.Uri("Pages/Historique.xaml", UriKind.RelativeOrAbsolute));
         }
+        private void btnHistoriqueRecette_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/RecetteHistorique.xaml", UriKind.RelativeOrAbsolute));
+        }
+
+        
         private void btnSuiviFact_Clic(object sender, RoutedEventArgs e)
         {
             fContainer.Navigate(new System.Uri("Pages/SFacture.xaml", UriKind.RelativeOrAbsolute));

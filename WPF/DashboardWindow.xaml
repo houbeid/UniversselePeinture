@@ -90,6 +90,9 @@
                         <Button x:Name="btnRecette" Style="{DynamicResource PopupButtonStyle}" Click="btnRecette_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Recette" VerticalAlignment="Center" Loaded="MenuItem_Loaded_2"/>
                         </Button>
+                        <Button x:Name="btnRecetteHistorique" Style="{DynamicResource PopupButtonStyle}" Click="btnHistoriqueRecette_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Historique du Recette"/>
+                        </Button>
                         <Button x:Name="btnHistorique" Style="{DynamicResource PopupButtonStyle}" Click="btnHistorique_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Historique"/>
                         </Button>
