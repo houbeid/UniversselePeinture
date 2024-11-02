@@ -85,5 +85,22 @@ namespace UniverssellePeintureApi.Controllers
 
             return statistiqueList;
         }
+
+        [HttpDelete("delete")]
+        public  void ReinitialiserProduits()
+        {
+            var produits = _context.Produits.ToList();
+
+            foreach (var produit in produits)
+            {
+                produit.stock = 0;
+                produit.StockActuel = 0;
+               // produit.PrixActuel = 0;
+                produit.PourcentageVente = 0;
+                produit.PourcentageProduit = 0;
+            }
+
+            _context.SaveChanges();
+        }
     }
 }

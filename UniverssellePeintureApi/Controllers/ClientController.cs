@@ -18,7 +18,19 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
-        
+        [HttpDelete("deleteClient")]
+        public async Task SupprimerClient(string code)
+        {
+
+            // Charger tous les clients avec leurs stocks et les StockProduits associés
+            var port = _context.Clients.FirstOrDefault(c => c.Code == code);
+            // Parcourir chaque client
+            _context.Clients.Remove(port);
+
+            // Sauvegarder les changements dans la base de données
+            await _context.SaveChangesAsync();
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateClient([FromBody] AddClientDto clientDto)
         {

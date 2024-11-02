@@ -28,4 +28,11 @@
         public decimal priseCompta { get; set; }
     }
 
+    public class AddRecetteDto
+    {
+        public string CodeClient { get; set; }
+        public decimal priseCompta { get; set; }
+        public DateTime Recette_Date { get; set; }
+    }
+
 }

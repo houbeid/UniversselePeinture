@@ -318,14 +318,16 @@ namespace UniverssellePeintureApi.Controllers
 
                         // Ajouter la ligne de total
                         table.AddCell(new PdfPCell(new Phrase("TOTAL Valeur", headerFont)) { Colspan = 8, HorizontalAlignment = Element.ALIGN_RIGHT});
-                        table.AddCell(new PdfPCell(new Phrase(valeur_actuelle.ToString(), cellFont)));
+                        
                         if (portfeuille != null)
                         {
+                            table.AddCell(new PdfPCell(new Phrase(portfeuille.currentPrice.ToString(), cellFont)));
                             table.AddCell(new PdfPCell(new Phrase(portfeuille.PriceCompta.ToString() ?? "", cellFont)));
-                            table.AddCell(new PdfPCell(new Phrase((portfeuille.PriceCompta - valeur_actuelle).ToString(), cellFont)));
+                            table.AddCell(new PdfPCell(new Phrase(portfeuille.PricePayer.ToString(), cellFont)));
                         }
                         else
                         {
+                            table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                             table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                             table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                         }

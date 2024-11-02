@@ -19,9 +19,70 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
-        [Authorize]
+        [HttpDelete("deleteport")]
+        public async Task Supprimerport(string code)
+        {
+
+            // Charger tous les clients avec leurs stocks et les StockProduits associés
+            var port = _context.portFeuilleClients.FirstOrDefault(c => c.Code == code);
+            // Parcourir chaque client
+            _context.portFeuilleClients.Remove(port);
+
+            // Sauvegarder les changements dans la base de données
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpDelete("deleteportfeuille")]
+        public async Task Supprimerportfeuille()
+        {
+
+            // Charger tous les clients avec leurs stocks et les StockProduits associés
+            var ports = _context.portFeuilleClients.ToList();
+            // Parcourir chaque client
+            foreach(var port in ports)
+            {
+                port.PriceCompta = 0;
+                port.PricePayer = 0;
+                port.currentPrice = 0;
+                port.LastPrise = 0;
+            }
+
+            // Sauvegarder les changements dans la base de données
+            await _context.SaveChangesAsync();
+        }
+
+        [HttpDelete ("delete")]
+        public async Task SupprimerTousLesStocks()
+        {
+           
+                // Charger tous les clients avec leurs stocks et les StockProduits associés
+                var clients = _context.Clients
+                    .Include(c => c.Stocks)
+                    .ThenInclude(s => s.StockProduits)
+                    .ToList();
+
+                // Parcourir chaque client
+                foreach (var client in clients)
+                {
+                    // Parcourir chaque stock du client
+                    foreach (var stock in client.Stocks)
+                    {
+                        // Supprimer tous les StockProduits associés à ce stock
+                        _context.StockProduits.RemoveRange(stock.StockProduits);
+
+                        // Supprimer le stock lui-même
+                        _context.Stocks.Remove(stock);
+                    }
+                }
+
+                // Sauvegarder les changements dans la base de données
+                await _context.SaveChangesAsync();
+        }
+
+
+        //[Authorize]
         [HttpPost("Add")]
-        public async Task AddStock([FromBody]  AddStockdto addStockDto)
+        public async Task AddStock([FromBody] AddStockdto addStockDto)
         {
             // Trouver le client par code
             var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == addStockDto.CodeClient);
@@ -29,135 +90,103 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("Client not found");
             }
-            var username = User?.Identity?.Name;
 
+            var username = User?.Identity?.Name;
             var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Nom == username);
-            //var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Id == client.CommercantId);
             if (comercial == null)
             {
                 throw new Exception("Comercial not found");
             }
+
             client.Delivery_Date = addStockDto.Delivery_date;
 
+            // Chercher le stock pour le client
             var stock = await _context.Stocks.Include(s => s.StockProduits).FirstOrDefaultAsync(s => s.ClientId == client.Id);
-            if (stock != null)
+
+            // Créer un nouveau stock si aucun n'existe
+            if (stock == null)
             {
-                stock.Quantity += addStockDto.StockProduitdto.Sum(sp => sp.Quantite);
-                foreach (var stockProduitdto in addStockDto.StockProduitdto)
+                stock = new Stock
                 {
-                    var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitdto.NameProduit);
-                    if (produit != null)
-                    {
-                        produit.StockActuel += stockProduitdto.Quantite;
-                        produit.stock += stockProduitdto.Quantite;
-                        var stockproduit = await _context.StockProduits.FirstOrDefaultAsync(p => p.ProduitId == produit.Id);
-                        if (stockproduit != null)
-                        {
-                            stockproduit.prix_actuell += produit.PrixActuel * stockProduitdto.Quantite;
-                            stockproduit.Quantite += stockProduitdto.Quantite;
-                            var historiqueProduit = new Historique
-                            {
-                                NameProduit = produit.Name,
-                                Quantite = stockProduitdto.Quantite,
-                                Montant = produit.PrixActuel * stockProduitdto.Quantite,
-                                Delivery_date = addStockDto.Delivery_date,
-                                distributeur = comercial.Nom,
-                                ClientId = client.Id
-                            };
-                            _context.Historiques.Add(historiqueProduit);
-                            await _context.SaveChangesAsync();
-                        }
-
-                        else
-                        {
-                            var stockProduit = new StockProduit
-                            {
-                                StockId = stock.Id,
-                                ProduitId = produit.Id,
-                                prix_actuell = produit.PrixActuel * stockProduitdto.Quantite,
-                                Quantite = stockProduitdto.Quantite
-                            };
-
-                            _context.StockProduits.Add(stockProduit);
-                            await _context.SaveChangesAsync();
-
-                            var historiqueProduit = new Historique
-                            {
-                                NameProduit = produit.Name,
-                                Quantite = stockProduitdto.Quantite,
-                                Montant = produit.PrixActuel * stockProduitdto.Quantite,
-                                Delivery_date = addStockDto.Delivery_date,
-                                distributeur = comercial.Nom,
-                                ClientId = client.Id
-                            };
-                            _context.Historiques.Add(historiqueProduit);
-                            await _context.SaveChangesAsync();
-                        }
-                    }
-   
-                }
-            }
-            else
-            {
-                // Créer un nouveau stock
-                var newStock = new Stock
-                {
-                    Quantity = addStockDto.StockProduitdto.Sum(sp => sp.Quantite),
+                    Quantity = 0,
                     Produit_Vendue = 0,
-                    PrixDeVenteTotal = 0, // Vous pouvez calculer le prix total si nécessaire
+                    PrixDeVenteTotal = 0,
                     ClientId = client.Id
                 };
-
-                _context.Stocks.Add(newStock);
+                _context.Stocks.Add(stock);
                 await _context.SaveChangesAsync();
-
-                // Ajouter les produits au stock et mettre à jour les pourcentages de vente
-                foreach (var stockProduitDto in addStockDto.StockProduitdto)
-                {
-                    var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitDto.NameProduit);
-                    if (produit != null)
-                    {
-                        produit.StockActuel += stockProduitDto.Quantite;
-                        produit.stock += stockProduitDto.Quantite;
-
-
-                        var stockProduit = new StockProduit
-                        {
-                            StockId = newStock.Id,
-                            ProduitId = produit.Id,
-                            prix_actuell = produit.PrixActuel * stockProduitDto.Quantite,
-                            Quantite = stockProduitDto.Quantite
-                        };
-
-                        _context.StockProduits.Add(stockProduit);
-                        await _context.SaveChangesAsync();
-                        var historiqueProduit = new Historique
-                        {
-                            NameProduit = produit.Name,
-                            Quantite = stockProduitDto.Quantite,
-                            Montant = produit.PrixActuel * stockProduitDto.Quantite,
-                            Delivery_date = addStockDto.Delivery_date,
-                            distributeur = comercial.Nom,
-                            ClientId = client.Id
-                        };
-                        _context.Historiques.Add(historiqueProduit);
-                        await _context.SaveChangesAsync();
-                    }
-                }
             }
+
+            // Mettre à jour la quantité totale du stock
+            stock.Quantity += addStockDto.StockProduitdto.Sum(sp => sp.Quantite);
+            decimal prix_actuell = 0;
+
+            // Traiter les produits du stock
+            foreach (var stockProduitDto in addStockDto.StockProduitdto)
+            {
+                var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitDto.NameProduit);
+                if (produit == null)
+                {
+                    continue; // Si le produit n'existe pas, passer au suivant
+                }
+
+                produit.StockActuel += stockProduitDto.Quantite;
+                produit.stock += stockProduitDto.Quantite;
+                var stockTotalProduit = await _context.Produits.SumAsync(c => c.stock);
+                stockTotalProduit += stockProduitDto.Quantite;
+                produit.PourcentageProduit = Math.Round(((produit.stock - produit.StockActuel) / (double)produit.stock) * 100, 2);
+                produit.PourcentageVente = Math.Round(((produit.stock - produit.StockActuel) / (double)stockTotalProduit) * 100, 2);
+
+
+                var stockproduit = await _context.StockProduits.FirstOrDefaultAsync(p => p.ProduitId == produit.Id && p.StockId == stock.Id);
+                if (stockproduit != null)
+                {
+                    stockproduit.prix_actuell += produit.PrixActuel * stockProduitDto.Quantite;
+                    stockproduit.Quantite += stockProduitDto.Quantite;
+                }
+                else
+                {
+                    var newStockProduit = new StockProduit
+                    {
+                        StockId = stock.Id,
+                        ProduitId = produit.Id,
+                        prix_actuell = produit.PrixActuel * stockProduitDto.Quantite,
+                        Quantite = stockProduitDto.Quantite
+                    };
+                    _context.StockProduits.Add(newStockProduit);
+                }
+
+                // Ajouter un historique pour chaque produit
+                var historiqueProduit = new Historique
+                {
+                    NameProduit = produit.Name,
+                    Quantite = stockProduitDto.Quantite,
+                    Montant = produit.PrixActuel * stockProduitDto.Quantite,
+                    Delivery_date = addStockDto.Delivery_date,
+                    distributeur = comercial.Nom,
+                    ClientId = client.Id
+                };
+                prix_actuell += stockProduitDto.Quantite * produit.PrixActuel;
+                _context.Historiques.Add(historiqueProduit);
+            }
+
+            // Mettre à jour le portefeuille du client
             var portfeuilleClient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == addStockDto.CodeClient);
             if (portfeuilleClient == null)
             {
                 throw new Exception("PortfeuilleClient not found");
             }
-            //portfeuilleClient.PriceCompta += addStockDto.PriceCompta;
-            //portfeuilleClient.currentPrice += addStockDto.PriceCompta;
+
             portfeuilleClient.depot = addStockDto.Delivery_date;
             portfeuilleClient.phone = client.Phone_Number;
+            portfeuilleClient.currentPrice = prix_actuell;
+
+            // Enregistrer toutes les modifications en une seule fois
             await _context.SaveChangesAsync();
         }
 
-        [Authorize]
+
+       // [Authorize]
         [HttpPost("PriseCompta")]
         public async Task AddPrisecompta(PriseComptaDto priseComptadto)
         {
@@ -168,13 +197,14 @@ namespace UniverssellePeintureApi.Controllers
             }
             //decimal? prise = portfeuilleClient.LastPrise - priseComptadto.priseCompta;
             portfeuilleClient.PriceCompta = priseComptadto.priseCompta;
-            portfeuilleClient.currentPrice = priseComptadto.priseCompta;
+            portfeuilleClient.PricePayer = priseComptadto.priseCompta - portfeuilleClient.currentPrice;
+           // portfeuilleClient.currentPrice = priseComptadto.priseCompta;
             await _context.SaveChangesAsync();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("recette")]
-        public async Task Addreceitte(PriseComptaDto priseComptadto)
+        public async Task Addreceitte(AddRecetteDto priseComptadto)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == priseComptadto.CodeClient);
             if (client == null)
@@ -192,22 +222,64 @@ namespace UniverssellePeintureApi.Controllers
                 throw new Exception("PortfeuilleClient not found");
             }
             portfeuilleClient.PriceCompta -= priseComptadto.priseCompta;
-            portfeuilleClient.PricePayer += stock.PrixDeVenteTotal - priseComptadto.priseCompta;
+            if (portfeuilleClient.PriceCompta == 0)
+            {
+                portfeuilleClient.currentPrice = 0;
+                portfeuilleClient.PricePayer = 0;
+            }
+            else
+                portfeuilleClient.PricePayer -= priseComptadto.priseCompta;
+            //if (portfeuilleClient.PriceCompta == 0)
+            //{
+            //    //foreach (var stockproduit  in stock.StockProduits)
+            //    //{
+            //    //    // Supprimer tous les StockProduits associés à ce stock
+            //    //    _context.StockProduits.RemoveRange(stockproduit);
+
+            //    //    // Supprimer le stock lui-même
+            //    //}
+            //    //_context.Stocks.Remove(stock);
+
+            //}
+            var recette = new HistoriqueRecette
+            {
+                Date = priseComptadto.Recette_Date,
+                Name = client.Respnsible_Name,
+                CodeClient = priseComptadto.CodeClient,
+                Recette = priseComptadto.priseCompta
+            };
+            _context.HistoriqueRecettes.Add(recette);
             await _context.SaveChangesAsync();
         }
+
+        [HttpGet("RecetteHistorique")]
+        public async Task<List<HistoriqueRecetteResponse>> GetHistoriqueRecette(DateTime date)
+        {
+            var recettes = await _context.HistoriqueRecettes
+                .Where(c => c.Date.Date == date.Date)
+                .Select(c => new HistoriqueRecetteResponse
+                {
+                    Date = c.Date,
+                    Name = c.Name,
+                    CodeClient = c.CodeClient,
+                    recette = c.Recette
+                })
+                .ToListAsync();
+
+            return recettes;
+        }
+
 
         [Authorize]
         [HttpPost("update")]
         public async Task UpdateStockAsync(UpdateStockdto updateStockDto)
         {
             // Trouver le client par code
-           
             var client = await _context.Clients.FirstOrDefaultAsync(c => c.Code == updateStockDto.CodeClient);
             if (client == null)
             {
                 throw new Exception("Client not found");
             }
-
 
             client.Visit_Date = updateStockDto.Visit_date;
             client.Description = updateStockDto.Description;
@@ -218,68 +290,70 @@ namespace UniverssellePeintureApi.Controllers
             {
                 throw new Exception("Stock not found for this client");
             }
-            decimal PrixDeVenteTotal = 0;
 
-            // Mettre à jour les informations du stock
-            //stock.PrixDeVenteTotal = updateStockDto.PrixDeVenteTotal;
-            //stock.Description = updateStockDto.Description;
+            decimal prixDeVenteTotal = 0;
+            int stockcount = 0;
 
-
-
-            // Supprimer les anciennes associations de produits
-            // _context.StockProduits.RemoveRange(stock.StockProduits);
-
-            // Ajouter les nouvelles associations de produits et mettre à jour les informations de stock
-            var stockProduit = await _context.Produits.SumAsync(c => c.stock);
+            // Parcourir les produits envoyés pour mise à jour
             foreach (var stockProduitDto in updateStockDto.StockProduitdto)
             {
                 var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitDto.NameProduit);
-                if (produit != null)
+                if (produit == null)
                 {
-                    var stockproduit = await _context.StockProduits.FirstOrDefaultAsync(p => p.ProduitId == produit.Id && p.StockId == stock.Id);
-                    if (stockproduit == null)
-                    {
-                        throw new Exception("Stock not found for this client");
-                    }
-                    // Mettre à jour le stock actuel du produit
-                    produit.StockActuel -= (stockproduit.Quantite - stockProduitDto.Quantite);
-
-                    // Calculer le pourcentage de vente
-                    produit.PourcentageProduit = Math.Round(((produit.stock - produit.StockActuel) / (double)produit.stock) * 100, 2);
-                    produit.PourcentageVente = Math.Round(((produit.stock - produit.StockActuel) / (double)stockProduit) * 100, 2);
-
-                    // Mettre à jour les informations du stockProduit existant
-                    stockproduit.prix_vent = ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel);
-                    stockproduit.prix_actuell = (stockproduit.prix_actuell - ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel));
-                    PrixDeVenteTotal += ((stockproduit.Quantite - stockProduitDto.Quantite) * produit.PrixActuel);
-                    stockproduit.Quantite = stockProduitDto.Quantite;
-                                                                                             
-                    // Mettre à jour le prix de vente total du stock
-                    
-
-                    // Marquer les entités comme modifiées
-                    _context.Entry(produit).State = EntityState.Modified;
-                    _context.Entry(stockproduit).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
-
+                    // Si un produit n'est pas trouvé, passer au suivant
+                    continue;
                 }
+
+                var stockproduit = await _context.StockProduits.FirstOrDefaultAsync(p => p.ProduitId == produit.Id && p.StockId == stock.Id);
+                if (stockproduit == null)
+                {
+                    // Créer un nouveau StockProduit si non trouvé
+                    throw new Exception("vous n'avez pas un stock pour cette produit");
+                }
+                else
+                {
+                    // Mettre à jour la quantité de stock actuel du produit
+                    stockcount += stockproduit.Quantite - stockProduitDto.Quantite;
+                    produit.StockActuel -= (stockproduit.Quantite - stockProduitDto.Quantite);
+                    stockproduit.Quantite = stockProduitDto.Quantite;
+                    stockproduit.prix_actuell = produit.PrixActuel * stockProduitDto.Quantite;
+                }
+
+                // Calculer les pourcentages de vente
+                var stockTotalProduit = await _context.Produits.SumAsync(c => c.stock);
+                produit.PourcentageProduit = Math.Round(((produit.stock - produit.StockActuel) / (double)produit.stock) * 100, 2);
+                produit.PourcentageVente = Math.Round(((produit.stock - produit.StockActuel) / (double)stockTotalProduit) * 100, 2);
+
+                // Calculer le prix de vente
+                stockproduit.prix_vent = produit.PrixActuel * stockProduitDto.Quantite;
+                prixDeVenteTotal += stockproduit.prix_vent;
+
+                // Marquer les entités comme modifiées
+                _context.Entry(produit).State = EntityState.Modified;
+                _context.Entry(stockproduit).State = EntityState.Modified;
             }
+
+            // Mise à jour des informations de stock
             stock.Produit_Vendue += stock.Quantity - updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
-            stock.Quantity = updateStockDto.StockProduitdto.Sum(sp => sp.Quantite);
-            stock.PrixDeVenteTotal = PrixDeVenteTotal;
-            var Portfeiulleclient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == updateStockDto.CodeClient);
-            if (Portfeiulleclient == null)
+            stock.Quantity -= stockcount;
+            stock.PrixDeVenteTotal = prixDeVenteTotal;
+
+            // Mise à jour du portefeuille client
+            var portefeuilleClient = await _context.portFeuilleClients.FirstOrDefaultAsync(c => c.Code == updateStockDto.CodeClient);
+            if (portefeuilleClient == null)
             {
                 throw new Exception("PortFeuilleClient not found");
             }
-            
-            Portfeiulleclient.visit = updateStockDto.Visit_date;
-            Portfeiulleclient.Date_RDV = updateStockDto.Description;
-            Portfeiulleclient.currentPrice = Portfeiulleclient.PriceCompta - stock.PrixDeVenteTotal;
-            Portfeiulleclient.PricePayer = stock.PrixDeVenteTotal;
 
+            portefeuilleClient.visit = updateStockDto.Visit_date;
+            portefeuilleClient.Date_RDV = updateStockDto.Description;
+            portefeuilleClient.currentPrice = portefeuilleClient.PriceCompta - stock.PrixDeVenteTotal;
+            portefeuilleClient.PricePayer += stock.PrixDeVenteTotal;
+
+            // Sauvegarder les modifications en une seule fois
             await _context.SaveChangesAsync();
         }
+
 
 
         [Authorize]
@@ -296,6 +370,23 @@ namespace UniverssellePeintureApi.Controllers
                    })
     .ToListAsync();
             return Produits;
+        }
+
+        [HttpGet("UpdateProduits")]
+        public void ModifierPrixParNom(string nomProduit, decimal nouveauPrix)
+        {
+            
+                var produit = _context.Produits.FirstOrDefault(p => p.Name == nomProduit);
+                if (produit != null)
+                {
+                    produit.PrixActuel = nouveauPrix;
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Produit non trouvé.");
+                }
+            
         }
     }
 }

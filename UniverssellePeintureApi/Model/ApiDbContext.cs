@@ -18,6 +18,8 @@ namespace UniverssellePeintureApi.Model
 
         public DbSet<Historique> Historiques { get; set; }
 
+        public DbSet<HistoriqueRecette> HistoriqueRecettes { get; set; }
+
         public DbSet<Facture> Factures { get; set; }
 
         public DbSet<Command> Commands { get; set; }

@@ -19,6 +19,21 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        [HttpDelete("delete")]
+        public async Task SupprimerToutHistorique()
+        {
+           
+                // Charger tous les historiques
+                var historiques = _context.Historiques.ToList();
+
+                // Supprimer tous les historiques
+                _context.Historiques.RemoveRange(historiques);
+
+                // Sauvegarder les changements dans la base de données
+                await _context.SaveChangesAsync();
+        }
+
+
         [Authorize]
         [HttpGet]
         public async Task<List<HistoriqueResponse>> GetHistoriqueClient(string codeClient)
