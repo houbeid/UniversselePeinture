@@ -30,8 +30,8 @@
                         <TextBlock Text="{Binding Telephone}" Width="200"/>
                         <StackPanel Orientation="Horizontal" Width="200">
 
-                            <Button Content="Recette" Background="#124481" Click="RecapButton_Click" Margin="5,0" Tag="{Binding Id}"/>
-                            <Button Content="Portefeuille" Background="#124481" Click="PortefeuilleButton_Click" Margin="5,0" Tag="{Binding Id}"/>
+                            <Button Content="Recette" Background="#124481" Click="DownloadRecette_Click" Margin="5,0" Tag="{Binding Id}"/>
+                            <Button Content="Portefeuille" Background="#124481" Click="DownloadPortefeuille_Click" Margin="5,0" Tag="{Binding Id}"/>
 
                         </StackPanel>
                     </StackPanel>
@@ -40,13 +40,13 @@
         </ListBox>
 
         <!-- Popup for displaying details -->
-        <Popup Name="PdfPopup" StaysOpen="False" Placement="Center" IsOpen="{Binding IsPopupOpen}">
+        <!--<Popup Name="PdfPopup" StaysOpen="False" Placement="Center" IsOpen="{Binding IsPopupOpen}">
             <Border Background="White" BorderBrush="#5f7fa1" BorderThickness="3" Padding="10" CornerRadius="5">
                 <StackPanel>
                     <WebBrowser Name="PdfViewer" Width="800" Height="450"/>
                     <Button Background="#124481" Content="Télécharger"  Click="DownloadButton_Click" Margin="10" VerticalAlignment="Center" Command="{Binding DownloadCommand}"/>
                 </StackPanel>
             </Border>
-        </Popup>
+        </Popup>-->
     </Grid>
 </Page>

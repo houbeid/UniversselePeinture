@@ -53,8 +53,8 @@ namespace WPFModernVerticalMenu.Pages
             Commercials = new ObservableCollection<Commercial>();
             DataContext = this;
             LoadCommercials();
-            ShowRecapCommand = new RelayCommand(RecapButton_Click);
-            ShowPortefeuilleCommand = new RelayCommand(PortefeuilleButton_Click);
+            //ShowRecapCommand = new RelayCommand(RecapButton_Click);
+            //ShowPortefeuilleCommand = new RelayCommand(PortefeuilleButton_Click);
 
         }
 
@@ -122,84 +122,108 @@ namespace WPFModernVerticalMenu.Pages
 
         private string _currentPdfUrl;
 
-        private async void ShowPdfInPopup(string fileUrl, int id)
+        //private async void ShowPdfInPopup(string fileUrl, int id)
+        //{
+        //    // Ajouter l'ID en tant que paramètre de requête à l'URL
+        //    string urlWithId = $"{fileUrl}?idcomerce={id}";
+        //    _currentPdfUrl = urlWithId;  // Stocke l'URL du PDF actuellement visualisé
+
+        //    // Ouvrir la popup
+        //    PdfPopup.IsOpen = true;
+
+        //    try
+        //    {
+        //        // Créer un client HTTP
+        //        var client = new HttpClient();
+        //        var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
+
+        //        // Ajouter l'en-tête Authorization avec le token JWT
+        //        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+        //        // Effectuer la requête GET avec l'URL mise à jour
+        //        var response = await client.SendAsync(request);
+
+        //        if (!response.IsSuccessStatusCode)
+        //        {
+        //            var errorMessage = await response.Content.ReadAsStringAsync();
+        //            MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //            return;
+        //        }
+
+        //        // Lire le flux de réponse PDF
+        //        var pdfStream = await response.Content.ReadAsStreamAsync();
+        //        var pdfPath = System.IO.Path.GetTempFileName() + ".pdf";
+
+        //        // Écrire le flux dans un fichier temporaire
+        //        using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
+        //        {
+        //            await pdfStream.CopyToAsync(fileStream);
+        //        }
+
+        //        // Naviguer vers le fichier PDF dans le contrôleur WebBrowser
+        //        PdfViewer.Navigate(new Uri(pdfPath));
+        //    }
+        //    catch (HttpRequestException httpEx)
+        //    {
+        //        MessageBox.Show($"HTTP Request Error: {httpEx.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
+        //}
+
+        private string _currentPdfType;
+        private string _currentCommercialName;
+
+        private async void DownloadRecette_Click(object sender, RoutedEventArgs e)
         {
-            // Ajouter l'ID en tant que paramètre de requête à l'URL
-            string urlWithId = $"{fileUrl}?idcomerce={id}";
-            _currentPdfUrl = urlWithId;  // Stocke l'URL du PDF actuellement visualisé
-
-            // Ouvrir la popup
-            PdfPopup.IsOpen = true;
-
-            try
+            Button button = sender as Button;
+            if (button != null)
             {
-                // Créer un client HTTP
-                var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
+                int commercialId = (int)button.Tag;
+                var commercial = Commercials.FirstOrDefault(c => c.Id == commercialId);
 
-                // Ajouter l'en-tête Authorization avec le token JWT
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
-
-                // Effectuer la requête GET avec l'URL mise à jour
-                var response = await client.SendAsync(request);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    var errorMessage = await response.Content.ReadAsStringAsync();
-                    MessageBox.Show($"Error: {errorMessage}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                // Lire le flux de réponse PDF
-                var pdfStream = await response.Content.ReadAsStreamAsync();
-                var pdfPath = System.IO.Path.GetTempFileName() + ".pdf";
-
-                // Écrire le flux dans un fichier temporaire
-                using (var fileStream = new FileStream(pdfPath, FileMode.Create, FileAccess.Write))
-                {
-                    await pdfStream.CopyToAsync(fileStream);
-                }
-
-                // Naviguer vers le fichier PDF dans le contrôleur WebBrowser
-                PdfViewer.Navigate(new Uri(pdfPath));
-            }
-            catch (HttpRequestException httpEx)
-            {
-                MessageBox.Show($"HTTP Request Error: {httpEx.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _currentPdfType = "Recette";
+                _currentCommercialName = commercial?.Nom;
+                // Directly download the Recette PDF without showing it
+                await DownloadPdf("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecettePdf", commercialId);
             }
         }
 
-        private async void DownloadButton_Click(object sender, RoutedEventArgs e)
+        private async void DownloadPortefeuille_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(_currentPdfUrl))
+            Button button = sender as Button;
+            if (button != null)
             {
-                MessageBox.Show("Aucun PDF à télécharger.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
+                int commercialId = (int)button.Tag;
+                var commercial = Commercials.FirstOrDefault(c => c.Id == commercialId);
+
+                _currentPdfType = "Portefeuille";
+                _currentCommercialName = commercial?.Nom;
+                // Directly download the Portefeuille PDF without showing it
+                await DownloadPdf("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecapPdf", commercialId);
             }
+        }
+
+        private async Task DownloadPdf(string fileUrl, int id)
+        {
+            string urlWithId = $"{fileUrl}?idcomerce={id}";
 
             try
             {
-                // Créer un client HTTP pour télécharger le PDF
                 var client = new HttpClient();
-                var request = new HttpRequestMessage(HttpMethod.Get, _currentPdfUrl);
+                var request = new HttpRequestMessage(HttpMethod.Get, urlWithId);
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
 
                 var response = await client.SendAsync(request);
-
                 if (response.IsSuccessStatusCode)
                 {
-                    // Lire le flux de réponse
                     var pdfStream = await response.Content.ReadAsStreamAsync();
 
-                    // Obtenir le chemin du dossier Téléchargements de l'utilisateur
+                    // Generate unique file name
                     string userDownloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-
-                    // Générer un nom unique avec la date et l'heure actuelles
-                    string uniqueFileName = $"fichier_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"; // Exemple: fichier_20241010_153045.pdf
+                    string uniqueFileName = $"{_currentCommercialName}{_currentPdfType}{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
                     string savePath = System.IO.Path.Combine(userDownloadsPath, uniqueFileName);
 
                     using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
@@ -219,49 +243,95 @@ namespace WPFModernVerticalMenu.Pages
                 MessageBox.Show($"Erreur lors du téléchargement : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-
-
-
-        //private void ShowRecap(object parameter)
+        //private async void DownloadButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    // Logic to load recap data
-        //    PdfPopup.IsOpen = true;
+        //    if (string.IsNullOrEmpty(_currentPdfUrl))
+        //    {
+        //        MessageBox.Show("Aucun PDF à télécharger.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Warning);
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        // Créer un client HTTP pour télécharger le PDF
+        //        var client = new HttpClient();
+        //        var request = new HttpRequestMessage(HttpMethod.Get, _currentPdfUrl);
+        //        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+
+        //        var response = await client.SendAsync(request);
+
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            // Lire le flux de réponse
+        //            var pdfStream = await response.Content.ReadAsStreamAsync();
+
+        //            // Obtenir le chemin du dossier Téléchargements de l'utilisateur
+        //            string userDownloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+
+        //            // Générer un nom unique avec la date et l'heure actuelles
+        //            string uniqueFileName = $"fichier_{DateTime.Now:yyyyMMdd_HHmmss}.pdf"; // Exemple: fichier_20241010_153045.pdf
+        //            string savePath = System.IO.Path.Combine(userDownloadsPath, uniqueFileName);
+
+        //            using (var fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write))
+        //            {
+        //                await pdfStream.CopyToAsync(fileStream);
+        //            }
+
+        //            MessageBox.Show($"PDF téléchargé avec succès : {savePath}", "Téléchargement terminé", MessageBoxButton.OK, MessageBoxImage.Information);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Erreur lors du téléchargement du fichier.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show($"Erreur lors du téléchargement : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        //    }
         //}
 
 
 
-        //private void ShowPortefeuille(object parameter)
+
+        ////private void ShowRecap(object parameter)
+        ////{
+        ////    // Logic to load recap data
+        ////    PdfPopup.IsOpen = true;
+        ////}
+
+
+
+        ////private void ShowPortefeuille(object parameter)
+        ////{
+        ////    // Logic to load portefeuille data
+        ////    PdfPopup.IsOpen = true;
+        ////}
+
+        //private void RecapButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    // Logic to load portefeuille data
-        //    PdfPopup.IsOpen = true;
+        //    // Utilisez une URL de votre API pour obtenir le PDF
+        //    Button button = sender as Button;
+        //    if (button != null)
+        //    {
+        //        int commercialId = (int)button.Tag;
+        //        // Logique pour afficher le récapitulatif du commercial
+        //        ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecettePdf", commercialId);
+        //    }
+
         //}
 
-        private void RecapButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Utilisez une URL de votre API pour obtenir le PDF
-            Button button = sender as Button;
-            if (button != null)
-            {
-                int commercialId = (int)button.Tag;
-                // Logique pour afficher le récapitulatif du commercial
-                ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecettePdf", commercialId);
-            }
-            
-        }
+        //private void PortefeuilleButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    // Utilisez une URL de votre API pour obtenir le PDF
+        //    Button button = sender as Button;
+        //    if (button != null)
+        //    {
+        //        int commercialId = (int)button.Tag;
+        //        // Logique pour afficher le récapitulatif du commercial
+        //        ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecapPdf", commercialId);
+        //    }
 
-        private void PortefeuilleButton_Click(object sender, RoutedEventArgs e)
-        {
-            // Utilisez une URL de votre API pour obtenir le PDF
-            Button button = sender as Button;
-            if (button != null)
-            {
-                int commercialId = (int)button.Tag;
-                // Logique pour afficher le récapitulatif du commercial
-                ShowPdfInPopup("https://universellepeintre.oneposts.io/api/Commerces/GenerateRecapPdf", commercialId);
-            }
-            
-        }
+        //}
 
         //private void DownloadButton_Click(object sender, RoutedEventArgs e)
         //{
@@ -283,7 +353,7 @@ namespace WPFModernVerticalMenu.Pages
 
             // Ajouter l'en-tête Authorization avec le token JWT
             var response = await client.SendAsync(request);
-            
+
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = await response.Content.ReadAsStringAsync();

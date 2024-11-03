@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Name="home"
         Title="MainWindow"
-        Height="650"
+        Height="700"
         Width="1000"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"

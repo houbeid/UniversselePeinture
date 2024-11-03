@@ -179,7 +179,7 @@ namespace UniverssellePeintureApi.Controllers
 
             portfeuilleClient.depot = addStockDto.Delivery_date;
             portfeuilleClient.phone = client.Phone_Number;
-            portfeuilleClient.currentPrice = prix_actuell;
+           // portfeuilleClient.currentPrice = prix_actuell;
 
             // Enregistrer toutes les modifications en une seule fois
             await _context.SaveChangesAsync();
@@ -197,8 +197,7 @@ namespace UniverssellePeintureApi.Controllers
             }
             //decimal? prise = portfeuilleClient.LastPrise - priseComptadto.priseCompta;
             portfeuilleClient.PriceCompta = priseComptadto.priseCompta;
-            portfeuilleClient.PricePayer = priseComptadto.priseCompta - portfeuilleClient.currentPrice;
-           // portfeuilleClient.currentPrice = priseComptadto.priseCompta;
+           portfeuilleClient.currentPrice = priseComptadto.priseCompta;
             await _context.SaveChangesAsync();
         }
 
@@ -224,23 +223,19 @@ namespace UniverssellePeintureApi.Controllers
             portfeuilleClient.PriceCompta -= priseComptadto.priseCompta;
             if (portfeuilleClient.PriceCompta == 0)
             {
+                foreach (var stockproduit in stock.StockProduits)
+                {
+                    // Supprimer tous les StockProduits associés à ce stock
+                    _context.StockProduits.RemoveRange(stockproduit);
+
+                    // Supprimer le stock lui-même
+                }
+                _context.Stocks.Remove(stock);
                 portfeuilleClient.currentPrice = 0;
                 portfeuilleClient.PricePayer = 0;
             }
             else
                 portfeuilleClient.PricePayer -= priseComptadto.priseCompta;
-            //if (portfeuilleClient.PriceCompta == 0)
-            //{
-            //    //foreach (var stockproduit  in stock.StockProduits)
-            //    //{
-            //    //    // Supprimer tous les StockProduits associés à ce stock
-            //    //    _context.StockProduits.RemoveRange(stockproduit);
-
-            //    //    // Supprimer le stock lui-même
-            //    //}
-            //    //_context.Stocks.Remove(stock);
-
-            //}
             var recette = new HistoriqueRecette
             {
                 Date = priseComptadto.Recette_Date,
