@@ -72,9 +72,17 @@ namespace WPFModernVerticalMenu.Pages
             Prod1.SelectedItem = null;
             Prod2.SelectedItem = null;
             Prod3.SelectedItem = null;
+            Prod4.SelectedItem = null;
+            Prod5.SelectedItem = null;
+            Prod6.SelectedItem = null;
             QtP1.Text = string.Empty;
             QtP2.Text = string.Empty;
             QtP3.Text = string.Empty;
+            QtP4.Text = string.Empty;
+            QtP5.Text = string.Empty;
+            QtP6.Text = string.Empty;
+
+
         }
 
         private async void Add_Click(object sender, RoutedEventArgs e)
@@ -118,6 +126,36 @@ namespace WPFModernVerticalMenu.Pages
                     {
                         NameProduit = selectedProduit3.Name,
                         Quantite = int.Parse(QtP3.Text)
+                    });
+                }
+
+                // Adding product 4
+                if (Prod4.SelectedItem is UpdateProduitDto selectedProduit4 && !string.IsNullOrWhiteSpace(QtP4.Text))
+                {
+                    stockDto.StockProduitdto.Add(new StockProduitdto
+                    {
+                        NameProduit = selectedProduit4.Name,
+                        Quantite = int.Parse(QtP4.Text)
+                    });
+                }
+
+                // Adding product 5
+                if (Prod5.SelectedItem is UpdateProduitDto selectedProduit5 && !string.IsNullOrWhiteSpace(QtP5.Text))
+                {
+                    stockDto.StockProduitdto.Add(new StockProduitdto
+                    {
+                        NameProduit = selectedProduit5.Name,
+                        Quantite = int.Parse(QtP5.Text)
+                    });
+                }
+
+                // Adding product 6
+                if (Prod6.SelectedItem is UpdateProduitDto selectedProduit6 && !string.IsNullOrWhiteSpace(QtP6.Text))
+                {
+                    stockDto.StockProduitdto.Add(new StockProduitdto
+                    {
+                        NameProduit = selectedProduit6.Name,
+                        Quantite = int.Parse(QtP6.Text)
                     });
                 }
 
@@ -173,6 +211,27 @@ namespace WPFModernVerticalMenu.Pages
                 return false;
             }
 
+            if ((Prod4.SelectedItem != null && string.IsNullOrWhiteSpace(QtP4.Text)) ||
+                (!string.IsNullOrWhiteSpace(QtP4.Text) && !int.TryParse(QtP4.Text, out _)))
+            {
+                MessageBox.Show("La Quantité 4 doit être un nombre entier si un produit est sélectionné.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if ((Prod5.SelectedItem != null && string.IsNullOrWhiteSpace(QtP5.Text)) ||
+                (!string.IsNullOrWhiteSpace(QtP5.Text) && !int.TryParse(QtP5.Text, out _)))
+            {
+                MessageBox.Show("La Quantité 5 doit être un nombre entier si un produit est sélectionné.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
+            if ((Prod6.SelectedItem != null && string.IsNullOrWhiteSpace(QtP6.Text)) ||
+                (!string.IsNullOrWhiteSpace(QtP6.Text) && !int.TryParse(QtP6.Text, out _)))
+            {
+                MessageBox.Show("La Quantité 6 doit être un nombre entier si un produit est sélectionné.", "Erreur de validation", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+
             return true;
         }
 
@@ -193,9 +252,12 @@ namespace WPFModernVerticalMenu.Pages
                 var produits = JsonConvert.DeserializeObject<List<UpdateProduitDto>>(jsonString);
                 if (produits != null)
                 {
-                    Prod1.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
-                    Prod2.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
-                    Prod3.ItemsSource = produits; // Lier directement la liste des produits à la ComboBox
+                    Prod1.ItemsSource = produits;
+                    Prod2.ItemsSource = produits;
+                    Prod3.ItemsSource = produits;
+                    Prod4.ItemsSource = produits;
+                    Prod5.ItemsSource = produits;
+                    Prod6.ItemsSource = produits;
                 }
             }
         }

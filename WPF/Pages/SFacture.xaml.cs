@@ -92,6 +92,65 @@ namespace WPFModernVerticalMenu.Pages
                 Montant = decimal.Parse(MontantTextBox.Text, System.Globalization.CultureInfo.InvariantCulture),
                 distribiteur = DistrubuteurTextBox.Text
             };
+            // Ajouter produit 1 si disponible
+            if (Prod1.SelectedItem is UpdateProduitDto selectedProduit1)
+            {
+                facture.StockProduitdto.Add(new StockProduitdto
+                {
+                    NameProduit = selectedProduit1.Name,
+                    Quantite = int.Parse(QtP1.Text)
+                });
+            }
+
+            // Ajouter produit 2 si disponible
+            if (Prod2.SelectedItem is UpdateProduitDto selectedProduit2 && !string.IsNullOrWhiteSpace(QtP2.Text))
+            {
+                facture.StockProduitdto.Add(new StockProduitdto
+                {
+                    NameProduit = selectedProduit2.Name,
+                    Quantite = int.Parse(QtP2.Text)
+                });
+            }
+
+            // Ajouter produit 3 si disponible
+            if (Prod3.SelectedItem is UpdateProduitDto selectedProduit3 && !string.IsNullOrWhiteSpace(QtP3.Text))
+            {
+                facture.StockProduitdto.Add(new StockProduitdto
+                {
+                    NameProduit = selectedProduit3.Name,
+                    Quantite = int.Parse(QtP3.Text)
+                });
+            }
+
+            // Adding product 4
+            if (Prod4.SelectedItem is UpdateProduitDto selectedProduit4 && !string.IsNullOrWhiteSpace(QtP4.Text))
+            {
+                facture.StockProduitdto.Add(new StockProduitdto
+                {
+                    NameProduit = selectedProduit4.Name,
+                    Quantite = int.Parse(QtP4.Text)
+                });
+            }
+
+            // Adding product 5
+            if (Prod5.SelectedItem is UpdateProduitDto selectedProduit5 && !string.IsNullOrWhiteSpace(QtP5.Text))
+            {
+                facture.StockProduitdto.Add(new StockProduitdto
+                {
+                    NameProduit = selectedProduit5.Name,
+                    Quantite = int.Parse(QtP5.Text)
+                });
+            }
+
+            // Adding product 6
+            if (Prod6.SelectedItem is UpdateProduitDto selectedProduit6 && !string.IsNullOrWhiteSpace(QtP6.Text))
+            {
+                facture.StockProduitdto.Add(new StockProduitdto
+                {
+                    NameProduit = selectedProduit6.Name,
+                    Quantite = int.Parse(QtP6.Text)
+                });
+            }
 
             var result = await AddfactureAsync(facture);
 
@@ -315,5 +374,7 @@ namespace WPFModernVerticalMenu.Pages
         public decimal Montant { get; set; }
 
         public string distribiteur { get; set; }
+
+        public List<StockProduitdto> StockProduitdto { get; set; }
     }
 }

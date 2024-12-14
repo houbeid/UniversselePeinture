@@ -15,7 +15,7 @@
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         FontFamily="Poppins">
 
     <Window.Resources>
@@ -34,7 +34,7 @@
         </Style>
     </Window.Resources>
 
-    <Border Background="{DynamicResource PrimaryBackgroundColor}"
+    <Border x:Name="MainBorder" Background="{DynamicResource PrimaryBackgroundColor}"
             CornerRadius="8">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -78,9 +78,9 @@
                         <Button x:Name="btnProducts" Style="{DynamicResource PopupButtonStyle}" Click="btnListCom_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Portefeilles des Comercials" VerticalAlignment="Center" Loaded="MenuItem_Loaded_1"/>
                         </Button>
-                        <Button x:Name="btnAddStock" Style="{DynamicResource PopupButtonStyle}" Click="btnAddStock_Click">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter au Stock" VerticalAlignment="Center"/>
-                        </Button>
+                        <!--<Button x:Name="btnAddStock" Style="{DynamicResource PopupButtonStyle}" Click="btnAddStock_Click">
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajouter au Stock" VerticalAlignment="Center" Loaded="MenuItem_Loaded_3"/>
+                        </Button>-->
                         <Button x:Name="btnDashboard" Style="{DynamicResource PopupButtonStyle}" Click="btnBtier_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Modifier Balance Tier" VerticalAlignment="Center"/>
                         </Button>
@@ -97,7 +97,7 @@
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Historique"/>
                         </Button>
                         <Button x:Name="btnFacture" Style="{DynamicResource PopupButtonStyle}" Click="btnSuiviFact_Clic">
-                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Suivi de Factures" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
+                            <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Ajout de Factures" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
                         </Button>
                         <Button x:Name="btnStatistique" Style="{DynamicResource PopupButtonStyle}" Click="btnStatistique_Click">
                             <ctls:MenuItem GroupName="MenuItem" IndicatorBrush="{DynamicResource PrimaryBlueColor}" Text="Statistiques" VerticalAlignment="Center" Loaded="MenuItem_Loaded"/>
@@ -181,6 +181,3 @@
         </Grid>
     </Border>
 </Window>
-
-
-
