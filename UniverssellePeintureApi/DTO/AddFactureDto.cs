@@ -13,5 +13,6 @@ namespace UniverssellePeintureApi.DTO
         public decimal Montant { get; set; }
 
         public string distribiteur { get; set; }
+        public List<StockProduitdto> StockProduitdto { get; set; }
     }
 }

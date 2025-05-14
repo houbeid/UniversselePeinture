@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
@@ -26,9 +27,13 @@ namespace WPFModernVerticalMenu.Pages
     /// </summary>
     public partial class SFacture : Page
     {
+        public ObservableCollection<string> Produits { get; set; }
         public SFacture()
         {
             InitializeComponent();
+            Produits = new ObservableCollection<string>();
+            DataContext = this;
+            Addproduit();
         }
 
         private static readonly HttpClient client = new HttpClient();
@@ -290,6 +295,28 @@ namespace WPFModernVerticalMenu.Pages
                 MessageBox.Show($"Erreur lors du téléchargement : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        public async void Addproduit()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://universellepeintre.oneposts.io/api/Stock/Produits");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", TokenStorage.Token);
+            var response = await client.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var produits = JsonConvert.DeserializeObject<List<UpdateProduitDto>>(jsonString);
+                if (produits != null)
+                {
+                    Prod1.ItemsSource = produits;
+                    Prod2.ItemsSource = produits;
+                    Prod3.ItemsSource = produits;
+                    Prod4.ItemsSource = produits;
+                    Prod5.ItemsSource = produits;
+                    Prod6.ItemsSource = produits;
+                }
+            }
+        }
+
         private async Task<HttpResponseMessage> AddfactureAsync(AddFactureDto facture)
         {
             try

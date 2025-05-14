@@ -24,6 +24,22 @@ namespace UniverssellePeintureApi.Controllers
             _context = context;
         }
 
+        //[HttpDelete("deletFacture")]
+        //public async Task SupprimerFacture()
+        //{
+
+        //    // Charger tous les clients avec leurs stocks et les StockProduits associés
+        //    var ports = _context.Factures.ToList();
+        //    // Parcourir chaque client
+        //    foreach (var port in ports)
+        //    {
+        //        _context.Factures.Remove(port);
+        //    }
+
+        //    // Sauvegarder les changements dans la base de données
+        //    await _context.SaveChangesAsync();
+        //}
+
         [Authorize]
         [HttpPost("Add")]
         public async Task<IActionResult> CreateFacture([FromBody] AddFactureDto factureDto)
@@ -32,6 +48,12 @@ namespace UniverssellePeintureApi.Controllers
             if (client == null)
             {
                 throw new Exception("Client not found");
+            }
+            var username = User?.Identity?.Name;
+            var comercial = await _context.Commerces.FirstOrDefaultAsync(c => c.Nom == username);
+            if (comercial == null)
+            {
+                throw new Exception("Comercial not found");
             }
             var facture = new Facture
             {
@@ -51,9 +73,33 @@ namespace UniverssellePeintureApi.Controllers
                 throw new Exception("PortfeuilleClient not found");
             }
             portfeuilleClient.PriceCompta += factureDto.Montant;
-            portfeuilleClient.currentPrice += factureDto.Montant;
+            //portfeuilleClient.currentPrice += factureDto.Montant;
             portfeuilleClient.LastPrise = factureDto.Montant;
-            await _context.SaveChangesAsync();
+            portfeuilleClient.depot = factureDto.date;
+            foreach (var stockProduitDto in factureDto.StockProduitdto)
+            {
+                var produit = await _context.Produits.FirstOrDefaultAsync(p => p.Name == stockProduitDto.NameProduit);
+                if (produit == null)
+                {
+                    continue; // Si le produit n'existe pas, passer au suivant
+                }
+                produit.StockActuel += stockProduitDto.Quantite;
+                produit.stock += stockProduitDto.Quantite;
+                var stockTotalProduit = await _context.Produits.SumAsync(c => c.stock);
+                stockTotalProduit += stockProduitDto.Quantite;
+                produit.PourcentageProduit = Math.Round(((produit.stock - produit.StockActuel) / (double)produit.stock) * 100, 2);
+                produit.PourcentageVente = Math.Round(((produit.stock - produit.StockActuel) / (double)stockTotalProduit) * 100, 2);
+                 var historiqueProduit = new Historique
+                {
+                    NameProduit = produit.Name,
+                    Quantite = stockProduitDto.Quantite,
+                    Montant = produit.PrixActuel * stockProduitDto.Quantite,
+                    distributeur = comercial.Nom,
+                    ClientId = client.Id
+                };
+                _context.Historiques.Add(historiqueProduit);
+            }
+                await _context.SaveChangesAsync();
             return Ok("facture created successfully.");
         }
 

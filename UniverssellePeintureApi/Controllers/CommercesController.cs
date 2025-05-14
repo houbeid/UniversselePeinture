@@ -162,7 +162,7 @@ namespace UniverssellePeintureApi.Controllers
                 // Remplir le tableau avec les données des commandes
                 foreach (var recette in recettes)
                 {
-                    var facture = _context.Factures.Where(c => c.Code == recette.Code && c.date == recette.visit).FirstOrDefault();
+                    var facture = _context.HistoriqueRecettes.Where(c => c.CodeClient == recette.Code && c.Date >= recette.visit).FirstOrDefault();
 
                     table.AddCell(new PdfPCell(new Phrase(recette.visit.ToString() ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(recette.depot.ToString() ?? "", cellFont)));
@@ -173,7 +173,7 @@ namespace UniverssellePeintureApi.Controllers
                     table.AddCell(new PdfPCell(new Phrase(recette.PriceCompta.ToString() ?? "", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(recette.PricePayer.ToString() ?? "", cellFont)));
                     if (facture != null)
-                        table.AddCell(new PdfPCell(new Phrase(facture.Montant.ToString() ?? "", cellFont)));
+                        table.AddCell(new PdfPCell(new Phrase(facture.Recette.ToString() ?? "", cellFont)));
                     else
                         table.AddCell(new PdfPCell(new Phrase("", cellFont)));
                     table.AddCell(new PdfPCell(new Phrase(recette.Date_RDV ?? "", cellFont)));
@@ -195,6 +195,7 @@ namespace UniverssellePeintureApi.Controllers
         }
 
 
+        [Authorize]
         [HttpGet]
         [Route("GenerateRecapPdf")]
         public async Task<IActionResult> GenerateStockPdf(int idcomerce)
@@ -321,9 +322,9 @@ namespace UniverssellePeintureApi.Controllers
                         
                         if (portfeuille != null)
                         {
-                            table.AddCell(new PdfPCell(new Phrase(portfeuille.currentPrice.ToString(), cellFont)));
+                            table.AddCell(new PdfPCell(new Phrase(valeur_actuelle.ToString(), cellFont)));
                             table.AddCell(new PdfPCell(new Phrase(portfeuille.PriceCompta.ToString() ?? "", cellFont)));
-                            table.AddCell(new PdfPCell(new Phrase(portfeuille.PricePayer.ToString(), cellFont)));
+                            table.AddCell(new PdfPCell(new Phrase((portfeuille.PriceCompta - valeur_actuelle).ToString(), cellFont)));
                         }
                         else
                         {
