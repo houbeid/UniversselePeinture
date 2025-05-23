@@ -95,7 +95,8 @@ namespace WPFModernVerticalMenu.Pages
                 CodeClient = CodeClientBox.Text,
                 Facture = NumFactTextBox.Text,
                 Montant = decimal.Parse(MontantTextBox.Text, System.Globalization.CultureInfo.InvariantCulture),
-                distribiteur = DistrubuteurTextBox.Text
+                distribiteur = DistrubuteurTextBox.Text,
+                StockProduitdto = new List<StockProduitdto>()
             };
             // Ajouter produit 1 si disponible
             if (Prod1.SelectedItem is UpdateProduitDto selectedProduit1)
